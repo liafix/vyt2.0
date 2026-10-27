@@ -1,0 +1,19 @@
+# Ignorovať dočasné súbory Pythonu
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+
+# Ignorovať spustiteľné a kompilované súbory (C / C++)
+*.exe
+*.o
+*.obj
+*.out
+*.app
+
+# Ignorovať nastavenia IDE a editorov
+.vscode/
+.idea/
+*.suo
+*.user

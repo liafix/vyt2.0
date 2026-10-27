@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Výučbová téma 2.10: algoritmizácia funkcií a podprogramov v Pythone.">
+<title>2.10 Algoritmizácia funkcií | Výučbová téma</title>
+<style>
+:root{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--code:#0f172a;--codefg:#e2e8f0;--tbg:#fff4d6;--tline:#e8c25a}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--code:#0a0e14;--codefg:#e2e8f0;--tbg:#3a3017;--tline:#7a6322}}
+:root[data-theme="light"]{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--code:#0f172a;--codefg:#e2e8f0;--tbg:#fff4d6;--tline:#e8c25a}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--code:#0a0e14;--codefg:#e2e8f0;--tbg:#3a3017;--tline:#7a6322}
+*{box-sizing:border-box}
+html{scroll-padding-top:1rem}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--acc)}
+.w{max-width:900px;margin:0 auto;padding:16px}
+header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+h1{margin:8px 0;font-size:30px;line-height:1.25}
+h2{margin-top:32px;border-bottom:2px solid var(--line);padding-bottom:4px}
+h3{margin-top:24px}
+.crumb{color:var(--mut);font-size:14px}
+.lead{font-size:1.1rem}
+.tag{display:inline-block;background:var(--line);border-radius:6px;padding:0 8px;font-size:13px}
+.card,.video-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:12px 0}
+.teacher-note{display:none;background:var(--tbg);border:1px solid var(--tline);border-radius:10px;padding:10px 14px;margin:12px 0}
+body.teacher .teacher-note{display:block}
+.teacher-note b{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.mode{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.mode button{border:0;background:var(--card);color:var(--fg);padding:8px 14px;font:inherit;cursor:pointer}
+.mode button.on{background:var(--acc);color:#fff}
+.copy-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.copy-btn{background:var(--acc);color:#fff;border:0;border-radius:6px;padding:5px 10px;font:inherit;font-size:14px;cursor:pointer}
+.copy-status{min-height:1.5em;margin:2px 0;color:var(--mut);font-size:13px}
+button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+pre{background:var(--code);color:var(--codefg);padding:12px;border-radius:8px;overflow-x:auto;font-size:14px;line-height:1.5}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
+.video-card{min-width:0}
+.video-frame{aspect-ratio:16/9;width:100%;border:0;border-radius:8px;background:#000}
+.video-card h3{margin:4px 0 8px;font-size:1.05rem}
+.video-card p{margin:.5rem 0}
+.callout{border-left:4px solid var(--acc);padding:8px 14px;background:var(--card)}
+.diagram{margin:18px 0;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.diagram svg{display:block;width:100%;height:auto}
+.diagram img{display:block;max-width:100%;height:auto;margin-inline:auto}
+.diagram figcaption{margin-top:8px;color:var(--mut);font-size:14px}
+.sources{margin-top:20px;padding:14px 18px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.sources h2{margin-top:0}
+.sources li{margin:.35rem 0}
+table{border-collapse:collapse;width:100%}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+.tw{overflow-x:auto}
+.checklist li{margin:.45rem 0}
+footer{margin-top:36px;padding:16px 0;border-top:1px solid var(--line);color:var(--mut);font-size:14px}
+@media(max-width:640px){.w{padding:12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+  <link rel="stylesheet" href="premium.css">
+</head>
+<body data-layout="reading">
+<div class="w">
+<header>
+<span class="crumb"><a href="python.html">Výučbové materiály</a> › 2. Algoritmus, algoritmizácia › 2.10</span>
+<div><a href="nastavenia.html">Nastavenia vzhľadu</a> · <div class="mode" role="group" aria-label="Zobrazenie stránky"><button id="student-mode" class="on" type="button" aria-pressed="true">Žiak</button><button id="teacher-mode" type="button" aria-pressed="false">Učiteľ</button></div></div>
+</header>
+<h1>2.10 Algoritmizácia funkcií</h1>
+<p class="lead"><span class="tag">2 × 45 min</span> <span class="tag">funkcie · podprogramy · Python</span></p>
+<p>Funkcia je pomenovaná časť programu, ktorá rieši jednu úlohu. Naučíš sa rozdeliť problém na menšie kroky, odovzdať funkcii vstupy a podľa potreby získať výsledok.</p>
+
+<div class="teacher-note"><b>Ciele, predpoklady a pomôcky</b>
+Žiak vysvetlí význam podprogramov, vytvorí a zavolá funkciu, rozlíši parameter a argument, použije <code>return</code>, predvolený parameter a základnú typovú anotáciu, opíše lokálny rozsah platnosti a otestuje funkciu. Predpoklady: premenné, vstup/výstup, aritmetika, podmienky a cykly. Pomôcky: Python/Thonny, projektor a tento materiál.</div>
+<div class="teacher-note"><b>Návrh časového plánu</b>
+1. hodina: 0–5 min opakovanie z videa; 5–12 min problém a delenie na kroky; 12–25 min definícia, volanie a parametre; 25–37 min return verzus print a príklady; 37–45 min krátke samostatné cvičenie.<br>
+2. hodina: 0–7 min opakovanie; 7–18 min lokálne premenné a rozsah; 18–28 min predvolené parametre a typové anotácie; 28–39 min kalkulačka a testovanie; 39–45 min reflexia a odovzdanie projektu. Videá sú v angličtine: podľa skupiny vyberte titulky alebo zadajte video ako domácu prípravu.</div>
+<div class="teacher-note"><b>Poznámka k riešeniam</b>
+Prepínač učiteľského zobrazenia iba skrýva poznámky v prehliadači; zdrojový HTML ich stále obsahuje. Materiál neobsahuje samostatné učiteľské heslo.</div>
+
+<h2>Najprv si zopakuj: čo je algoritmus?</h2>
+<p>Pred novou témou si pripomeň, že algoritmus je presný postup, ktorý vedie od vstupu k výsledku. Sleduj, ako sa dá dlhší program rozdeliť na malé pomenované kroky.</p>
+<div class="video-card">
+<h3>Krátke opakovanie: algoritmus a programovanie</h3>
+<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/3sim8jgkpTU" title="Krátke opakovanie algoritmov – YouTube Shorts" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a href="https://youtube.com/shorts/3sim8jgkpTU?si=HqLL3MHdF8-rhP8O">Otvoriť krátke video na YouTube</a></p>
+</div>
+<div class="card"><strong>Skús pred videom:</strong> Vysvetli vlastnými slovami, čo je vstup, spracovanie a výstup. Po videu povedz, ktorý opakujúci sa krok v programe by sa dal pomenovať a použiť viackrát.</div>
+
+<h2>1. hodina – funkcia ako podprogram</h2>
+<div class="teacher-note"><b>Plán 1. hodiny</b>
+Nechajte žiakov najprv vyriešiť jednoduchú úlohu ručne a potom porovnajte opakované príkazy s jednou funkciou. Zdôraznite, že definícia funkcie ju ešte nespúšťa; spustí sa až volaním.</div>
+
+<h3>Čo je funkcia a prečo ju používame?</h3>
+<p><strong>Funkcia</strong> (podprogram) je pomenovaný blok kódu, ktorý vykonáva určitú úlohu. Po definovaní ho môžeme zavolať z rôznych miest programu a s rôznymi vstupmi.</p>
+<figure class="diagram">
+<img class="lesson-image" src="img/2.10 Python-Functions.jpg" alt="Ilustrácia DataFlair znázorňuje štyri druhy funkcií v Pythone: používateľské, vstavané, lambda a rekurzívne." width="1200" height="628" loading="lazy">
+<figcaption>Prehľad štyroch druhov funkcií v Pythone: používateľské funkcie vytvorené programátorom, vstavané funkcie, lambda funkcie a rekurzívne funkcie, ktoré volajú samy seba. Zdroj obrázka: <a href="https://data-flair.training/blogs/python-function/" target="_blank" rel="noopener noreferrer">DataFlair – Python Function: Type of Functions in Python</a>.</figcaption>
+</figure>
+<ul>
+<li><strong>Menej opakovania:</strong> rovnaký postup zapíšeme raz.</li>
+<li><strong>Prehľadnejší program:</strong> názov funkcie pomáha pochopiť, čo sa deje.</li>
+<li><strong>Jednoduchšie testovanie a opravy:</strong> menšiu časť vieme overiť samostatne.</li>
+<li><strong>Rozdelenie práce:</strong> väčší problém rozdelíme medzi menšie funkcie.</li>
+</ul>
+<figure class="diagram">
+<svg viewBox="0 0 760 290" role="img" aria-labelledby="function-map-title function-map-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="function-map-title">Typy funkcií v Pythone</title>
+<desc id="function-map-desc">Funkcie rozdeľujeme na vstavané funkcie, ako print a len, a používateľom vytvorené funkcie, ako sucet. Obe zavoláme menom a podľa účelu odovzdáme argumenty.</desc>
+<defs><marker id="arrow-functions" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 10 5 0 10z" fill="#1f6feb"/></marker></defs>
+<rect x="16" y="16" width="728" height="258" rx="18" fill="var(--bg)" stroke="var(--line)" stroke-width="2"/>
+<text x="380" y="54" text-anchor="middle" fill="var(--fg)" font-family="system-ui,sans-serif" font-size="22" font-weight="700">Funkcie v Pythone</text>
+<path d="M380 68v24M380 92H200v20M380 92h180v20" fill="none" stroke="#1f6feb" stroke-width="3"/>
+<rect x="54" y="112" width="292" height="116" rx="14" fill="var(--card)" stroke="#1f6feb" stroke-width="2"/>
+<rect x="414" y="112" width="292" height="116" rx="14" fill="var(--card)" stroke="#1f6feb" stroke-width="2"/>
+<text x="200" y="146" text-anchor="middle" fill="var(--fg)" font-family="system-ui,sans-serif" font-size="18" font-weight="700">Vstavané funkcie</text>
+<text x="200" y="177" text-anchor="middle" fill="var(--fg)" font-family="ui-monospace,monospace" font-size="17">print("Ahoj")</text>
+<text x="200" y="205" text-anchor="middle" fill="var(--mut)" font-family="system-ui,sans-serif" font-size="14">len([2, 4, 6]) → 3</text>
+<text x="560" y="146" text-anchor="middle" fill="var(--fg)" font-family="system-ui,sans-serif" font-size="18" font-weight="700">Vlastné funkcie</text>
+<text x="560" y="177" text-anchor="middle" fill="var(--fg)" font-family="ui-monospace,monospace" font-size="17">sucet(5, 7)</text>
+<text x="560" y="205" text-anchor="middle" fill="var(--mut)" font-family="system-ui,sans-serif" font-size="14">definujeme ich pomocou def</text>
+<path d="M200 230v18h360v-18" fill="none" stroke="#1f6feb" stroke-width="3" marker-end="url(#arrow-functions)"/>
+<text x="380" y="267" text-anchor="middle" fill="var(--mut)" font-family="system-ui,sans-serif" font-size="14">Volaním funkcie vykonáme jej úlohu</text>
+</svg>
+<figcaption>Vlastná schéma: vstavané funkcie sú pripravené v Pythone, vlastné funkcie vytvára programátor podľa úlohy.</figcaption>
+</figure>
+<div class="video-grid">
+<div class="video-card">
+<h3>Video 1: funkcie v Pythone</h3>
+<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/89cGQjB5R4M" title="Funkcie v Pythone – video 1" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>Pri pozeraní si poznač, ako sa funkcia definuje a ako sa zavolá.</p>
+<a href="https://youtu.be/89cGQjB5R4M?si=q7gYgS91DSfnSRkz">Otvoriť video na YouTube</a>
+</div>
+<div class="video-card">
+<h3>Video 2: parametre a výsledky funkcie</h3>
+<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/KW6qncswzHw" title="Parametre a výsledky funkcie – video 2" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>Všímaj si, aké údaje funkcia dostáva a čo s nimi urobí.</p>
+<a href="https://youtu.be/KW6qncswzHw?si=ZdXCjWsuJ5TT3z-W">Otvoriť video na YouTube</a>
+</div>
+</div>
+
+<h3>Vytvorenie a volanie funkcie</h3>
+<p>V Pythone sa funkcia začína kľúčovým slovom <code>def</code>. Telo funkcie je odsadené. Funkcia sa vykoná až vtedy, keď ju zavoláme jej menom.</p>
+<figure class="diagram">
+<svg viewBox="0 0 760 210" role="img" aria-labelledby="function-flow-title function-flow-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="function-flow-title">Ako prechádza hodnota cez funkciu</title>
+<desc id="function-flow-desc">Hodnoty 5 a 7 sa odovzdajú ako argumenty do funkcie sucet, funkcia vypočíta ich súčet a return vráti hodnotu 12.</desc>
+<defs><marker id="arrow-flow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 10 5 0 10z" fill="#1f6feb"/></marker></defs>
+<rect x="16" y="16" width="728" height="178" rx="18" fill="var(--bg)" stroke="var(--line)" stroke-width="2"/>
+<rect x="42" y="69" width="142" height="70" rx="12" fill="var(--card)" stroke="#1f6feb" stroke-width="2"/>
+<rect x="249" y="54" width="250" height="100" rx="14" fill="var(--card)" stroke="#1f6feb" stroke-width="2"/>
+<rect x="564" y="69" width="152" height="70" rx="12" fill="var(--card)" stroke="#1f6feb" stroke-width="2"/>
+<text x="113" y="97" text-anchor="middle" fill="var(--mut)" font-family="system-ui,sans-serif" font-size="14">argumenty</text>
+<text x="113" y="124" text-anchor="middle" fill="var(--fg)" font-family="ui-monospace,monospace" font-size="18">5 a 7</text>
+<text x="374" y="90" text-anchor="middle" fill="var(--fg)" font-family="ui-monospace,monospace" font-size="18">sucet(a, b)</text>
+<text x="374" y="119" text-anchor="middle" fill="var(--mut)" font-family="system-ui,sans-serif" font-size="15">vypočíta a + b</text>
+<text x="640" y="97" text-anchor="middle" fill="var(--mut)" font-family="system-ui,sans-serif" font-size="14">return</text>
+<text x="640" y="124" text-anchor="middle" fill="var(--fg)" font-family="ui-monospace,monospace" font-size="18">12</text>
+<path d="M188 104h50M503 104h52" fill="none" stroke="#1f6feb" stroke-width="3" marker-end="url(#arrow-flow)"/>
+<text x="374" y="177" text-anchor="middle" fill="var(--mut)" font-family="system-ui,sans-serif" font-size="14">vstup → spracovanie → návratová hodnota</text>
+</svg>
+<figcaption>Vlastná schéma volania funkcie: argumenty vstupujú do funkcie a <code>return</code> odovzdá výsledok späť.</figcaption>
+</figure>
+<pre><code>def sucet(a, b):
+    return a + b
+
+vysledok = sucet(5, 7)
+print(vysledok)  # 12</code></pre>
+
+<h3>Parametre, argumenty a návratová hodnota</h3>
+<div class="tw"><table>
+<thead><tr><th>Pojem</th><th>Význam</th><th>Príklad</th></tr></thead>
+<tbody>
+<tr><td><strong>Parameter</strong></td><td>Meno vstupnej hodnoty v definícii funkcie.</td><td><code>a</code> a <code>b</code> v <code>def sucet(a, b)</code></td></tr>
+<tr><td><strong>Argument</strong></td><td>Konkrétna hodnota odovzdaná pri volaní.</td><td><code>5</code> a <code>7</code> v <code>sucet(5, 7)</code></td></tr>
+<tr><td><strong>Návratová hodnota</strong></td><td>Výsledok odovzdaný späť príkazom <code>return</code>.</td><td><code>a + b</code></td></tr>
+</tbody></table></div>
+<p>Funkcia môže aj iba vykonať činnosť, napríklad vypísať pozdrav. Ak nemá príkaz <code>return</code>, vráti hodnotu <code>None</code>.</p>
+<pre><code>def pozdrav():
+    print("Ahoj, Python!")
+
+def obvod_stvorca(strana):
+    return 4 * strana
+
+pozdrav()
+print(obvod_stvorca(5))  # 20</code></pre>
+<div class="callout"><strong>Zapamätaj si:</strong> <code>print()</code> zobrazuje informáciu. <code>return</code> odovzdáva hodnotu ďalej, aby sa dala uložiť, porovnať alebo použiť vo výpočte.</div>
+
+<h3>Rovnaká funkcia, rôzne vstupy</h3>
+<pre><code>def obvod_obdlznika(a, b):
+    return 2 * (a + b)
+
+print(obvod_obdlznika(4, 5))  # 18
+print(obvod_obdlznika(3, 7))  # 20</code></pre>
+<p>Funkciu nemusíme kopírovať. Pri každom volaní jej odovzdáme iné argumenty.</p>
+
+<h3>Rozklad úlohy na podprogramy</h3>
+<p>Úloha: vypočítať priemer troch čísel. Samostatná funkcia môže riešiť výpočet, zatiaľ čo hlavný program sa postará o zadanie údajov a zobrazenie výsledku.</p>
+<pre><code>def priemer(a, b, c):
+    return (a + b + c) / 3
+
+priemer_hodnot = priemer(2, 4, 6)
+print("Priemer:", priemer_hodnot)  # Priemer: 4.0</code></pre>
+
+<h2>2. hodina – rozsah, predvolené hodnoty a typy</h2>
+<div class="teacher-note"><b>Plán 2. hodiny</b>
+Rozsah premenných ukážte spustením krátkeho príkladu a predikciou výstupu. Pri kalkulačke žiadajte testy pre nulu, záporné hodnoty aj delenie nulou. Pri predvolených parametroch vysvetlite, prečo parameter s predvolenou hodnotou musí byť za povinnými parametrami.</div>
+
+<h3>Lokálne a globálne premenné</h3>
+<p><strong>Lokálna premenná</strong> vznikne vo funkcii a používa sa v nej. <strong>Globálna premenná</strong> je vytvorená mimo funkcií. Ak funkcia len číta hodnotu globálnej premennej, netreba ju označovať ako <code>global</code>; vo všeobecnosti je však vhodnejšie odovzdať vstup cez parameter a výsledok vrátiť.</p>
+<pre><code>x = 10  # globálna premenná
+
+def test():
+    x = 5  # lokálna premenná; nezmení globálne x
+    print("Vo funkcii:", x)
+
+test()
+print("Mimo funkcie:", x)
+# Vo funkcii: 5
+# Mimo funkcie: 10</code></pre>
+
+<h3>Predvolené (prednastavené) parametre</h3>
+<p>Predvolená hodnota sa použije, keď argument pri volaní vynecháme. Povinné parametre zapisujeme pred parametrami s predvolenou hodnotou.</p>
+<pre><code>def pozdrav(meno="žiak"):
+    print("Ahoj,", meno)
+
+pozdrav()          # Ahoj, žiak
+pozdrav("Peter")   # Ahoj, Peter
+
+def mocnina(x, n=2):
+    return x ** n
+
+print(mocnina(3))     # 9
+print(mocnina(2, 5))  # 32</code></pre>
+<h3>Typové anotácie (type hints)</h3>
+<p>Typové anotácie dokumentujú očakávané vstupy a výsledok. Python ich pri bežnom spustení automaticky nevynucuje; kontrolovať ich môžu editor alebo samostatné nástroje.</p>
+<pre><code>def sucet(a: int, b: int) -&gt; int:
+    return a + b
+
+def priemer(a: float, b: float, c: float) -&gt; float:
+    return (a + b + c) / 3
+
+print(sucet(5, 7))  # 12</code></pre>
+<div class="video-card">
+<h3>Video 3: funkcie a ich použitie</h3>
+<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/vg7Hwd9TANY" title="Funkcie a ich použitie – video 3" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>Pozeraj sa, ako sa funkcia zapája do celého programu. Skús si zapísať jeden vstup, jeden výstup a jednu vec, ktorú by bolo možné otestovať.</p>
+<a href="https://youtu.be/vg7Hwd9TANY?si=2hqDJftiuC4Df4RL">Otvoriť video na YouTube</a>
+</div>
+
+<h3>Ukážkový program: jednoduchá kalkulačka</h3>
+<p>Každá funkcia vykonáva jednu pomenovanú operáciu. Pri delení ošetríme zakázaný vstup.</p>
+<pre><code>def sucet(a: float, b: float) -&gt; float:
+    return a + b
+
+def rozdiel(a: float, b: float) -&gt; float:
+    return a - b
+
+def sucin(a: float, b: float) -&gt; float:
+    return a * b
+
+def podiel(a: float, b: float) -&gt; float:
+    if b == 0:
+        raise ValueError("Nulou nemožno deliť.")
+    return a / b
+
+x = float(input("Zadaj prvé číslo: "))
+y = float(input("Zadaj druhé číslo: "))
+
+print("Súčet:", sucet(x, y))
+print("Rozdiel:", rozdiel(x, y))
+print("Súčin:", sucin(x, y))
+try:
+    print("Podiel:", podiel(x, y))
+except ValueError as chyba:
+    print(chyba)</code></pre>
+
+<h2>Postup algoritmizácie s funkciami</h2>
+<ol>
+<li>Pomenuj problém a urč, aký výsledok má program vytvoriť.</li>
+<li>Rozdeľ problém na menšie úlohy; každej priraď jasnú zodpovednosť.</li>
+<li>Pri každej funkcii urč vstupy (parametre) a výstup (návratovú hodnotu), ak ju potrebuje.</li>
+<li>Napíš a otestuj jednotlivé funkcie samostatne.</li>
+<li>Spoj ich do hlavného programu a otestuj aj celý postup.</li>
+</ol>
+
+<h2>Precvičovanie</h2>
+<div class="card"><strong>Úloha 1 – obsah obdĺžnika:</strong> Vytvor funkciu <code>obsah_obdlznika(a, b)</code>, ktorá vráti obsah. Otestuj ju pre strany 4 a 5; očakávaný výsledok je 20.</div>
+<div class="card"><strong>Úloha 2 – párne číslo:</strong> Vytvor funkciu <code>je_parne(n)</code>, ktorá vráti <code>True</code>, ak je celé číslo párne, inak <code>False</code>. Otestuj kladné aj záporné číslo a nulu.</div>
+<div class="card"><strong>Úloha 3 – pozdrav s predvolenou hodnotou:</strong> Napíš <code>pozdrav(meno="žiak")</code>, ktorá vráti text pozdravu. Vyskúšaj volanie bez argumentu aj s menom.</div>
+<div class="card"><strong>Úloha 4 – kalkulačka:</strong> Doplň funkcie pre súčet, rozdiel, súčin a podiel. Otestuj bežné čísla, záporné číslo a delenie nulou.</div>
+<div class="teacher-note"><b>Riešenia na kontrolu</b>
+<pre><code>def obsah_obdlznika(a, b):
+    return a * b
+
+def je_parne(n):
+    return n % 2 == 0
+
+def pozdrav(meno="žiak"):
+    return f"Ahoj, {meno}!"</code></pre>
+Pri obsahu obdĺžnika <code>obsah_obdlznika(4, 5)</code> vráti 20. Funkcia <code>je_parne</code> vráti pravdivostnú hodnotu. Pri delení nulou vhodne oznám chybu, napríklad výnimkou <code>ValueError</code>.</div>
+
+<h2>Zhrnutie</h2>
+<div class="tw"><table>
+<thead><tr><th>Pojem</th><th>Zapamätaj si</th></tr></thead>
+<tbody>
+<tr><td><strong>Funkcia / podprogram</strong></td><td>Pomenovaná časť programu na samostatnú úlohu.</td></tr>
+<tr><td><strong>Parameter / argument</strong></td><td>Parameter je premenná v definícii; argument je konkrétna hodnota vo volaní.</td></tr>
+<tr><td><strong><code>return</code></strong></td><td>Vráti výsledok volajúcemu; <code>print()</code> ho iba zobrazí.</td></tr>
+<tr><td><strong>Lokálna premenná</strong></td><td>Je dostupná v rozsahu funkcie, kde vznikla.</td></tr>
+<tr><td><strong>Predvolený parameter</strong></td><td>Použije sa, keď pri volaní vynecháme príslušný argument.</td></tr>
+<tr><td><strong>Typová anotácia</strong></td><td>Dokumentuje očakávaný typ; sama osebe ho pri spustení nevynucuje.</td></tr>
+</tbody></table></div>
+<h3>Výstupný lístok</h3>
+<ol class="checklist">
+<li>Aký je rozdiel medzi parametrom a argumentom?</li>
+<li>Čím sa líši <code>return</code> od <code>print()</code>?</li>
+<li>Prečo je funkcia užitočná, keď rovnaký postup potrebujeme opakovane?</li>
+<li>Ktorú časť alebo príklad potrebuješ ešte vysvetliť?</li>
+</ol>
+<div class="card"><strong>Projekt č. 2:</strong> Na prvý riadok pridaj komentár <code># Funkcie som pochopil a viem ich použiť</code>, alebo napíš, ktorú časť potrebuješ podrobnejšie vysvetliť. Pod komentár vytvor vlastný krátky program s aspoň dvoma funkciami a otestuj ich.</div>
+
+<section class="sources" aria-labelledby="sources-heading">
+<h2 id="sources-heading">Použité zdroje</h2>
+<ul>
+<li><a href="https://data-flair.training/blogs/python-function/" target="_blank" rel="noopener noreferrer">DataFlair: Python Function – Type of Functions in Python</a> – odporúčané čítanie k vstavaným a používateľským funkciám; schémy v tejto stránke sú vytvorené nanovo.</li>
+<li><a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions" target="_blank" rel="noopener noreferrer">Oficiálny tutoriál Pythonu: Defining Functions</a>.</li>
+<li><a href="https://docs.python.org/3/library/typing.html" target="_blank" rel="noopener noreferrer">Oficiálna dokumentácia Pythonu: typing</a>.</li>
+<li><a href="https://youtu.be/3sim8jgkpTU" target="_blank" rel="noopener noreferrer">Video na zopakovanie algoritmov</a>; <a href="https://youtu.be/89cGQjB5R4M" target="_blank" rel="noopener noreferrer">video o funkciách</a>; <a href="https://youtu.be/KW6qncswzHw" target="_blank" rel="noopener noreferrer">video o parametroch</a>; <a href="https://youtu.be/vg7Hwd9TANY" target="_blank" rel="noopener noreferrer">video o použití funkcií</a>.</li>
+<li><a href="https://www.programiz.com/python-programming/online-compiler/" target="_blank" rel="noopener noreferrer">Programiz Python Online Compiler</a> – online spustenie ukážok.</li>
+</ul>
+</section>
+<footer><a href="python.html">Späť na prehľad prednášok</a> · <a href="nastavenia.html">Nastavenia vzhľadu</a></footer>
+</div>
+<script>
+document.querySelectorAll("pre").forEach(function(code){
+ var wrapper=document.createElement("div"),actions=document.createElement("div"),button=document.createElement("button"),editor=document.createElement("a"),status=document.createElement("p");
+ wrapper.className="copyable-code";actions.className="copy-actions";button.className="copy-btn";button.type="button";button.textContent="Kopírovať kód";
+ editor.href="https://www.programiz.com/python-programming/online-compiler/";editor.target="_blank";editor.rel="noopener noreferrer";editor.textContent="Vyskúšať v online editore";
+ status.className="copy-status";status.setAttribute("role","status");status.setAttribute("aria-live","polite");
+ code.parentNode.insertBefore(wrapper,code);wrapper.appendChild(actions);actions.appendChild(button);actions.appendChild(editor);wrapper.appendChild(code);wrapper.appendChild(status);
+ button.addEventListener("click",function(){
+  if(!navigator.clipboard||!navigator.clipboard.writeText){status.textContent="Kopírovanie nie je dostupné. Označ kód a skopíruj ho pomocou Ctrl+C.";return;}
+  navigator.clipboard.writeText(code.innerText).then(function(){status.textContent="Kód skopírovaný.";}).catch(function(){status.textContent="Kód sa nepodarilo skopírovať. Označ ho a skopíruj pomocou Ctrl+C.";});
+ });
+});
+const studentButton = document.getElementById("student-mode");
+const teacherButton = document.getElementById("teacher-mode");
+function setMode(teacher) {
+  document.body.classList.toggle("teacher", teacher);
+  studentButton.classList.toggle("on", !teacher);
+  teacherButton.classList.toggle("on", teacher);
+  studentButton.setAttribute("aria-pressed", String(!teacher));
+  teacherButton.setAttribute("aria-pressed", String(teacher));
+}
+studentButton.addEventListener("click", () => setMode(false));
+teacherButton.addEventListener("click", () => setMode(true));
+</script>
+<script src="theme.js"></script>
+</body>
+</html>

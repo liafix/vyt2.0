@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nastavenia vzhľadu výučbových materiálov z Pythonu.">
+  <title>Nastavenia | Výučbové materiály</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fa;
+      --surface: #fff;
+      --text: #1c2330;
+      --muted: #5b6678;
+      --accent: #1f6feb;
+      --border: #d9dee7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg: #12161d;
+        --surface: #1b212b;
+        --text: #e6eaf1;
+        --muted: #9aa6b8;
+        --accent: #5aa2ff;
+        --border: #2d3644;
+      }
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f7f8fa;
+      --surface: #fff;
+      --text: #1c2330;
+      --muted: #5b6678;
+      --accent: #1f6feb;
+      --border: #d9dee7;
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #12161d;
+      --surface: #1b212b;
+      --text: #e6eaf1;
+      --muted: #9aa6b8;
+      --accent: #5aa2ff;
+      --border: #2d3644;
+    }
+    * { box-sizing: border-box; }
+    body { min-height: 100vh; margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+    main { width: min(100% - 2rem, 760px); margin: 0 auto; padding: 2rem 0; }
+    a { color: var(--accent); }
+    .card { margin-top: 1.5rem; padding: 1.25rem; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+    .choices { display: flex; flex-wrap: wrap; gap: .75rem; }
+    button { padding: .65rem 1rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; cursor: pointer; }
+    button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    #theme-status { min-height: 1.5em; color: var(--muted); }
+  </style>
+  <script src="theme.js" defer></script>
+  <link rel="stylesheet" href="premium.css">
+</head>
+<body data-layout="settings">
+  <main>
+    <p><a href="python.html">← Späť na prehľad prednášok</a></p>
+    <h1>Nastavenia</h1>
+    <section class="card" aria-labelledby="theme-heading">
+      <h2 id="theme-heading">Vzhľad stránky</h2>
+      <p>Vyber si denný alebo nočný režim. Nastavenie sa uloží v tomto prehliadači a použije sa na všetkých výučbových stránkach.</p>
+      <div class="choices" role="group" aria-label="Vzhľad stránky">
+        <button type="button" data-theme-choice="light" aria-pressed="false">Denný režim</button>
+        <button type="button" data-theme-choice="dark" aria-pressed="false">Nočný režim</button>
+        <button type="button" data-theme-choice="system" aria-pressed="true">Podľa zariadenia</button>
+      </div>
+      <p id="theme-status" role="status" aria-live="polite">Vzhľad sa prispôsobuje nastaveniu zariadenia.</p>
+    </section>
+    <section class="card" aria-labelledby="sources-heading">
+      <h2 id="sources-heading">Použité zdroje</h2>
+      <ul>
+        <li><a href="theme.js">Spoločný skript nastavenia vzhľadu</a> pre všetky stránky v tomto materiáli.</li>
+        <li>Vzhľad stránky používa natívne CSS premenné a nastavenie preferencií systému.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

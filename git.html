@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="sk">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Kurz Gitu v slovenčine: verzovanie, inštalácia, commity a práca s repozitárom." name="description"/>
+<title>Kurz Gitu | Výučbové materiály</title>
+<style>
+    :root{color-scheme:light;--bg:#f7f8fa;--surface:#fff;--text:#1c2330;--muted:#5b6678;--accent:#1f6feb;--border:#d9dee7;--code:#eef2f8}
+    @media(prefers-color-scheme:dark){:root:not([data-theme]){color-scheme:dark;--bg:#101827;--surface:#182437;--text:#edf3fc;--muted:#b4c2d6;--accent:#83c5ff;--border:#2b3b52;--code:#101827}}
+    :root[data-theme="light"]{color-scheme:light}
+    :root[data-theme="dark"]{color-scheme:dark;--bg:#101827;--surface:#182437;--text:#edf3fc;--muted:#b4c2d6;--accent:#83c5ff;--border:#2b3b52;--code:#101827}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+    main{width:min(100% - 2rem,900px);margin:auto;padding:1.5rem 0 3rem}
+    a{color:var(--accent)}
+    header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+    h1{margin:1rem 0 .4rem;font-size:clamp(2rem,6vw,3.2rem);line-height:1.1;letter-spacing:-.04em}
+    h2{margin:0 0 .8rem;font-size:1.45rem}
+    .lead,.muted{color:var(--muted)}
+    .cheatsheet,.lessons{margin:1.5rem 0;padding:1.25rem;border:1px solid var(--border);border-radius:1rem;background:var(--surface)}
+    .commands{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:.75rem}
+    .command{padding:.75rem;border-radius:.6rem;background:var(--code)}
+    .command p{margin:0 0 .35rem;color:var(--muted);font-size:.9rem}
+    code{font-family:Consolas,"Cascadia Code",monospace}
+    pre{overflow:auto;margin:.4rem 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+    .warning{padding:.75rem 1rem;border-left:4px solid #d97706;background:var(--code)}
+    .video{position:relative;overflow:hidden;width:100%;aspect-ratio:16/9;border:1px solid var(--border);border-radius:.75rem;background:#000}
+    .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);color:var(--muted)}
+  </style>
+<script defer="" src="theme.js"></script>
+<link href="premium.css" rel="stylesheet"/>
+</head>
+<body data-layout="git">
+<main>
+<header><a href="index.html">← Všetky kurzy</a><a href="nastavenia.html">Nastavenia vzhľadu</a></header>
+<h1>Kurz Gitu</h1>
+<p class="lead">Git zaznamenáva históriu zmien v projekte. Prejdi si najprv stručný ťahák a potom lekcie z video playlistu.</p>
+<section aria-labelledby="content-heading" class="lessons">
+<h2 id="content-heading">Náplň kurzu</h2>
+<ul class="muted">
+<li>Čo je Git a aký je rozdiel oproti vzdialenému repozitáru (GitHub).</li>
+<li>Základný cyklus: <code>git status</code>, <code>git add</code>, <code>git commit</code>, <code>git log</code>.</li>
+<li>Vetvy (branching) a zlučovanie zmien (merging).</li>
+<li>Riešenie merge konfliktov.</li>
+<li>Súbor <code>.gitignore</code> na ignorovanie dočasných súborov.</li>
+</ul>
+<p><a href="https://github.com/cabalad/Programovanie/tree/main/00_Git_a_Verzovanie" rel="noopener noreferrer" target="_blank">Dokumentácia a cvičenia na GitHube</a></p>
+</section><section aria-label="Študijné zdroje" class="resource-panel"><h2>Lokálne materiály Git</h2><div class="resource-links"><a class="resource-button" href="materialy/00_Git_a_Verzovanie/README.html">Git — učebná osnova a dokumentácia</a><a class="resource-button" href="materialy/index.html#git">Všetky Git lekcie a cvičenia</a></div></section><section aria-labelledby="cheatsheet-heading" class="cheatsheet">
+<h2 id="cheatsheet-heading">Ťahák príkazov Gitu</h2>
+<p><a href="https://github.com/misohu/git-tutorial/blob/main/git-commands/commands.md" rel="noopener noreferrer" target="_blank">Otvoriť úplný ťahák príkazov od autora kurzu</a></p>
+<div class="commands">
+<div class="command"><p>Skontroluj stav a históriu</p><pre><code>git status
+git log --oneline</code></pre></div>
+<div class="command"><p>Priprav zmeny a vytvor commit</p><pre><code>git add nazov-suboru
+git commit -m "Popis zmeny"</code></pre></div>
+<div class="command"><p>Vytvor a prepni sa na vetvu</p><pre><code>git switch -c nova-vetva
+git branch</code></pre></div>
+<div class="command"><p>Pracuj so vzdialeným repozitárom</p><pre><code>git remote -v
+git pull
+git push</code></pre></div>
+<div class="command"><p>Nastav meno a e-mail pre commity</p><pre><code>git config --global user.name "Tvoje meno"
+git config --global user.email "ty@example.com"</code></pre></div>
+</div>
+<p class="warning"><strong>Pozor:</strong> príkazy ako <code>git reset --hard</code> môžu natrvalo odstrániť neuložené zmeny. Používaj ich iba vtedy, keď presne vieš, čo robia.</p>
+</section>
+<section aria-labelledby="lessons-heading" class="lessons">
+<h2 id="lessons-heading">Video kurz: Kurz Gitu</h2>
+<p class="muted">Playlist kanála Informatika s Mišom: úvod, čo je Git, inštalácia, Visual Studio Code, práca s commitmi a ďalšie témy.</p>
+<div class="video">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/videoseries?list=PLNAMH_0HgWT-ey31hQqrmi_Rgr4OVWgH3" title="Playlist Kurz Gitu — Informatika s Mišom"></iframe>
+</div>
+<p><a href="https://www.youtube.com/playlist?list=PLNAMH_0HgWT-ey31hQqrmi_Rgr4OVWgH3" rel="noopener noreferrer" target="_blank">Otvoriť celý kurz na YouTube</a></p>
+<p class="muted">Autor videí: <a href="https://www.youtube.com/@InformatikasMisom" rel="noopener noreferrer" target="_blank">Informatika s Mišom</a>.</p>
+</section>
+<footer><a href="index.html">Späť na všetky kurzy</a> · <a href="index.html">Všetky kurzy</a></footer>
+</main>
+</body>
+</html>

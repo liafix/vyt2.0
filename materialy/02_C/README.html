@@ -1,0 +1,141 @@
+<!doctype html><html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Modul 02: C – Procedurálne Programovanie a Správa Pamäte | Programovanie</title><link rel="stylesheet" href="../../premium.css"><script src="../../theme.js" defer></script></head><body data-layout="doc-viewer"><div class="doc-shell"><nav class="module-breadcrumb"><a href="../../index.html">← Všetky kurzy</a><a href="README.html">Jazyk C</a><a href="../../nastavenia.html">Nastavenia vzhľadu</a></nav><header class="doc-head"><span class="module-eyebrow">Dokumentácia</span><h1>Modul 02: C – Procedurálne Programovanie a Správa Pamäte</h1></header><main class="doc-content"><h1>Modul 02: C – Procedurálne Programovanie a Správa Pamäte</h1>
+<p>Vítajte v treťom module. Programovací jazyk <strong>C</strong> je univerzálny, efektívny a systémový programovací jazyk. Tvorí základ vývoja operačných systémov, embedded zariadení, mikrokontrolérov v mechatronike a ovládačov hardvéru.</p>
+<p>Cieľom tohto modulu je porozumieť procedurálnemu modelu, statickému typovaniu a najmä <strong>práci s počítačovou pamäťou</strong> (ukazovatele, adresa, zásobník, halda).</p>
+<hr />
+<h2>🎯 Vzdelávacie ciele</h2>
+<p>Po absolvovaní tohto modulu budete vedieť:</p>
+<ul>
+<li>Porozumieť štruktúre C programu, funkcii <code>main()</code> a hlavičkovým súborom (<code>#include &lt;stdio.h&gt;</code>).</li>
+<li>Pracovať so základnými dátovými typmi (<code>int</code>, <code>float</code>, <code>double</code>, <code>char</code>) a správnym formátovaním výstupu (<code>printf</code>, <code>scanf</code>).</li>
+<li>Rozumieť rozsahu platnosti premenných (<code>scope</code>) a životnosti objektov.</li>
+<li><strong>Masterovať prácu s pamäťou a ukazovateľmi</strong>: adresný operátor <code>&amp;</code>, dereferenčný operátor <code>*</code>, pointerová aritmetika.</li>
+<li>Dynamicky alokovať pamäť pomocou <code>malloc()</code>, <code>calloc()</code>, <code>realloc()</code> a prevencii únikov pamäte (<code>free()</code>).</li>
+<li>Definovať vlastné štruktúry (<code>struct</code>) a používateľské typy (<code>typedef</code>).</li>
+<li>Rozdeľovať programy do viacerých moduly pomocou <code>.h</code> a <code>.c</code> súborov.</li>
+<li>Používať kompilátor GCC s bezpečnostnými príznakmi <code>-Wall -Wextra -Wpedantic</code>.</li>
+</ul>
+<hr />
+<h2>🗺️ Učebná cesta modulu</h2>
+<table>
+<thead>
+<tr>
+  <th style="text-align:left">Lekcia / Priečinok</th>
+  <th style="text-align:left">Téma</th>
+  <th style="text-align:left">Popis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:left"><a href="00_Prostredie_a_struktura_programu/README.html"><code>00_Prostredie_a_struktura_programu/</code></a></td>
+  <td style="text-align:left">Prostredie a Kompilácia</td>
+  <td style="text-align:left">GCC, preprocesor, štruktúra C programu a funkcia <code>main</code>.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="01_Premenne_a_datove_typy/README.html"><code>01_Premenne_a_datove_typy/</code></a></td>
+  <td style="text-align:left">Typy a Pamäť</td>
+  <td style="text-align:left">Základné typy, veľkosti v bajtoch (<code>sizeof</code>) a modifikátory.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="02_Operatory_a_vyrazy/README.html"><code>02_Operatory_a_vyrazy/</code></a></td>
+  <td style="text-align:left">Operátory</td>
+  <td style="text-align:left">Aritmetické, bitové a logické operátory.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="03_Podmienky_a_cykly/README.html"><code>03_Podmienky_a_cykly/</code></a></td>
+  <td style="text-align:left">Riadenie toku</td>
+  <td style="text-align:left">Podmienky (<code>if-else</code>, <code>switch</code>) a cykly (<code>for</code>, <code>while</code>, <code>do-while</code>).</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="04_Funkcie_a_scope/README.html"><code>04_Funkcie_a_scope/</code></a></td>
+  <td style="text-align:left">Funkcie a Lokálny Scope</td>
+  <td style="text-align:left">Deklarácia, definícia, odovzdávanie hodnotou vs. odkazom cez ukazovateľ.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="05_Polia_a_retazce/README.html"><code>05_Polia_a_retazce/</code></a></td>
+  <td style="text-align:left">Polia a C-Reťazce</td>
+  <td style="text-align:left">Jednorozmerné/viacrozmerné polia a reťazce ukončené <code>\0</code>.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="06_Ukazovatele_a_pamat/README.html"><code>06_Ukazovatele_a_pamat/</code></a></td>
+  <td style="text-align:left">Ukazovatele (Pointers)</td>
+  <td style="text-align:left">Pamäťová adresa, ukazovatele, pointerová aritmetika a dereferencia.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="07_Struktury_a_vymenovane_typy/README.html"><code>07_Struktury_a_vymenovane_typy/</code></a></td>
+  <td style="text-align:left">Štruktúry</td>
+  <td style="text-align:left">Užívateľské dátové typy <code>struct</code> a <code>enum</code>.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="08_Dynamicka_pamat/README.html"><code>08_Dynamicka_pamat/</code></a></td>
+  <td style="text-align:left">Dynamická Alokácia</td>
+  <td style="text-align:left">Práca s haldou (Heap): <code>malloc</code>, <code>free</code>, uvoľňovanie a memory leaks.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="09_Subory/README.html"><code>09_Subory/</code></a></td>
+  <td style="text-align:left">Práca so súbormi</td>
+  <td style="text-align:left">Čítanie a zápis pomocou <code>fopen</code>, <code>fprintf</code>, <code>fscanf</code>, <code>fclose</code>.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="10_Header_a_moduly/README.html"><code>10_Header_a_moduly/</code></a></td>
+  <td style="text-align:left">Modulárny vývoj</td>
+  <td style="text-align:left">Hlavičkové súbory (<code>.h</code>), include guards <code>#ifndef</code>.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="11_Debugging_a_bezpecnost/README.html"><code>11_Debugging_a_bezpecnost/</code></a></td>
+  <td style="text-align:left">Ladenie a Bezpečnosť</td>
+  <td style="text-align:left">Predchádzanie pretečeniu buffera (<em>Buffer Overflow</em>) a neplatným ukazovateľom.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="cvicenia/README.html"><code>cvicenia/</code></a></td>
+  <td style="text-align:left">Cvičenia</td>
+  <td style="text-align:left">Úlohy na precvičenie C syntaxe a ukazovateľov.</td>
+</tr>
+<tr>
+  <td style="text-align:left"><a href="projekty/index.html"><code>projekty/</code></a></td>
+  <td style="text-align:left">Miniprojekt</td>
+  <td style="text-align:left"><em>Dynamický Správca Pamäte pre Snímače (Dynamic Sensor Buffer)</em>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>📺 Odporúčané študijné zdroje</h2>
+<ul>
+<li>🌐 <strong>W3Schools</strong>: <a href="https://www.w3schools.com/c/">C Programming Tutorial</a></li>
+<li>📖 <strong>Autoritatívna C Referencia</strong>: <a href="https://en.cppreference.com/w/c">cppreference.com - C Reference</a></li>
+<li>📚 <strong>Knižná klasika</strong>: <em>Brian W. Kernighan, Dennis M. Ritchie - The C Programming Language (ANSI C)</em></li>
+</ul>
+<hr />
+<h2>🛠️ Kompilácia a Spustenie</h2>
+<p>Na kompiláciu použite kompilátor GCC s prísnymi varovaniami:</p>
+<pre><code class="language-bash"># Kompilácia programu main.c
+gcc -std=c17 -Wall -Wextra -Wpedantic main.c -o main
+
+# Spustenie
+./main          # Linux / macOS
+main.exe        # Windows
+</code></pre>
+<hr />
+<h2>💻 Štartovací kód (Ukazovatele v C)</h2>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void vymeň(int *a, int *b) {
+    int dočasná = *a;
+    *a = *b;
+    *b = dočasná;
+}
+
+int main(void) {
+    int x = 10, y = 20;
+    printf(&quot;Pred výmenou: x = %d, y = %d\n&quot;, x, y);
+
+    // Odovzdávame adresy premenných
+    vymeň(&amp;x, &amp;y);
+
+    printf(&quot;Po výmene:    x = %d, y = %d\n&quot;, x, y);
+    return 0;
+}
+</code></pre>
+<hr />
+<h2>🏁 Pokračovanie v štúdiu</h2>
+<p>Po zvládnutí C a práce s pamäťou prejdite na modul <a href="../03_C++/README.html"><code>03_C++</code></a>, kde využijete získané vedomosti pri objektovo orientovanom návrhu a RAII správe zdrojov.</p>
+<p class="source-download"><a href="../../02_C/README.md" download>Stiahnuť pôvodný súbor (README.md) ↓</a></p></main><footer class="module-footer"><a href="../../index.html">Všetky kurzy</a> · <a href="../../materialy/index.html">Prehľad dokumentácie</a></footer></div></body></html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="sk">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#101827" name="theme-color"/>
+<meta content="Výučbové materiály k programovaniu v Pythone, algoritmom, programovacím jazykom, OOP, vývojovým diagramom a dátovým štruktúram." name="description"/>
+<title>Kurz programovania v Pythone | Výučbové materiály</title>
+<style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fa;
+      --surface: #fff;
+      --text: #1c2330;
+      --muted: #5b6678;
+      --accent: #1f6feb;
+      --border: #d9dee7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        color-scheme: dark;
+        --bg: #101827;
+        --surface: #182437;
+        --text: #edf3fc;
+        --muted: #b4c2d6;
+        --accent: #83c5ff;
+        --border: #2b3b52;
+      }
+    }
+    :root[data-theme="light"] { color-scheme: light; }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #101827;
+      --surface: #182437;
+      --text: #edf3fc;
+      --muted: #b4c2d6;
+      --accent: #83c5ff;
+      --border: #2b3b52;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: radial-gradient(ellipse at 50% -20%, #27466b 0, var(--bg) 58%);
+      color: var(--text);
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    .page { width: min(100% - 2rem, 1000px); margin-inline: auto; }
+    header { padding: clamp(3.5rem, 10vw, 7rem) 0 3rem; text-align: center; }
+    .eyebrow { color: var(--accent); font-size: .82rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: .6rem 0; font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.1; letter-spacing: -.04em; }
+    header p { max-width: 600px; margin: 1rem auto 0; color: var(--muted); font-size: 1.1rem; }
+    h2 { margin: 0 0 1.25rem; font-size: 1.45rem; }
+    .lessons { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1.25rem; padding-bottom: 4rem; }
+    .section-heading { grid-column: 1 / -1; margin: 1rem 0 0; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .card {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      background: var(--surface);
+      color: inherit;
+      text-decoration: none;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    .card img { display: block; width: 100%; height: 210px; background: #fff; object-fit: cover; }
+    .card img.function-thumbnail { object-fit: contain; background: #fff4bd; }
+    .card img.intro-thumbnail { object-position: center; }
+    .card-content { display: flex; flex: 1; flex-direction: column; padding: 1.35rem; }
+    .tag { color: var(--accent); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .card h3 { margin: .45rem 0; font-size: 1.3rem; line-height: 1.3; }
+    .card p { margin: 0 0 1.25rem; color: var(--muted); }
+    .open { margin-top: auto; color: var(--accent); font-weight: 700; }
+    footer { padding: 1rem 0 2rem; border-top: 1px solid var(--border); color: var(--muted); text-align: center; font-size: .9rem; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+<link href="premium.css" rel="stylesheet"/>
+<script defer="" src="motion.js"></script>
+</head>
+<body data-layout="catalog">
+<div class="page">
+<header>
+<div class="eyebrow">Výučbové materiály</div>
+<h1>Programovanie v Pythone</h1>
+<p>Vyber si prednášku a preskúmaj algoritmy krok za krokom.</p>
+</header>
+<main>
+<h2>Materiály</h2>
+<section aria-label="Zoznam prednášok" class="lessons">
+<h2 class="section-heading">1. Úvod do predmetu</h2>
+<a class="card" href="1.1%20Bezpe%C4%8Dnos%C5%A5%20pri%20pr%C3%A1ci.html">
+<img alt="Vitajte v predmete Programovanie v Pythone – úvodný prehľad programovania, dát a projektov" class="intro-thumbnail" height="1024" src="img/Vitajte%20v%20programovan%C3%AD%20v%20Pythone.png" width="1536"/>
+<div class="card-content">
+<span class="tag">Vstup do predmetu</span>
+<h3>1.1 Bezpečnosť pri práci</h3>
+<p>Úvodné poučenie BOZP, kontrola pracoviska a prevádzkový poriadok učebne SVL-16 · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="1.2%20Vstup%20do%20predmetu.html">
+<img alt="Úvodný prehľad predmetu Algoritmy a programovanie" class="intro-thumbnail" height="1024" src="img/Algoritmy%20a%20programovanie_%20%C3%9Avod%20do%20predmetu.png" width="1536"/>
+<div class="card-content">
+<span class="tag">Vstup do predmetu</span>
+<h3>1.2 Vstup do predmetu</h3>
+<p>Prvé kroky vo VS Code Portable a Pythone: inštalácia, aktualizácie a prvé spustenie kódu · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<h2 class="section-heading">2. Algoritmizácia</h2>
+<a class="card" href="2.1%20Algoritmus%20-%20z%C3%A1kladn%C3%A9%20pojmy,%20vlastnosti%20algoritmov.html">
+<img alt="Algoritmus: cesta od problému k riešeniu" height="1024" src="img/Algoritmus_%20Od%20probl%C3%A9mu%20k%20rie%C5%A1eniu.png" width="1536"/>
+<div class="card-content">
+<span class="tag">Algoritmické myslenie</span>
+<h3>2.1 Algoritmus – základné pojmy, vlastnosti algoritmov</h3>
+<p>Čo je algoritmus, jeho vstupy, výstupy a vlastnosti; prezentácia a videá · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="2.2%20Z%C3%A1kladn%C3%A9%20formy%20a%20typy%20algoritmov.html">
+<img alt="Základné formy a typy algoritmov" loading="lazy" src="img/Z%C3%A1kladn%C3%A9%20formy%20a%20typy%20algoritmov.png"/>
+<div class="card-content">
+<span class="tag">Algoritmické myslenie</span>
+<h3>2.2 Základné formy a typy algoritmov</h3>
+<p>Postupnosť, vetvenie a opakovanie algoritmov; praktické podtémy o dátach a operáciách v Pythone · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="2.3%20V%C3%BDvojov%C3%BD%20diagram.html">
+<img alt="Prehľad značiek a pravidiel vývojového diagramu" loading="lazy" src="img/V%C3%BDvojov%C3%BD%20diagram_%20Preh%C4%BEadn%C3%BD%20sprievodca.png"/>
+<div class="card-content">
+<span class="tag">Znázornenie algoritmov</span>
+<h3>2.3 Vývojový diagram</h3>
+<p>Základné symboly, čítanie a tvorba vývojových diagramov · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="2.4%20Algoritmiz%C3%A1cia%20v%C3%BDpo%C4%8Dtu%20pl%C3%B4ch%20a%20objemov.html">
+<img alt="Ilustrácia plochy obdĺžnika a objemu kvádra" src="img/2.4%20Plochy%20a%20objemy.svg"/>
+<div class="card-content">
+<span class="tag">Výpočtové algoritmy</span>
+<h3>2.4 Algoritmizácia výpočtu plôch a objemov</h3>
+<p>Vzorce, jednotky a výpočty obsahov a objemov v Pythone · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="2.5%20Algoritmiz%C3%A1cia%20podmienky.html">
+<img alt="Vývojový diagram algoritmizácie jednoduchej podmienky" loading="lazy" src="img/AlgoritmizaciaJednoduchejPodmienky.png"/>
+<div class="card-content">
+<span class="tag">Rozhodovanie</span>
+<h3>2.5 Algoritmizácia podmienky</h3>
+<p>Logické výrazy, vetvenie if/else a rozhodovanie v Pythone · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="2.6%20Algoritmiz%C3%A1cia%20vnorenej%20podmienky.html">
+<img alt="Vývojový diagram s vnorenými rozhodnutiami pri diagnostike lampičky" loading="lazy" src="img/VnorenaPodmienka1.png"/>
+<div class="card-content">
+<span class="tag">Rozhodovanie</span>
+<h3>2.6 Algoritmizácia vnorenej podmienky</h3>
+<p>Hierarchia rozhodnutí, vnorené if, odsadenie a trasovanie v Pythone · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="2.7%20Algoritmiz%C3%A1cia%20cyklu.html">
+<img alt="Porovnanie cyklov for a while v Pythone" loading="lazy" src="img/2.7%20Cykly.svg"/>
+<div class="card-content">
+<span class="tag">Opakovanie</span>
+<h3>2.7 Algoritmizácia cyklu</h3>
+<p>Cyklus for, while, range, break a continue v Pythone · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="U%C4%8Debn%C3%A9%20materi%C3%A1ly/2.7.1%20D%C3%A1tov%C3%A9%20%C5%A1trukt%C3%BAry%20v%20Pythone.html">
+<img alt="Prehľad dátových štruktúr list, tuple, set a dict" loading="lazy" src="img/2.7.1 Datove struktury.svg"/>
+<div class="card-content">
+<span class="tag">Dáta a kolekcie</span>
+<h3>2.7.1 Dátové štruktúry v Pythone</h3>
+<p>Zoznam, n-tica, množina a slovník · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="U%C4%8Debn%C3%A9%20materi%C3%A1ly/2.7.2%20V%C3%BDrezy%20v%20Pythone.html">
+<img alt="Ukážka výberu časti sekvencie pomocou zápisu slice" loading="lazy" src="img/2.7.2 Vyrezy.svg"/>
+<div class="card-content">
+<span class="tag">Práca so sekvenciami</span>
+<h3>2.7.2 Výrezy v Pythone</h3>
+<p>Výber častí zoznamu, reťazca a n-tice pomocou slice · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="U%C4%8Debn%C3%A9%20materi%C3%A1ly/2.7.3%20List%20Comprehension%20v%20Pythone.html">
+<img alt="List comprehension vytvára nový zoznam transformovaním a filtrovaním hodnôt" loading="lazy" src="img/2.7.3%20List%20comprehension.svg"/>
+<div class="card-content">
+<span class="tag">Práca so zoznamami</span>
+<h3>2.7.3 List comprehension v Pythone</h3>
+<p>Vytváranie, transformovanie a filtrovanie zoznamov pomocou komprehencie · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="2.8%20Algoritmiz%C3%A1cia%20vnoren%C3%A9ho%20cyklu.html">
+<img alt="Schéma vnoreného cyklu, v ktorom sa vnútorné iterácie opakujú pre každú hodnotu vonkajšieho cyklu" loading="lazy" src="img/2.8%20Vnoren%C3%A9%20cykly.svg"/>
+<div class="card-content">
+<span class="tag">Opakovanie</span>
+<h3>2.8 Algoritmizácia vnoreného cyklu</h3>
+<p>Trasovanie vnútorných a vonkajších cyklov, tabuľky, vzory a mriežky · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="2.9%20Algoritmiz%C3%A1cia%20podprogramov.html">
+<img alt="Hlavný algoritmus rozdelený na menšie podprogramy so samostatnými zodpovednosťami" loading="lazy" src="img/2.9%20Podprogramy.svg"/>
+<div class="card-content">
+<span class="tag">Algoritmické myslenie</span>
+<h3>2.9 Algoritmizácia podprogramov</h3>
+<p>Teoretický úvod: rozklad úloh, abstrakcia, rozhrania a návrh spolupracujúcich častí algoritmu.</p>
+<span class="open">Otvoriť prednášku <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="2.10%20Algoritmiz%C3%A1cia%20funkci%C3%AD.html">
+<img alt="Prehľad štyroch druhov funkcií v Pythone: používateľské, vstavané, lambda a rekurzívne" class="function-thumbnail" height="628" src="img/2.10 Python-Functions.jpg" width="1200"/>
+<div class="card-content">
+<span class="tag">Funkcie</span>
+<h3>2.10 Algoritmizácia funkcií</h3>
+<p>Rozdeľ program na podprogramy, používaj parametre a vracaj výsledky.</p>
+<span class="open">Otvoriť prednášku <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="2.11%20Algoritmus%20triedenia.html">
+<img alt="Prehľad algoritmov triedenia" height="600" src="img/2.11 SortingAlgoritmus.png" width="900"/>
+<div class="card-content">
+<span class="tag">Algoritmy</span>
+<h3>2.11 Algoritmy triedenia</h3>
+<p>Porovnaj rôzne spôsoby triedenia a zisti, ako fungujú v Pythone.</p>
+<span class="open">Otvoriť prednášku <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="2.11.1%20Rekurzia%20a%20rekurzivne%20triedenie.html">
+<img alt="Schéma zásobníka rekurzívnych volaní" height="600" src="img/2.11.1 rekurzia-zasobnik-volani.png" width="900"/>
+<div class="card-content">
+<span class="tag">Rekurzia</span>
+<h3>2.11.1 Rekurzia a rekurzívne triedenie</h3>
+<p>Pochop rekurzívne volania, základný prípad a triedenie rozdeľovaním.</p>
+<span class="open">Otvoriť prednášku <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<h2 class="section-heading">3. Programovanie všeobecne</h2>
+<a class="card" href="3.1%20Programovacie%20jazyky%20a%20ich%20delenie.html">
+<img alt="Programovacie jazyky rozdelené podľa úrovne abstrakcie, vykonávania a paradigmy" loading="lazy" src="img/3.1%20Programovacie%20jazyky.svg"/>
+<div class="card-content">
+<span class="tag">Základy programovania</span>
+<h3>3.1 Programovacie jazyky a ich delenie</h3>
+<p>Úrovne jazykov, spôsoby vykonávania, paradigmy a oblasti použitia · 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="3.2%20Jazyky%20vy%C5%A1%C5%A1ieho%20typu.html">
+<img alt="Trieda GameObject opisuje atribúty a metódy spoločné pre viac objektov" loading="lazy" src="img/3.2%20Trieda%20a%20objekty.svg"/>
+<div class="card-content">
+<span class="tag">Vyššie jazyky a OOP</span>
+<h3>3.2 Jazyky vyššieho typu</h3>
+<p>Vyššie jazyky a objektovo orientované programovanie v Pythone · 2 × 45 min.</p>
+<span class="open">Otvoriť tému <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<h2 class="section-heading">4. Opakovanie</h2>
+<a class="card" href="Opakovanie%20-%20Z%C3%A1klady%20algoritmov.html">
+<div class="card-content">
+<span class="tag">Študijné podklady</span>
+<h3>Základy algoritmov</h3>
+<p>Podklady k algoritmom, vývojovým diagramom a riadiacim štruktúram.</p>
+<span class="open">Otvoriť podklady <span aria-hidden="true">→</span></span>
+</div>
+</a>
+<a class="card" href="Opakovanie%20-%20Interakt%C3%ADvne%20testy.html">
+<div class="card-content">
+<span class="tag">Precvičovanie</span>
+<h3>Interaktívny test z algoritmov</h3>
+<p>Over si vedomosti o algoritmickom myslení a riadiacich štruktúrach.</p>
+<span class="open">Spustiť testy <span aria-hidden="true">→</span></span>
+</div>
+</a>
+</section>
+</main>
+<section aria-labelledby="sources-heading" class="card">
+<h2 id="sources-heading">Použité zdroje</h2>
+<ul>
+<li><a href="1.1%20Bezpe%C4%8Dnos%C5%A5%20pri%20pr%C3%A1ci.html">téma 1.1</a> a <a href="1.2%20Vstup%20do%20predmetu.html">1.2</a>; témy <a href="2.1%20Algoritmus%20-%20z%C3%A1kladn%C3%A9%20pojmy,%20vlastnosti%20algoritmov.html">2.1</a>, <a href="2.2%20Z%C3%A1kladn%C3%A9%20formy%20a%20typy%20algoritmov.html">2.2</a>, <a href="2.3%20V%C3%BDvojov%C3%BD%20diagram.html">2.3</a>, <a href="2.4%20Algoritmiz%C3%A1cia%20v%C3%BDpo%C4%8Dtu%20pl%C3%B4ch%20a%20objemov.html">2.4</a>, <a href="2.5%20Algoritmiz%C3%A1cia%20podmienky.html">2.5</a>, <a href="2.6%20Algoritmiz%C3%A1cia%20vnorenej%20podmienky.html">2.6</a>, <a href="2.7%20Algoritmiz%C3%A1cia%20cyklu.html">2.7</a> a <a href="2.8%20Algoritmiz%C3%A1cia%20vnoren%C3%A9ho%20cyklu.html">2.8</a>; nadväzujúce témy <a href="2.9%20Algoritmiz%C3%A1cia%20podprogramov.html">2.9</a>, <a href="2.10%20Algoritmiz%C3%A1cia%20funkci%C3%AD.html">2.10</a>, <a href="2.11%20Algoritmus%20triedenia.html">2.11</a>, <a href="2.11.1%20Rekurzia%20a%20rekurzivne%20triedenie.html">2.11.1</a>, <a href="3.1%20Programovacie%20jazyky%20a%20ich%20delenie.html">3.1</a> a <a href="3.2%20Jazyky%20vy%C5%A1%C5%A1ieho%20typu.html">3.2</a>.</li>
+<li>Ilustrácie prednášok: súbory dodané k týmto výučbovým materiálom v priečinku <code>img</code>.</li>
+<li>Ilustrácia k téme funkcií: <a href="https://data-flair.training/blogs/python-function/" rel="noopener noreferrer" target="_blank">DataFlair – Python Function: Type of Functions in Python</a>.</li>
+</ul>
+</section>
+<section aria-label="Študijné zdroje" class="resource-panel"><h2>Ďalšie materiály Python</h2><div class="resource-links"><a class="resource-button" href="materialy/01_Python/README.html">Python — osnova a dokumentácia</a><a class="resource-button" href="materialy/index.html#python">Všetky Python témy a ukážky</a></div></section><footer>Výučbové materiály z programovania · Python · <a href="nastavenia.html">Nastavenia vzhľadu</a> · <a href="index.html">Všetky kurzy</a></footer>
+</div>
+<script src="theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.11.1 Rekurzia a rekurzívne triedenie | Výučbová téma</title>
+<style>
+:root{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--code:#0f172a;--codefg:#e2e8f0;--tbg:#fff4d6;--tline:#e8c25a}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--code:#0a0e14;--codefg:#e2e8f0;--tbg:#3a3017;--tline:#7a6322}}
+:root[data-theme="light"]{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--code:#0f172a;--codefg:#e2e8f0;--tbg:#fff4d6;--tline:#e8c25a}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--code:#0a0e14;--codefg:#e2e8f0;--tbg:#3a3017;--tline:#7a6322}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+.w{max-width:900px;margin:0 auto;padding:16px}
+header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+h1{margin:8px 0;font-size:30px}
+h2{margin-top:32px;border-bottom:2px solid var(--line);padding-bottom:4px}
+h3{margin-top:24px}
+a{color:var(--acc)}
+.crumb{color:var(--mut);font-size:14px}
+.mode{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.mode button{border:0;background:var(--card);color:var(--fg);padding:8px 14px;font:inherit;cursor:pointer}
+.mode button.on{background:var(--acc);color:#fff}
+button:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.tag{display:inline-block;background:var(--line);border-radius:6px;padding:0 8px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:12px 0}
+.teacher-note{display:none;background:var(--tbg);border:1px solid var(--tline);border-radius:10px;padding:10px 14px;margin:12px 0}
+body.teacher .teacher-note{display:block}
+.teacher-note b{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.code-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.code-grid .card{min-width:0}
+pre{background:var(--code);color:var(--codefg);padding:12px;border-radius:8px;overflow-x:auto;font-size:14px;line-height:1.45}
+.copyable-code{margin:8px 0}
+.copy-btn{background:var(--acc);color:#fff;border:0;border-radius:6px;padding:5px 10px;font:inherit;font-size:14px;cursor:pointer}
+.copy-status{min-height:1.5em;margin:2px 0;color:var(--mut);font-size:13px}
+.copy-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
+.video-card{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin:12px 0}
+.video-frame{aspect-ratio:16/9;width:100%;border:0;border-radius:8px;background:#000}
+.video-card p{margin:.5rem 0}
+.media{border:2px dashed var(--line);border-radius:10px;padding:18px;text-align:center;color:var(--mut);margin:12px 0}
+.lesson-image{display:block;max-width:100%;height:auto;margin:0 auto;border-radius:8px}
+textarea{width:100%;min-height:110px;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit}
+@media(max-width:640px){.code-grid{grid-template-columns:1fr}.w{padding:12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+  <link rel="stylesheet" href="premium.css">
+</head>
+<body data-layout="reading">
+<div class="w">
+<header>
+<span class="crumb">Doplnková téma · Algoritmy a Python</span>
+<div><a href="nastavenia.html">Nastavenia vzhľadu</a> · <div class="mode" role="group" aria-label="Zobrazenie stránky"><button id="student-mode" class="on" type="button" aria-pressed="true">Žiak</button><button id="teacher-mode" type="button" aria-pressed="false">Učiteľ</button></div></div>
+</header>
+<h1>2.11.1 Rekurzia a rekurzívne triedenie</h1>
+<p><span class="tag">2 × 45 min (návrh)</span> <span class="tag">funkcie · rozklad problému · Python</span></p>
+
+<h2>Úvod: čo znamená rekurzia?</h2>
+<p>V tejto téme sa naučíš, ako môže funkcia vyriešiť úlohu tak, že zavolá samu seba s menším problémom. Rekurziu si najprv ukážeme na jednoduchom odpočítavaní, potom na faktoriáli a napokon na algoritmoch, ktoré triedia zoznamy rozdelením na menšie časti.</p>
+<p>Pri každom príklade hľadaj dve dôležité veci: <strong>kde sa volanie zastaví</strong> a <strong>ako sa vstup pri ďalšom volaní zmenší</strong>. Bez podmienky zastavenia by funkcia pokračovala, až kým by Python nenahlásil chybu.</p>
+<div class="video-card">
+<h3>Úvodné video: Recursion (anglicky, 8 min)</h3>
+<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/u8Xam9EsqXQ" title="Learn Recursion in 8 minutes – Bro Code" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>Počas pozerania si zapíš jeden príklad rekurzívneho volania a označ miesto, kde sa zastaví.</p>
+<a href="https://youtu.be/u8Xam9EsqXQ">Otvoriť video na YouTube</a>
+</div>
+<div class="card"><strong>Pred pozeraním:</strong> Skús si predstaviť, ako by si niekomu vysvetlil, čo znamená „urob to isté, ale pre menší problém“. Po videu porovnaj svoj nápad s pojmami <em>rekurzívny krok</em> a <em>základný prípad</em>.</div>
+
+<div class="teacher-note"><b>Ciele, pomôcky a predpoklady</b>
+Žiak vysvetlí rekurziu, rozpozná rekurzívny prípad a základný prípad, trasuje zásobník volaní a použije rekurziu pri faktoriáli a triedení. Predpoklady: funkcie, podmienky, zoznamy a cykly. Pomôcky: Python/Thonny, projektor a kartičky s číslami.</div>
+<div class="teacher-note"><b>Návrh časového plánu</b>
+1. hodina: 0–8 min motivácia a príklady; 8–20 min základný a rekurzívny prípad; 20–32 min trasovanie faktoriálu; 32–42 min krátka úloha; 42–45 min výstupný lístok.<br>
+2. hodina: 0–8 min opakovanie; 8–22 min merge sort; 22–34 min quick sort; 34–42 min porovnanie alebo práca s videom; 42–45 min zhrnutie. Videá sú v angličtine; podľa času vyber krátku ukážku alebo ich zadaj na samostatné pozretie.</div>
+<div class="teacher-note"><b>Zverejnenie</b>
+Prepínač skrýva poznámky iba vizuálne. Riešenia sú preto v zdrojovom HTML a nie sú chránené heslom; na verejné zverejnenie vytvor samostatnú učiteľskú verziu.</div>
+
+<h2>Čo je rekurzia?</h2>
+<p>Rekurzia je spôsob riešenia úlohy, pri ktorom funkcia volá samu seba s menším alebo jednoduchším vstupom. Volania pokračujú, kým nenarazia na <strong>základný prípad</strong>, ktorý už ďalšie volanie nepotrebuje. Každé rekurzívne volanie musí smerovať k tomuto prípadu.</p>
+<div class="card"><strong>Zapamätaj si dva diely:</strong>
+<ul><li><strong>Základný prípad</strong> – kedy sa funkcia zastaví.</li><li><strong>Rekurzívny krok</strong> – ako sa problém zmenší a funkcia zavolá samu seba.</li></ul></div>
+<!--<figure class="media"><img class="lesson-image" src="img/2.11.1 rekurzia-zasobnik-volani.png" alt="Schéma rekurzívnych volaní, ktoré sa rozvinú k základnému prípadu a potom sa vracajú späť"><figcaption>Ak pridáš obrázok, ulož ho ako <code>img/2.11.1 rekurzia-zasobnik-volani.png</code>.</figcaption></figure>
+-->
+<h3>Prvý príklad: odpočítavanie</h3>
+<pre class="python-code">def odpocitaj(n):
+    if n == 0:                 # základný prípad
+        print("Štart!")
+        return
+    print(n)
+    odpocitaj(n - 1)            # menší problém
+
+odpocitaj(3)</pre>
+<p>Výpis je 3, 2, 1, Štart!. Pri volaní <code>odpocitaj(0)</code> sa funkcia zastaví. Keby sme zmenšovanie vstupu vynechali, funkcia by sa nezastavila správne.</p>
+
+<h3>Faktoriál a návrat zo zásobníka</h3>
+<p>Faktoriál čísla <code>n</code> je súčin čísel od 1 po <code>n</code>. Platí <code>0! = 1</code> a pre kladné <code>n</code> platí <code>n! = n · (n−1)!</code>.</p>
+<pre class="python-code">def faktorial(n):
+    if n &lt; 0:
+        raise ValueError("Faktoriál je definovaný len pre n >= 0")
+    if n == 0:                  # základný prípad
+        return 1
+    return n * faktorial(n - 1)
+
+print(faktorial(4))  # 24</pre>
+<p>Pri <code>faktorial(4)</code> sa najprv volá <code>faktorial(3)</code>, potom <code>faktorial(2)</code>, <code>faktorial(1)</code> a napokon <code>faktorial(0)</code>. Výsledky sa dopočítajú pri návrate: <code>1 → 1 → 2 → 6 → 24</code>.</p>
+<div class="teacher-note"><b>Časté chyby</b>
+Chýbajúci základný prípad alebo vstup, ktorý sa k nemu nepribližuje, spôsobí priveľa volaní a nakoniec <code>RecursionError</code>. Vysvetli, že volania čakajú na zásobníku na výsledok hlbšieho volania. Python má limit hĺbky rekurzie; nezvyšuj ho ako náhradu za správny základný prípad.</div>
+
+<h2>Rekurzívne triedenie</h2>
+<p>Niektoré algoritmy rozdelia zoznam na menšie časti, tie vyriešia rekurzívne a následne spoja výsledky. Takýto prístup sa nazýva <strong>rozdeľ a panuj</strong>.</p>
+
+<h3>Merge sort (triedenie zlučovaním)</h3>
+<p>Zoznam rozdeľujeme na polovice až po časti s najviac jedným prvkom. Tie sú už zoradené. Potom zoradené polovice postupne zlúčime. Základný prípad je zoznam s dĺžkou 0 alebo 1.</p>
+<pre class="python-code">def merge(left, right):
+    vysledok = []
+    i = j = 0
+    while i &lt; len(left) and j &lt; len(right):
+        if left[i] &lt;= right[j]:
+            vysledok.append(left[i])
+            i += 1
+        else:
+            vysledok.append(right[j])
+            j += 1
+    return vysledok + left[i:] + right[j:]
+
+def merge_sort(a):
+    if len(a) &lt;= 1:             # základný prípad
+        return a
+    stred = len(a) // 2
+    lava = merge_sort(a[:stred])
+    prava = merge_sort(a[stred:])
+    return merge(lava, prava)
+
+print(merge_sort([5, 3, 8, 1, 9, 2]))  # [1, 2, 3, 5, 8, 9]</pre>
+<p>Časová zložitosť je približne <code>O(n log n)</code>. Táto jednoduchá implementácia vytvára pomocné zoznamy, preto používa dodatočnú pamäť.</p>
+<div class="video-card">
+<h3>Video: Merge Sort (anglicky, 13 min)</h3>
+<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/3j0SWDX4AtU" title="Learn Merge Sort in 13 minutes – Bro Code" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>Sleduj rozdelenie zoznamu na polovice a následné zlučovanie zoradených častí.</p>
+<a href="https://youtu.be/3j0SWDX4AtU">Otvoriť video na YouTube</a>
+</div>
+
+<h3>Quick sort (rýchle triedenie)</h3>
+<p>Vyberieme pivot a rozdelíme prvky na menšie, rovnaké a väčšie. Potom rekurzívne zoradíme menšiu a väčšiu skupinu. Základný prípad je skupina s najviac jedným prvkom.</p>
+<pre class="python-code">def quick_sort(a):
+    if len(a) &lt;= 1:             # základný prípad
+        return a
+    pivot = a[len(a) // 2]
+    mensie = [x for x in a if x &lt; pivot]
+    rovnake = [x for x in a if x == pivot]
+    vacsie = [x for x in a if x &gt; pivot]
+    return quick_sort(mensie) + rovnake + quick_sort(vacsie)
+
+print(quick_sort([5, 3, 8, 1, 9, 2]))  # [1, 2, 3, 5, 8, 9]</pre>
+<p>Ide o zjednodušenú verziu, ktorá vytvára nové zoznamy. Quick sort má pri vhodnom rozdelení priemernú zložitosť <code>O(n log n)</code>; pri veľmi nevyváženom delení môže mať <code>O(n²)</code>.</p>
+<div class="video-card">
+<h3>Video: Quick Sort (anglicky, 13 min)</h3>
+<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/Vtckgz38QHs" title="Learn Quick Sort in 13 minutes – Bro Code" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>Všímaj si výber pivota, rozdelenie prvkov a rekurzívne triedenie menších častí.</p>
+<a href="https://youtu.be/Vtckgz38QHs">Otvoriť video na YouTube</a>
+</div>
+
+<div class="teacher-note"><b>Tip k videám</b>
+Všetky videá sú v angličtine. Pri úvodnom videu nech žiaci najprv hľadajú základný prípad a rekurzívny krok; pri ďalších videách sledujú rozdelenie a spájanie zoznamu alebo výber pivota. Vložené prehrávače načítajú YouTube až pri otvorení stránky v prehliadači s internetom.</div>
+
+<h2>Úlohy</h2>
+<div class="card"><ol>
+<li>Napíš funkciu <code>sucet_do(n)</code> pre nezáporné celé <code>n</code>, ktorá rekurzívne vráti súčet čísel od 1 po <code>n</code>. Urči základný prípad.</li>
+<li>Vypíš poradie volaní aj návratových hodnôt pre <code>faktorial(3)</code>.</li>
+<li>Vysvetli, prečo sa <code>merge_sort([])</code> a <code>merge_sort([7])</code> zastavia.</li>
+<li>Uprav <code>quick_sort</code> a otestuj ho na zozname s opakovanými číslami.</li>
+<li><strong>★</strong> Porovnaj počet delení pri <code>merge_sort</code> a <code>quick_sort</code>. Prečo môže voľba pivota ovplyvniť quick sort?</li>
+</ol></div>
+<div class="teacher-note"><b>Náčrt riešení</b>
+1) Základný prípad <code>n == 0</code> vráti 0; inak vráť <code>n + sucet_do(n - 1)</code>.<br>
+2) Volania: <code>faktorial(3) → 3 · faktorial(2) → 3 · 2 · faktorial(1) → 3 · 2 · 1 · faktorial(0)</code>; návraty: <code>1, 1, 2, 6</code>.<br>
+3) Dĺžka zoznamu je najviac 1, takže sa vykoná základný prípad bez ďalšieho volania.<br>
+4) Funkcia rozdeľuje rovnaké hodnoty do zoznamu <code>rovnake</code>; príklad <code>[3, 1, 3, 2]</code> vráti <code>[1, 2, 3, 3]</code>.<br>
+5) Merge sort rozdeľuje na polovice pravidelne; quick sort závisí od rozdelenia prvkov okolo pivota. Veľmi nevyvážené časti znamenajú viac úrovní volaní.</div>
+
+<h2>Zhrnutie</h2>
+<div class="card">Rekurzívna funkcia potrebuje správny základný prípad a krok, ktorý ju k nemu približuje. Volania sa ukladajú, kým sa nedosiahne základný prípad, a potom sa výsledky vracajú späť. Merge sort a quick sort používajú rekurziu na riešenie menších častí zoznamu.</div>
+<p><a href="2.11%20Algoritmus%20triedenia.html">Späť na tému 2.11 – Algoritmus triedenia</a> · <a href="python.html">Prehľad prednášok</a> · <a href="nastavenia.html">Nastavenia vzhľadu</a></p>
+
+<h2>Moje poznámky</h2>
+<label for="notes">Poznámky sa ukladajú iba v tomto prehliadači na tomto zariadení.</label>
+<textarea id="notes" placeholder="Sem si píš poznámky…"></textarea>
+<p id="notes-status" class="crumb" role="status" aria-live="polite"></p>
+<section class="card" aria-labelledby="sources-heading">
+<h2 id="sources-heading">Použité zdroje</h2>
+<ul>
+<li><a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions" target="_blank" rel="noopener noreferrer">Oficiálny tutoriál Pythonu: Defining Functions</a>.</li>
+<li>Videá o <a href="https://youtu.be/u8Xam9EsqXQ" target="_blank" rel="noopener noreferrer">rekurzii</a>, <a href="https://youtu.be/3j0SWDX4AtU" target="_blank" rel="noopener noreferrer">merge sort</a> a <a href="https://youtu.be/Vtckgz38QHs" target="_blank" rel="noopener noreferrer">quick sort</a>.</li>
+<li><a href="https://www.programiz.com/python-programming/online-compiler/" target="_blank" rel="noopener noreferrer">Programiz Python Online Compiler</a> – online spustenie ukážok.</li>
+</ul>
+</section>
+</div>
+<script>
+(function(){
+document.querySelectorAll('pre.python-code').forEach(function(code){
+var wrapper=document.createElement('div'),actions=document.createElement('div'),button=document.createElement('button'),editor=document.createElement('a'),status=document.createElement('p');
+wrapper.className='copyable-code';actions.className='copy-actions';
+ button.className='copy-btn';button.type='button';button.textContent='Kopírovať kód';
+editor.href='https://www.programiz.com/python-programming/online-compiler/';editor.target='_blank';editor.rel='noopener noreferrer';editor.textContent='Vyskúšať v online editore';
+status.className='copy-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+code.parentNode.insertBefore(wrapper,code);
+wrapper.appendChild(actions);actions.appendChild(button);actions.appendChild(editor);wrapper.appendChild(code);wrapper.appendChild(status);
+ button.onclick=function(){
+  if(!navigator.clipboard||!navigator.clipboard.writeText){
+   status.textContent='Kopírovanie nie je dostupné. Označ kód a skopíruj ho pomocou Ctrl+C.';
+   return;
+  }
+  navigator.clipboard.writeText(code.innerText).then(function(){
+   status.textContent='Kód skopírovaný.';
+  }).catch(function(){
+   status.textContent='Kód sa nepodarilo skopírovať. Označ ho a skopíruj pomocou Ctrl+C.';
+  });
+ };
+});
+var body=document.body,student=document.getElementById('student-mode'),teacher=document.getElementById('teacher-mode');
+function setMode(isTeacher){
+ body.classList.toggle('teacher',isTeacher);
+ teacher.classList.toggle('on',isTeacher);teacher.setAttribute('aria-pressed',String(isTeacher));
+ student.classList.toggle('on',!isTeacher);student.setAttribute('aria-pressed',String(!isTeacher));
+}
+student.onclick=function(){setMode(false)};
+teacher.onclick=function(){setMode(true)};
+var notes=document.getElementById('notes'),status=document.getElementById('notes-status'),key='tema-rekurzia-poznamky';
+try{notes.value=localStorage.getItem(key)||'';status.textContent='Poznámky sa ukladajú v tomto prehliadači.'}
+catch(error){status.textContent='Ukladací priestor nie je dostupný. Poznámky si skopíruj, aby sa nestratili.'}
+notes.oninput=function(){
+ try{localStorage.setItem(key,notes.value);status.textContent='Poznámky uložené.'}
+ catch(error){status.textContent='Poznámky sa nepodarilo uložiť. Skopíruj si ich, aby sa nestratili.'}
+};
+})();
+</script>
+<script src="theme.js"></script>
+</body>
+</html>

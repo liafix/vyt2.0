@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+  <title id="title">Programovacie jazyky možno deliť podľa viacerých hľadísk</title>
+  <desc id="desc">Tri nezávislé osi klasifikácie: úroveň abstrakcie, spôsob vykonávania a programovacia paradigma.</desc>
+  <defs><style>text{font-family:system-ui,sans-serif;fill:#17212f}.title{font-size:30px;font-weight:700}.head{font-size:23px;font-weight:700}.label{font-size:18px;font-weight:600}.small{font-size:16px}</style></defs>
+  <rect width="1000" height="540" rx="26" fill="#f7f9fc"/>
+  <text class="title" x="500" y="54" text-anchor="middle">Ten istý jazyk možno opísať z rôznych pohľadov</text>
+  <g transform="translate(40 100)">
+    <rect width="290" height="340" rx="20" fill="#e3f2ff" stroke="#1672c4" stroke-width="3"/>
+    <text class="head" x="145" y="46" text-anchor="middle">Úroveň abstrakcie</text>
+    <rect x="28" y="83" width="234" height="58" rx="12" fill="#fff" stroke="#1672c4" stroke-width="2"/>
+    <text class="label" x="145" y="119" text-anchor="middle">Strojový jazyk</text>
+    <path d="M145 143v30" stroke="#526174" stroke-width="3"/>
+    <rect x="28" y="177" width="234" height="58" rx="12" fill="#fff" stroke="#1672c4" stroke-width="2"/>
+    <text class="label" x="145" y="213" text-anchor="middle">Assembler</text>
+    <path d="M145 237v30" stroke="#526174" stroke-width="3"/>
+    <rect x="28" y="271" width="234" height="48" rx="12" fill="#cce7ff" stroke="#1672c4" stroke-width="2"/>
+    <text class="label" x="145" y="302" text-anchor="middle">Vyššie jazyky</text>
+  </g>
+  <g transform="translate(355 100)">
+    <rect width="290" height="340" rx="20" fill="#fff2cc" stroke="#c38b00" stroke-width="3"/>
+    <text class="head" x="145" y="46" text-anchor="middle">Vykonávanie</text>
+    <rect x="28" y="95" width="234" height="68" rx="12" fill="#fff" stroke="#c38b00" stroke-width="2"/>
+    <text class="label" x="145" y="124" text-anchor="middle">Kompilácia</text>
+    <text class="small" x="145" y="148" text-anchor="middle">preklad do inej podoby</text>
+    <text class="head" x="145" y="203" text-anchor="middle">+</text>
+    <rect x="28" y="225" width="234" height="68" rx="12" fill="#fff" stroke="#c38b00" stroke-width="2"/>
+    <text class="label" x="145" y="254" text-anchor="middle">Interpretácia</text>
+    <text class="small" x="145" y="278" text-anchor="middle">vykonávanie prostredím</text>
+    <text class="small" x="145" y="322" text-anchor="middle">často sa kombinujú</text>
+  </g>
+  <g transform="translate(670 100)">
+    <rect width="290" height="340" rx="20" fill="#e8f6e9" stroke="#25823c" stroke-width="3"/>
+    <text class="head" x="145" y="46" text-anchor="middle">Paradigma</text>
+    <rect x="28" y="83" width="234" height="58" rx="12" fill="#fff" stroke="#25823c" stroke-width="2"/>
+    <text class="label" x="145" y="119" text-anchor="middle">Procedurálna</text>
+    <rect x="28" y="155" width="234" height="58" rx="12" fill="#fff" stroke="#25823c" stroke-width="2"/>
+    <text class="label" x="145" y="191" text-anchor="middle">Objektovo orientovaná</text>
+    <rect x="28" y="227" width="234" height="58" rx="12" fill="#fff" stroke="#25823c" stroke-width="2"/>
+    <text class="label" x="145" y="263" text-anchor="middle">Funkcionálna</text>
+    <text class="small" x="145" y="319" text-anchor="middle">Python podporuje viac štýlov</text>
+  </g>
+  <text class="small" x="500" y="490" text-anchor="middle">Kategórie na rôznych osiach sa nevylučujú: Python je vyšší, viacparadigmový jazyk.</text>
+</svg>

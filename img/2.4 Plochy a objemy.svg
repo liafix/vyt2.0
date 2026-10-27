@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Plochy a objemy geometrických útvarov</title>
+  <desc id="desc">Ilustrácia obdĺžnika s výpočtom obsahu a kvádra s výpočtom objemu.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eaf4ff"/>
+      <stop offset="1" stop-color="#f8fbff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" rx="32" fill="url(#background)"/>
+  <text x="600" y="88" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="46" font-weight="700" fill="#17345c">Algoritmizácia výpočtov</text>
+  <text x="600" y="134" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="25" fill="#45627f">Od rozmerov a vzorca po výsledok so správnou jednotkou</text>
+  <g transform="translate(92 190)">
+    <rect x="0" y="0" width="450" height="350" rx="24" fill="#fff" stroke="#c8d7e8" stroke-width="3"/>
+    <text x="225" y="54" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="29" font-weight="700" fill="#1f6feb">PLOCHA</text>
+    <path d="M118 115h214v132H118z" fill="#b9e6ff" stroke="#1672c4" stroke-width="5"/>
+    <text x="225" y="190" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="27" font-weight="600" fill="#17345c">obdĺžnik</text>
+    <text x="225" y="286" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="700" fill="#17345c">S = a × b</text>
+    <text x="225" y="324" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="21" fill="#45627f">jednotky², napr. cm²</text>
+  </g>
+  <g transform="translate(658 190)">
+    <rect x="0" y="0" width="450" height="350" rx="24" fill="#fff" stroke="#c8d7e8" stroke-width="3"/>
+    <text x="225" y="54" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="29" font-weight="700" fill="#16834b">OBJEM</text>
+    <path d="M120 150l72-43h166l-72 43z" fill="#d9f7df" stroke="#25823c" stroke-width="5"/>
+    <path d="M120 150h166v112H120z" fill="#a8e7b7" stroke="#25823c" stroke-width="5"/>
+    <path d="M286 150l72-43v112l-72 43z" fill="#74cb8a" stroke="#25823c" stroke-width="5"/>
+    <text x="225" y="306" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="28" font-weight="700" fill="#17345c">V = a × b × c</text>
+    <text x="225" y="338" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="21" fill="#45627f">jednotky³, napr. cm³</text>
+  </g>
+</svg>

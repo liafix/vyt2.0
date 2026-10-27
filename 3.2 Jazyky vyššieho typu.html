@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Vlastnosti vyšších programovacích jazykov a základy objektovo orientovaného programovania v Pythone: triedy, objekty, atribúty, metódy a dedičnosť.">
+<title>3.2 Jazyky vyššieho typu a OOP v Pythone</title>
+<style>
+:root{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--note:#fff4d6}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--note:#3a3017}}
+:root[data-theme="light"]{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--note:#fff4d6}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--note:#3a3017}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--acc)}.wrap{width:min(100% - 2rem,900px);margin:auto;padding:16px}header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}.muted{color:var(--mut)}h1{font-size:clamp(1.7rem,5vw,2.3rem);line-height:1.2}.tag{padding:2px 9px;border-radius:6px;background:var(--line);font-size:13px}.card,.note{margin:14px 0;padding:14px 17px;border:1px solid var(--line);border-radius:12px;background:var(--card)}.note{background:var(--note);display:none}body.teacher .note{display:block}.mode{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.mode button{padding:6px 11px;border:0;background:var(--card);color:var(--fg);font:inherit;cursor:pointer}.mode button.on{background:var(--acc);color:#fff}button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:3px}table{width:100%;border-collapse:collapse}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}th{background:var(--line)}.scroll{overflow-x:auto}.lesson-image{display:block;width:min(100%,760px);height:auto;margin:18px auto;border:1px solid var(--line);border-radius:12px;background:#fff}.image-caption{margin-top:-10px;color:var(--mut);font-size:14px;text-align:center}pre{margin:0;background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow-x:auto;font-size:14px;line-height:1.5}.code-sample{margin:14px 0}.copy-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}.copy-btn{background:var(--acc);color:#fff;border:0;border-radius:6px;padding:5px 10px;font:inherit;font-size:14px;cursor:pointer}.copy-status{min-height:1.5em;margin:2px 0;color:var(--mut);font-size:13px}.sources,footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line)}footer{color:var(--mut);font-size:14px}
+</style>
+  <link rel="stylesheet" href="premium.css">
+</head>
+<body data-layout="reading"><div class="wrap">
+<header><span class="muted"><a href="python.html">Prehľad tém</a> › 3. Programovanie všeobecne › 3.2</span><div><a href="nastavenia.html">Nastavenia vzhľadu</a> · <div class="mode" role="group" aria-label="Zobrazenie"><button class="on" id="student" type="button" aria-pressed="true">Žiak</button><button id="teacher" type="button" aria-pressed="false">Učiteľ</button></div></div></header>
+<h1>3.2 Jazyky vyššieho typu a OOP v Pythone</h1><p><span class="tag">2 × 45 min</span> <span class="tag">Vyššie programovacie jazyky</span> <span class="tag">Objektovo orientované programovanie</span></p>
+<figure><img class="lesson-image" src="img/3.2%20Trieda%20a%20objekty.svg" alt="Trieda GameObject ako plán vytvára objekty s vlastným stavom a spoločnými metódami" width="1000" height="540" loading="lazy"><figcaption class="image-caption">Trieda určuje spoločnú štruktúru a správanie; každý vytvorený objekt má vlastný stav.</figcaption></figure>
+<h2>Orientačný plán (2 × 45 min)</h2><div class="scroll"><table><thead><tr><th>Čas</th><th>Časť hodiny</th><th>Pracovný zámer</th></tr></thead><tbody><tr><td>1. hodina 0–8 min</td><td>Vyššie jazyky</td><td>Prepojiť abstrakciu jazyka s prostredím Pythonu.</td></tr><tr><td>1. hodina 8–20 min</td><td>Objekty a triedy</td><td>Rozlíšiť plán triedy od konkrétnej inštancie.</td></tr><tr><td>1. hodina 20–35 min</td><td>Atribúty a metódy</td><td>Vytvoriť objekty a sledovať ich samostatný stav.</td></tr><tr><td>1. hodina 35–45 min</td><td>Spolupráca objektov</td><td>Trasovať interakciu dvoch herných objektov.</td></tr><tr><td>2. hodina 0–12 min</td><td>Dedičnosť</td><td>Rozlíšiť spoločné vlastnosti rodiča a špecifické správanie potomka.</td></tr><tr><td>2. hodina 12–25 min</td><td>Viditeľnosť a super()</td><td>Pochopiť konvencie názvov a rozšírenie inicializácie.</td></tr><tr><td>2. hodina 25–35 min</td><td>Prepisovanie a MRO</td><td>Vysvetliť výber prepísanej metódy a poradie vyhľadávania.</td></tr><tr><td>2. hodina 35–45 min</td><td>Precvičenie</td><td>Nakresliť návrh tried a otestovať krátky program.</td></tr></tbody></table></div>
+<section class="card"><strong>Nadväznosť:</strong> Téma 2.9 sa venuje návrhovému rozkladu úloh na podprogramy, 2.10 algoritmizácii funkcií. V tejto téme sa sústredíme na objektovo orientovaný model a syntax tried v Pythone; OOP je paradigma, ktorú možno používať vo viacerých vyšších jazykoch.</section>
+<h2>Ciele hodiny</h2><ul><li>Vysvetliť, čo je vyšší programovací jazyk a akú úlohu má jeho vykonávacie prostredie.</li><li>Rozlíšiť triedu, objekt (inštanciu), atribút a metódu.</li><li>Vytvoriť triedu a viac objektov s nezávislým stavom a nechať ich spolupracovať.</li><li>Vysvetliť základnú dedičnosť, prepisovanie metód a volanie rodičovskej implementácie pomocou <code>super()</code>.</li><li>Správne opísať konvencie prístupu k atribútom v Pythone a princíp MRO pri viacnásobnom dedení.</li></ul>
+<h2>1. Vyššie programovacie jazyky</h2><p>Vyšší jazyk umožňuje zapisovať riešenia pomocou abstraktnejších konštrukcií, než sú jednotlivé inštrukcie procesora. Programátor tak pracuje napríklad s premennými, funkciami, kolekciami a triedami. Zdrojový kód sa vykoná prostredníctvom prekladača alebo runtime prostredia; konkrétny postup závisí od jazyka a implementácie.</p><p>Python je vysokoúrovňový, dynamicky typovaný a viacparadigmový jazyk. Podporuje procedurálny, objektovo orientovaný i funkcionálny štýl. V tejto téme sa sústredíme na OOP – spôsob organizovania programu okolo objektov, ich stavu a správania.</p>
+<h2>2. Trieda a objekt</h2><p><strong>Trieda</strong> je používateľom definovaný typ a opis spoločných atribútov a metód. <strong>Objekt</strong> (inštancia) je konkrétna hodnota vytvorená podľa triedy. Analógia s plánom domu pomáha predstave: plán je trieda, jednotlivé postavené domy sú objekty; každý môže mať vlastné hodnoty niektorých vlastností.</p><pre><code>class GameObject:
+    def __init__(self, name, health, attack):
+        self.name = name
+        self.health = health
+        self.attack = attack
+
+    def take_damage(self, amount):
+        self.health = max(0, self.health - amount)
+
+    def is_alive(self):
+        return self.health &gt; 0</code></pre>
+<ul><li><code>class GameObject:</code> definuje novú triedu; názov triedy sa bežne píše v štýle <code>PascalCase</code>.</li><li><code>__init__</code> je inicializačná metóda, ktorú Python zavolá pri vytváraní novej inštancie. Nejde o metódu, ktorá sama vytvára objekt.</li><li><code>self</code> odkazuje na konkrétnu inštanciu. Pri volaní <code>objekt.is_alive()</code> Python túto inštanciu odovzdá metóde ako prvý argument.</li><li><code>name</code>, <code>health</code> a <code>attack</code> sú atribúty inštancie, teda údaje patriace konkrétnemu objektu.</li><li><code>take_damage</code> a <code>is_alive</code> sú metódy, teda správanie definované v triede.</li></ul>
+<h2>3. Vytvorenie objektov a ich vlastný stav</h2><pre><code>player1 = GameObject("Player 1", 100, 20)
+player2 = GameObject("Player 2", 120, 15)
+enemy = GameObject("Enemy", 80, 10)
+
+print(player1.name, player1.health)  # Player 1 100
+print(player2.name, player2.health)  # Player 2 120</code></pre><p>Všetky tri objekty vznikli z rovnakej triedy a majú rovnaké pomenované atribúty a metódy. Ich hodnoty sú však nezávislé: poškodenie jedného objektu samo osebe nemení zdravie ostatných.</p>
+<h2>4. Interakcia medzi objektmi</h2><p>Objekty môžu spolupracovať tak, že jedna metóda dostane druhý objekt ako argument a vyvolá na ňom jeho metódu:</p><pre><code>print("--- Začiatok súboja ---")
+enemy.take_damage(player1.attack)
+player1.take_damage(enemy.attack)
+player2.take_damage(enemy.attack)
+
+print("\n--- Stav po útokoch ---")
+print(f"{player1.name} je živý: {player1.is_alive()}")
+print(f"{player2.name} je živý: {player2.is_alive()}")
+print(f"{enemy.name} je živý: {enemy.is_alive()}")</code></pre><p>Nepriateľ utrpí 20 bodov poškodenia, hráč 1 utrpí 10 a hráč 2 tiež 10. Metóda <code>take_damage</code> zníži zdravie, ale nie pod nulu; metóda <code>is_alive</code> vráti logickú hodnotu.</p>
+<h2>5. Dedičnosť</h2><p><strong>Dedičnosť</strong> umožňuje definovať novú triedu na základe existujúcej. Potomok zdedí jej verejné správanie, môže pridať svoje metódy a prípadne niektoré zdedené metódy prepísať. Používame ju tam, kde medzi typmi existuje zmysluplný vzťah „je druhom“.</p><pre><code>class Player(GameObject):
+    def heal(self, amount):
+        self.health += amount
+
+
+class Enemy(GameObject):
+    def enraged_attack(self, target):
+        damage = self.attack * 2
+        target.take_damage(damage)
+        print(f"{self.name} zaútočil na {target.name} za {damage} bodov.")
+
+
+player = Player("Hrdina", 100, 20)
+enemy = Enemy("Ork", 80, 10)
+enemy.enraged_attack(player)
+player.heal(15)
+print(player.health)  # 95 po útoku a následnom liečení</code></pre><p><code>Player</code> a <code>Enemy</code> zdedia inicializáciu aj metódy triedy <code>GameObject</code> a doplnia vlastné správanie. V reálnom programe navrhni pravidlá, napríklad maximálne zdravie, aby liečenie nemohlo viesť k neplatnému stavu.</p>
+<h2>6. Viditeľnosť atribútov v Pythone</h2><p>Python nepoužíva kľúčové slová <code>public</code>, <code>protected</code> a <code>private</code> ako striktný systém prístupových práv v niektorých iných jazykoch. Používa predovšetkým pomenovaciu konvenciu:</p><div class="scroll"><table><thead><tr><th>Zápis</th><th>Konvencia a význam</th></tr></thead><tbody><tr><td><code>self.name</code></td><td>Verejné rozhranie; používa sa bežne aj zvonka objektu.</td></tr><tr><td><code>self._energy</code></td><td>Jeden podčiarkovník označuje interný alebo „protected“ prvok podľa konvencie. Prístup je technicky možný, no používatelia triedy by s ním nemali počítať ako s verejným rozhraním.</td></tr><tr><td><code>self.__secret</code></td><td>Dva úvodné podčiarkovníky spúšťajú name mangling: názov sa zmení napríklad na <code>_Hero__secret</code>. Pomáha to predísť kolíziám názvov v podtriedach, ale nejde o skutočné utajenie ani nepriestupnú ochranu.</td></tr></tbody></table></div>
+<pre><code>class Hero:
+    def __init__(self, name):
+        self.name = name
+        self._energy = 100
+        self.__secret_code = 123
+
+    def show_status(self):
+        print(f"{self.name}: energia {self._energy}")
+
+
+hero = Hero("Arthas")
+hero.show_status()
+print(hero.name)       # verejný atribút
+print(hero._energy)    # možné, ale ide o interný detail
+# hero.__secret_code  # tento názov na inštancii nie je definovaný</code></pre><p>Pre väčšinu školských tried stačí používať verejné atribúty a interné údaje označiť jedným podčiarkovníkom. Dvojité podčiarkovníky nepoužívaj ako predstierané bezpečnostné opatrenie.</p>
+<h2>7. Volanie rodičovskej triedy pomocou super()</h2><p>Ak potomok definuje vlastný <code>__init__</code>, môže zavolať inicializáciu rodiča pomocou <code>super()</code> a potom pridať svoje atribúty:</p><pre><code>class Animal:
+    def __init__(self, name):
+        self.name = name
+
+
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)
+        self.breed = breed
+
+
+dog = Dog("Luna", "ovčiak")
+print(dog.name, dog.breed)</code></pre><p><code>super()</code> nie je len pevne zakódovaný názov rodiča; v dedičnej hierarchii spolupracuje s poradím MRO, aby sa implementácie mohli korektne reťaziť.</p>
+<h2>8. Prepisovanie metód</h2><p>Ak potomok definuje metódu s rovnakým menom ako zdedená metóda, jeho verzia ju pri volaní na objekte potomka prekryje. Tomu sa hovorí <strong>prepisovanie</strong> (override).</p><pre><code>class Animal:
+    def speak(self):
+        return "Zviera vydáva zvuk."
+
+
+class Dog(Animal):
+    def speak(self):
+        return "Hav-hav!"
+
+
+animal = Animal()
+dog = Dog("Luna")
+print(animal.speak())  # Zviera vydáva zvuk.
+print(dog.speak())     # Hav-hav!</code></pre><p>Rovnaké rozhranie metódy umožňuje pracovať s rôznymi potomkami bez toho, aby volajúci musel poznať detaily každej triedy. Ak chceme zachovať aj správanie rodiča, možno v prepísanej metóde použiť <code>super().speak()</code>.</p>
+<h2>9. Viacnásobné dedenie a MRO</h2><p>Trieda v Pythone môže dediť z viac než jednej rodičovskej triedy. <strong>MRO</strong> (Method Resolution Order) je poradie, v ktorom Python hľadá metódu alebo atribút v triede a jej predkoch. Python používa algoritmus C3 linearizácie; poradie možno zobraziť cez <code>ClassName.__mro__</code>.</p><pre><code>class Flyable:
+    def move(self):
+        return "Letím!"
+
+
+class Swimmable:
+    def move(self):
+        return "Plávam!"
+
+
+class Duck(Flyable, Swimmable):
+    pass
+
+
+duck = Duck()
+print(duck.move())  # Letím! – Flyable je v MRO pred Swimmable
+print(Duck.__mro__)</code></pre><p>Pre danú definíciu je poradie <code>Duck → Flyable → Swimmable → object</code>. Viacnásobné dedenie je pokročilejší nástroj; používaj ho uvážene, lebo zložité hierarchie môžu sťažiť čitateľnosť. Pri spolupracujúcich metódach treba dodržať spoločný návrh volaní <code>super()</code>.</p>
+<h2>10. Zhrnutie pojmov</h2><div class="scroll"><table><thead><tr><th>Pojem</th><th>Význam</th></tr></thead><tbody><tr><td>Trieda</td><td>Definícia typu, spoločných atribútov a metód.</td></tr><tr><td>Objekt / inštancia</td><td>Konkrétna hodnota vytvorená podľa triedy.</td></tr><tr><td>Atribút</td><td>Údaj alebo stav objektu.</td></tr><tr><td>Metóda</td><td>Funkcia definovaná v triede, ktorá opisuje správanie.</td></tr><tr><td>Dedičnosť</td><td>Mechanizmus rozšírenia existujúcej triedy.</td></tr><tr><td><code>super()</code></td><td>Prístup k ďalšej implementácii v poradí MRO, často rodičovskej triedy.</td></tr><tr><td>MRO</td><td>Poradie vyhľadávania atribútov a metód v hierarchii tried.</td></tr></tbody></table></div>
+<h2>11. Precvičenie</h2><ol><li>Vysvetli rozdiel medzi triedou <code>GameObject</code> a objektom <code>enemy</code>.</li><li>Vytvor dve inštancie <code>GameObject</code> s rôznym zdravím. Zmeň zdravie jednej a over, že druhá zostala nezmenená.</li><li>Pridaj do triedy metódu, ktorá vráti textový opis objektu.</li><li>Vytvor triedu <code>Player</code> odvodenú od <code>GameObject</code>, ktorá pridá atribút <code>level</code>; inicializáciu základných atribútov zavolaj cez <code>super()</code>.</li><li>Prepíš metódu <code>speak()</code> alebo inú metódu v potomkovi a vysvetli, ktorú verziu Python zavolá.</li><li>Pri triedach <code>Duck</code>, <code>Flyable</code> a <code>Swimmable</code> vypíš <code>Duck.__mro__</code> a predpovedz výsledok volania <code>move()</code>.</li></ol>
+<div class="note"><strong>Poznámka pre učiteľa:</strong> Rozsah je rozvrhnutý na dve 45-minútové hodiny, pretože dodané ciele zahŕňajú základné triedy aj pokročilejšie témy dedičnosti a MRO. V prvej hodine zostaňte pri triede, inštanciách, atribútoch, metódach a interakcii dvoch objektov. V druhej sa venujte dedičnosti, konvenciám viditeľnosti, <code>super()</code> a prepisovaniu; MRO a viacnásobné dedenie predstavte ako rozširujúci obsah. Zdôraznite, že podčiarkovníky v Pythone vyjadrujú konvenciu, nie bezpečnostné hranice.</div>
+<section class="sources"><h2>Použité zdroje</h2><ul><li><a href="https://docs.python.org/3/tutorial/classes.html" target="_blank" rel="noopener noreferrer">Oficiálny tutoriál Pythonu – triedy</a>.</li><li><a href="https://docs.python.org/3/reference/datamodel.html#custom-classes" target="_blank" rel="noopener noreferrer">Referenčný model Pythonu – vlastné triedy</a>.</li><li><a href="https://docs.python.org/3/library/functions.html#super" target="_blank" rel="noopener noreferrer">Dokumentácia Pythonu – <code>super()</code></a>.</li><li><a href="3.1%20Programovacie%20jazyky%20a%20ich%20delenie.html">3.1 Programovacie jazyky a ich delenie</a>; nadväzuje <a href="2.9%20Algoritmiz%C3%A1cia%20podprogramov.html">2.9 Algoritmizácia podprogramov</a> a <a href="2.10%20Algoritmiz%C3%A1cia%20funkci%C3%AD.html">2.10 Algoritmizácia funkcií</a>.</li></ul></section>
+<footer><a href="3.1%20Programovacie%20jazyky%20a%20ich%20delenie.html">Späť na 3.1</a> · <a href="python.html">Prehľad tém</a></footer>
+</div><script>
+document.querySelectorAll("pre").forEach(function(code){var wrapper=document.createElement("div"),actions=document.createElement("div"),button=document.createElement("button"),editor=document.createElement("a"),status=document.createElement("p");wrapper.className="code-sample";actions.className="copy-actions";button.className="copy-btn";button.type="button";button.textContent="Kopírovať kód";editor.href="https://www.programiz.com/python-programming/online-compiler/";editor.target="_blank";editor.rel="noopener noreferrer";editor.textContent="Vyskúšať online";status.className="copy-status";status.setAttribute("role","status");status.setAttribute("aria-live","polite");code.parentNode.insertBefore(wrapper,code);wrapper.appendChild(actions);actions.appendChild(button);actions.appendChild(editor);wrapper.appendChild(code);wrapper.appendChild(status);button.addEventListener("click",function(){if(!navigator.clipboard||!navigator.clipboard.writeText){status.textContent="Kopírovanie nie je dostupné. Označ kód a použi Ctrl+C.";return;}navigator.clipboard.writeText(code.innerText).then(function(){status.textContent="Kód skopírovaný.";}).catch(function(){status.textContent="Kód sa nepodarilo skopírovať. Označ ho a použi Ctrl+C.";});});});
+const s=document.getElementById("student"),t=document.getElementById("teacher");function mode(isTeacher){document.body.classList.toggle("teacher",isTeacher);s.classList.toggle("on",!isTeacher);t.classList.toggle("on",isTeacher);s.setAttribute("aria-pressed",String(!isTeacher));t.setAttribute("aria-pressed",String(isTeacher))}s.addEventListener("click",()=>mode(false));t.addEventListener("click",()=>mode(true));
+</script><script src="theme.js"></script></body></html>

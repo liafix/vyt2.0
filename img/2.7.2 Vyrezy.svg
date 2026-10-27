@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+  <title id="title">Ako funguje výrez sekvencie</title>
+  <desc id="desc">Výrez zo sekvencie vyberá prvky od start po stop s určeným krokom; stop sa nezahrnie.</desc>
+  <defs><style>text{font-family:system-ui,sans-serif;fill:#17212f}.head{font-size:30px;font-weight:700}.label{font-size:21px;font-weight:600}.code{font-family:Consolas,monospace;font-size:34px;font-weight:700}.small{font-size:18px}</style><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#526174"/></marker></defs>
+  <rect width="1000" height="520" rx="28" fill="#f7f9fc"/>
+  <text class="head" x="500" y="65" text-anchor="middle">Výrez vyberie časť sekvencie</text>
+  <rect x="155" y="110" width="690" height="90" rx="20" fill="#e3f2ff" stroke="#1672c4" stroke-width="3"/>
+  <text class="code" x="500" y="168" text-anchor="middle">sekvencia[start:stop:step]</text>
+  <g text-anchor="middle">
+    <text class="label" x="255" y="255" fill="#1672c4">start</text><text class="small" x="255" y="286">prvý zahrnutý index</text>
+    <text class="label" x="500" y="255" fill="#c38b00">stop</text><text class="small" x="500" y="286">hranica, nezahŕňa sa</text>
+    <text class="label" x="745" y="255" fill="#673ab7">step</text><text class="small" x="745" y="286">krok a smer</text>
+  </g>
+  <path d="M255 210v25M500 210v25M745 210v25" stroke="#526174" stroke-width="3" marker-end="url(#arr)"/>
+  <text class="small" x="500" y="350" text-anchor="middle">Príklad: cisla = [10, 20, 30, 40, 50, 60]</text>
+  <g font-family="system-ui,sans-serif" text-anchor="middle" font-size="20" font-weight="700">
+    <rect x="175" y="385" width="100" height="60" rx="10" fill="#fff" stroke="#b7c1ce" stroke-width="2"/><text x="225" y="423">10</text>
+    <rect x="285" y="385" width="100" height="60" rx="10" fill="#b8e0ff" stroke="#1672c4" stroke-width="3"/><text x="335" y="423">20</text>
+    <rect x="395" y="385" width="100" height="60" rx="10" fill="#b8e0ff" stroke="#1672c4" stroke-width="3"/><text x="445" y="423">30</text>
+    <rect x="505" y="385" width="100" height="60" rx="10" fill="#b8e0ff" stroke="#1672c4" stroke-width="3"/><text x="555" y="423">40</text>
+    <rect x="615" y="385" width="100" height="60" rx="10" fill="#fff" stroke="#d18a00" stroke-width="3" stroke-dasharray="7 5"/><text x="665" y="423">50</text>
+    <rect x="725" y="385" width="100" height="60" rx="10" fill="#fff" stroke="#b7c1ce" stroke-width="2"/><text x="775" y="423">60</text>
+  </g>
+  <text class="small" x="500" y="485" text-anchor="middle">cisla[1:4] → [20, 30, 40] · index 4 je stop, preto sa nezahrnie</text>
+</svg>

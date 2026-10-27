@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+  <title id="title">Ako funguje list comprehension</title>
+  <desc id="desc">Zoznam vstupných čísel sa spracuje cyklom, voliteľne filtruje podmienkou a vytvorí nový zoznam druhých mocnín.</desc>
+  <defs>
+    <style>
+      text{font-family:system-ui,sans-serif;fill:#17212f}
+      .title{font-size:30px;font-weight:700}
+      .head{font-size:23px;font-weight:700}
+      .body{font-size:19px}
+      .code{font-family:Consolas,monospace;font-size:20px}
+      .arrow{fill:none;stroke:#526174;stroke-width:3;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#526174"/></marker>
+  </defs>
+  <rect width="1000" height="500" rx="26" fill="#f7f9fc"/>
+  <text class="title" x="500" y="56" text-anchor="middle">Od vstupného zoznamu k novému zoznamu</text>
+  <rect x="55" y="135" width="230" height="190" rx="20" fill="#e3f2ff" stroke="#1672c4" stroke-width="3"/>
+  <text class="head" x="170" y="178" text-anchor="middle">Vstup</text>
+  <text class="code" x="170" y="226" text-anchor="middle">[1, 2, 3, 4, 5]</text>
+  <text class="body" x="170" y="273" text-anchor="middle">každý prvok</text>
+  <text class="body" x="170" y="301" text-anchor="middle">prejde cyklom</text>
+  <path class="arrow" d="M295 230h95"/>
+  <rect x="405" y="105" width="340" height="250" rx="20" fill="#fff2cc" stroke="#c38b00" stroke-width="3"/>
+  <text class="head" x="575" y="151" text-anchor="middle">List comprehension</text>
+  <text class="code" x="575" y="202" text-anchor="middle">[x ** 2 for x in cisla</text>
+  <text class="code" x="575" y="233" text-anchor="middle">if x % 2 == 0]</text>
+  <path d="M435 261h280" stroke="#c38b00" stroke-width="2"/>
+  <text class="body" x="575" y="296" text-anchor="middle">výraz + cyklus + filter</text>
+  <text class="body" x="575" y="328" text-anchor="middle">výber párnych čísel</text>
+  <path class="arrow" d="M755 230h95"/>
+  <rect x="865" y="135" width="100" height="190" rx="20" fill="#e5f6e8" stroke="#25823c" stroke-width="3"/>
+  <text class="head" x="915" y="178" text-anchor="middle">Výstup</text>
+  <text class="code" x="915" y="226" text-anchor="middle">[4,</text>
+  <text class="code" x="915" y="255" text-anchor="middle">16]</text>
+  <text class="body" x="915" y="301" text-anchor="middle">nový list</text>
+  <text class="body" x="500" y="425" text-anchor="middle">Filter je voliteľný; bez neho sa výraz použije na každý prvok vstupu.</text>
+</svg>

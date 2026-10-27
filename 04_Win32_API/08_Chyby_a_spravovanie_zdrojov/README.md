@@ -1,0 +1,1 @@
+# 08_Chyby_a_spravovanie_zdrojov

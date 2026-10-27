@@ -1,0 +1,1 @@
+# 00_Uvod_a_priprava_prostredia

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-labelledby="title desc">
+  <title id="title">Ako prebiehajú vnorené cykly</title>
+  <desc id="desc">Tri iterácie vonkajšieho cyklu i; v každej z nich vnútorný cyklus j vykoná obe svoje iterácie od začiatku.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#526174"/>
+    </marker>
+    <style>
+      text{font-family:system-ui,sans-serif;fill:#17212f}
+      .title{font-size:30px;font-weight:700}
+      .head{font-size:22px;font-weight:700}
+      .label{font-size:19px;font-weight:600}
+      .small{font-size:17px}
+      .arrow{fill:none;stroke:#526174;stroke-width:3;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1000" height="560" rx="26" fill="#f7f9fc"/>
+  <text class="title" x="500" y="48" text-anchor="middle">Vnútorný cyklus sa dokončí pri každej iterácii vonkajšieho</text>
+  <text class="small" x="500" y="80" text-anchor="middle">for i in range(3):  →  for j in range(2):  →  print(i, j)</text>
+  <g transform="translate(46 122)">
+    <rect width="278" height="350" rx="20" fill="#e3f2ff" stroke="#1672c4" stroke-width="3"/>
+    <text class="head" x="139" y="42" text-anchor="middle">i = 0</text>
+    <rect x="35" y="78" width="208" height="82" rx="14" fill="#fff0b3" stroke="#c38b00" stroke-width="3"/>
+    <text class="label" x="139" y="110" text-anchor="middle">j = 0</text><text class="small" x="139" y="138" text-anchor="middle">vypíš 0 0</text>
+    <path class="arrow" d="M139 162v38"/>
+    <rect x="35" y="207" width="208" height="82" rx="14" fill="#fff0b3" stroke="#c38b00" stroke-width="3"/>
+    <text class="label" x="139" y="239" text-anchor="middle">j = 1</text><text class="small" x="139" y="267" text-anchor="middle">vypíš 0 1</text>
+    <text class="small" x="139" y="322" text-anchor="middle">vnútorný cyklus hotový</text>
+  </g>
+  <g transform="translate(361 122)">
+    <rect width="278" height="350" rx="20" fill="#e3f2ff" stroke="#1672c4" stroke-width="3"/>
+    <text class="head" x="139" y="42" text-anchor="middle">i = 1</text>
+    <rect x="35" y="78" width="208" height="82" rx="14" fill="#fff0b3" stroke="#c38b00" stroke-width="3"/>
+    <text class="label" x="139" y="110" text-anchor="middle">j = 0</text><text class="small" x="139" y="138" text-anchor="middle">vypíš 1 0</text>
+    <path class="arrow" d="M139 162v38"/>
+    <rect x="35" y="207" width="208" height="82" rx="14" fill="#fff0b3" stroke="#c38b00" stroke-width="3"/>
+    <text class="label" x="139" y="239" text-anchor="middle">j = 1</text><text class="small" x="139" y="267" text-anchor="middle">vypíš 1 1</text>
+    <text class="small" x="139" y="322" text-anchor="middle">vnútorný cyklus hotový</text>
+  </g>
+  <g transform="translate(676 122)">
+    <rect width="278" height="350" rx="20" fill="#e3f2ff" stroke="#1672c4" stroke-width="3"/>
+    <text class="head" x="139" y="42" text-anchor="middle">i = 2</text>
+    <rect x="35" y="78" width="208" height="82" rx="14" fill="#fff0b3" stroke="#c38b00" stroke-width="3"/>
+    <text class="label" x="139" y="110" text-anchor="middle">j = 0</text><text class="small" x="139" y="138" text-anchor="middle">vypíš 2 0</text>
+    <path class="arrow" d="M139 162v38"/>
+    <rect x="35" y="207" width="208" height="82" rx="14" fill="#fff0b3" stroke="#c38b00" stroke-width="3"/>
+    <text class="label" x="139" y="239" text-anchor="middle">j = 1</text><text class="small" x="139" y="267" text-anchor="middle">vypíš 2 1</text>
+    <text class="small" x="139" y="322" text-anchor="middle">vnútorný cyklus hotový</text>
+  </g>
+  <path class="arrow" d="M324 296h31M639 296h31"/>
+  <text class="small" x="500" y="520" text-anchor="middle">3 vonkajšie iterácie × 2 vnútorné iterácie = 6 vykonaní tela vnútorného cyklu</text>
+</svg>

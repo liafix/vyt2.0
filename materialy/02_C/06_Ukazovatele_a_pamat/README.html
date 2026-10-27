@@ -1,0 +1,67 @@
+<!doctype html><html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lekcia 06: Ukazovatele a Správa Pamäte | Programovanie</title><link rel="stylesheet" href="../../../premium.css"><script src="../../../theme.js" defer></script></head><body data-layout="doc-viewer"><div class="doc-shell"><nav class="module-breadcrumb"><a href="../../../index.html">← Všetky kurzy</a><a href="../README.html">Jazyk C</a><a href="../../../nastavenia.html">Nastavenia vzhľadu</a></nav><header class="doc-head"><span class="module-eyebrow">Dokumentácia</span><h1>Lekcia 06: Ukazovatele a Správa Pamäte</h1></header><main class="doc-content"><h1>Lekcia 06: Ukazovatele a Správa Pamäte</h1>
+<h2>1. Cieľ lekcie</h2>
+<p>Pochopiť koncept pamäťovej adresy, naučiť sa vytvárať ukazovatele (pointers), vykonávať dereferenciu a odovzdávať parametre funkciám odkazom.</p>
+<hr />
+<h2>2. Prerekvizity</h2>
+<ul>
+<li>Znalosť premenných, dátových typov a funkcií v C.</li>
+</ul>
+<hr />
+<h2>3. Teoretické vysvetlenie</h2>
+<p>Pamäť RAM počítača si môžeme predstaviť ako obrovské jednorozmerné pole očíslovaných buniek (bajtov). Každý bajt má svoju unikátnu <strong>pamäťovú adresu</strong>.</p>
+<ul>
+<li><strong>Adresný operátor (<code>&amp;</code>)</strong>: Vráti pamäťovú adresu premennej.</li>
+<li><strong>Ukazovateľ (Pointer)</strong>: Premenná, ktorej hodnotou je pamäťová adresa inej premennej.</li>
+<li><strong>Dereferenčný operátor (<code>*</code>)</strong>: Sprístupní hodnotu uloženú na adrese, na ktorú ukazovateľ ukazuje.</li>
+</ul>
+<p>Anatómia deklarácie ukazovateľa:</p>
+<pre><code class="language-c">int x = 42;
+int *p_x = &amp;x; // p_x obsahuje pamäťovú adresu premennej x
+</code></pre>
+<p>Vizualizácia pamäte:</p>
+<pre><code class="language-text">Premenná:    x                  p_x (Pointer)
+Hodnota:     [ 42 ]             [ 0x7ffd8 ]
+Adresa:      0x7ffd8            0x7ffdc
+</code></pre>
+<hr />
+<h2>4. Kódový príklad s rozborom</h2>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(void) {
+    int cislo = 100;
+    int *ptr = &amp;cislo; // ptr ukazuje na cislo
+
+    printf(&quot;Hodnota premennej cislo: %d\n&quot;, cislo);
+    printf(&quot;Adresa premennej cislo:  %p\n&quot;, (void*)&amp;cislo);
+    printf(&quot;Hodnota v ukazovateli ptr: %p\n&quot;, (void*)ptr);
+    printf(&quot;Hodnota na adrese *ptr:  %d\n&quot;, *ptr);
+
+    // Zmena hodnoty cez pointer
+    *ptr = 200;
+    printf(&quot;Nová hodnota cislo po zmene cez *ptr: %d\n&quot;, cislo);
+
+    return 0;
+}
+</code></pre>
+<hr />
+<h2>5. Časté chyby a ich oprava</h2>
+<ul>
+<li><strong>Dereferencovanie inicializovaného (Dangling / Wild) ukazovateľa</strong>:<ul>
+<li><em>Chyba</em>: <code>int *p; *p = 10;</code> (Ukazovateľ smeruje na náhodnú pamäť - riziko Segmentation Fault).</li>
+<li><em>Oprava</em>: Vždy inicializujte ukazovateľ na platnú adresu alebo <code>NULL</code>: <code>int *p = NULL;</code>.</li>
+</ul>
+</li>
+<li><strong>Zmena samotnej adresy namiesto hodnoty</strong>:<ul>
+<li><code>p++</code> posunie ukazovateľ na nasledujúcu pamäťovú adresu, zatiaľ čo <code>(*p)++</code> inkrementuje hodnotu na danej adrese.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2>6. Samostatné úlohy</h2>
+<ul>
+<li><strong>Úroveň A (Základ)</strong>: Vytvorte premennú typu <code>double</code> a ukazovateľ na ňu. Vytlačte hodnotu aj adresu.</li>
+<li><strong>Úroveň B (Precvičenie)</strong>: Napíšte funkciu <code>void nuluj(int *p)</code>, ktorá nastaví hodnotu premennej na adrese <code>p</code> na <code>0</code>.</li>
+<li><strong>Úroveň C (Aplikácia)</strong>: Napíšte funkciu <code>void najdi_min_max(const int *pole, int velkost, int *min, int *max)</code>, ktorá pomocou ukazovateľov vráti najmenšiu a najväčšiu hodnotu v poli.</li>
+<li><strong>Úroveň D (Výzva)</strong>: Napíšte funkciu na obrátenie (reverz) poľa čísel bez použitia indexového operátora <code>[]</code> (iba pomocou pointerovej aritmetiky <code>ptr++</code>).</li>
+</ul>
+<p class="source-download"><a href="../../../02_C/06_Ukazovatele_a_pamat/README.md" download>Stiahnuť pôvodný súbor (README.md) ↓</a></p></main><footer class="module-footer"><a href="../../../index.html">Všetky kurzy</a> · <a href="../../../materialy/index.html">Prehľad dokumentácie</a></footer></div></body></html>

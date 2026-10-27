@@ -1,0 +1,36 @@
+<!doctype html><html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>main.py | Programovanie</title><link rel="stylesheet" href="../../premium.css"><script src="../../theme.js" defer></script></head><body data-layout="doc-viewer"><div class="doc-shell"><nav class="module-breadcrumb"><a href="../../index.html">← Všetky kurzy</a><a href="README.html">Python</a><a href="../../nastavenia.html">Nastavenia vzhľadu</a></nav><header class="doc-head"><span class="module-eyebrow">Zdrojový kód</span><h1>main.py</h1></header><main class="doc-content"><p class="resource-caption">Pôvodný súbor: <code>01_Python/main.py</code></p><pre class="source-code"><code>#!/usr/bin/env python3
+&quot;&quot;&quot;
+Modul 01: Python - Ukážkový štartovací skript
+Tento skript demonštruje základné funkcie, prácu so zoznamami a podmienkami v Pythone.
+&quot;&quot;&quot;
+
+def vypocitaj_statistiky(cisla: list[float]) -&gt; dict:
+    &quot;&quot;&quot;Vypočíta súčet, priemer, minimum a maximum zo zoznamu čísel.&quot;&quot;&quot;
+    if not cisla:
+        return {}
+
+    sucet = sum(cisla)
+    priemer = sucet / len(cisla)
+    return {
+        &quot;sucet&quot;: sucet,
+        &quot;priemer&quot;: priemer,
+        &quot;min&quot;: min(cisla),
+        &quot;max&quot;: max(cisla)
+    }
+
+def main():
+    print(&quot;=== Vitajte v module 01: Python ===&quot;)
+
+    # Práca so zoznamom
+    namerane_hodnoty = [12.5, 14.2, 9.8, 15.0, 11.3]
+    print(f&quot;Namerané hodnoty: {namerane_hodnoty}&quot;)
+
+    vysledky = vypocitaj_statistiky(namerane_hodnoty)
+
+    print(&quot;\nVýsledky spracovania:&quot;)
+    for kluc, hodnota in vysledky.items():
+        print(f&quot;  - {kluc.capitalize()}: {hodnota:.2f}&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre><p class="source-download"><a href="../../01_Python/main.py" download>Stiahnuť pôvodný súbor (main.py) ↓</a></p></main><footer class="module-footer"><a href="../../index.html">Všetky kurzy</a> · <a href="../../materialy/index.html">Prehľad dokumentácie</a></footer></div></body></html>

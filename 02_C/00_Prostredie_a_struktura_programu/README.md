@@ -1,0 +1,1 @@
+# 00_Prostredie_a_struktura_programu

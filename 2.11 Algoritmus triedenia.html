@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2.11 Algoritmus triedenia | Výučbová téma</title>
+<style>
+:root{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--code:#0f172a;--codefg:#e2e8f0;--tbg:#fff4d6;--tline:#e8c25a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--code:#0a0e14;--codefg:#e2e8f0;--tbg:#3a3017;--tline:#7a6322}}
+:root[data-theme="light"]{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--code:#0f172a;--codefg:#e2e8f0;--tbg:#fff4d6;--tline:#e8c25a}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--code:#0a0e14;--codefg:#e2e8f0;--tbg:#3a3017;--tline:#7a6322}
+html{box-sizing:border-box;scroll-padding-top:1rem}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+.w{max-width:860px;margin:0 auto;padding:16px}
+header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.crumb{color:var(--mut);font-size:14px}
+h1{margin:4px 0 4px;font-size:28px}
+h2{margin-top:32px;border-bottom:2px solid var(--line);padding-bottom:4px}
+.lead{font-size:1.1rem}
+.mode{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.mode button{border:0;background:var(--card);color:var(--fg);padding:8px 14px;font:inherit;cursor:pointer}
+.mode button.on{background:var(--acc);color:#fff}
+button:focus-visible,textarea:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:12px 0}
+.t{display:none;background:var(--tbg);border:1px solid var(--tline);border-radius:10px;padding:10px 14px;margin:12px 0}
+body.teacher .t{display:block}
+.t b.l{display:block;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+pre{background:var(--code);color:var(--codefg);padding:12px;border-radius:8px;overflow-x:auto;font-size:14px;line-height:1.45}
+.copyable-code{margin:8px 0}
+.copy-btn{background:var(--acc);color:#fff;border:0;border-radius:6px;padding:5px 10px;font:inherit;font-size:14px;cursor:pointer}
+.copy-status{min-height:1.5em;margin:2px 0;color:var(--mut);font-size:13px}
+.copy-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.code-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.code-pair .card{min-width:0}
+.media{border:2px dashed var(--line);border-radius:10px;padding:22px;text-align:center;color:var(--mut);margin:12px 0}
+.lesson-image{display:block;max-width:100%;height:auto;margin:0 auto;border-radius:8px}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
+.video-card{min-width:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.video-frame{aspect-ratio:16/9;width:100%;border:0;border-radius:8px;background:#000}
+.video-card p{margin:.5rem 0}
+table{border-collapse:collapse;width:100%}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left}
+.tw{overflow-x:auto}
+.bars{display:flex;align-items:flex-end;gap:6px;height:140px;margin:12px 0}
+.bars div{flex:1;background:var(--acc);border-radius:4px 4px 0 0;color:#fff;text-align:center;font-size:13px;transition:height .2s}
+.bars div.cmp{background:#e0a100}
+.bars div.ok{background:#2da44e}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;margin-right:6px}
+textarea{width:100%;min-height:110px;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit}
+.tag{display:inline-block;background:var(--line);border-radius:6px;padding:0 8px;font-size:13px}
+@media(max-width:640px){.code-pair{grid-template-columns:1fr}.w{padding:12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+  <link rel="stylesheet" href="premium.css">
+</head>
+<body data-layout="reading">
+<div class="w">
+<header>
+ <span class="crumb">Priemyselná informatika › 2. Algoritmus, algoritmizácia › 2.11</span>
+ <div><a href="nastavenia.html">Nastavenia vzhľadu</a> · <div class="mode" role="group" aria-label="Zobrazenie stránky"><button id="bs" class="on" type="button" aria-pressed="true">Žiak</button><button id="bt" type="button" aria-pressed="false">Učiteľ</button></div></div>
+</header>
+<h1>2.11 Algoritmus triedenia</h1>
+<p class="lead"><span class="tag">2 × 45 min</span> <span class="tag">algoritmy + Python</span></p>
+
+<div class="t"><b class="l">Pokyny pre učiteľa – cieľ a pomôcky</b>
+Cieľ: žiak vlastnými slovami vysvetlí triedenie, trasuje bubble sort, napíše bubble sort, selection sort a insertion sort v Pythone a vysvetlí, kedy použiť <code>sorted()</code> alebo <code>.sort()</code>.<br>
+Pomôcky: projektor, tento web, Python (Thonny/IDLE), 6–8 kartičiek s číslami na skupinu.<br>
+Predpoklady a nadväznosť: zoznamy, podmienky, cyklus <code>for</code>, vnorený cyklus (2.7–2.10).<br>
+Kontrola porozumenia: žiak vie po každom prechode ukázať stav zoznamu a vysvetliť, prečo sa porovnáva práve daná dvojica.</div>
+<div class="t"><b class="l">Upozornenie pri zverejnení</b>
+Prepínač iba skrýva učiteľské poznámky v prehliadači; nie je to ochrana heslom. Ak majú riešenia zostať žiakom neprístupné, zverejni ich v samostatnom, prístupovo obmedzenom súbore.</div>
+
+<h2>1. hodina – princíp a bubble sort</h2>
+
+<div class="t"><b class="l">Plán 1. hodiny (45 min)</b>
+0–5 Opakovanie: vnorený cyklus a indexovanie zoznamu.<br>
+5–12 Motivácia: skupiny zoradia kartičky a nahlas opíšu pravidlo.<br>
+12–20 Bubble sort: trasovanie jedného prechodu na tabuli.<br>
+20–25 Animácia: žiaci predpovedajú výsledok každej dvojice.<br>
+25–40 Implementácia a testovanie v Pythone.<br>
+40–45 Zhrnutie: tri kontrolné otázky („Čo porovnávame?“, „Kedy meníme?“, „Čo vieme po prechode?“).</div>
+
+<h3>Čo je triedenie?</h3>
+<p>Triedenie je usporiadanie prvkov do poradia (vzostupne/zostupne). Využíva sa pri vyhľadávaní, tabuľkách, výpisoch z databáz, spracovaní nameraných hodnôt zo senzorov.</p>
+<figure class="media"><img class="lesson-image" src="img/2.11 SortingAlgoritmus.png" alt="Prehľad šiestich algoritmov triedenia: bubble, selection, insertion, merge, quick a radix sort"><figcaption>Prehľad vybraných algoritmov triedenia.</figcaption></figure>
+
+<h3>Bubble sort (bublinkové triedenie)</h3>
+<p>Porovnávame susedné dvojice. Ak sú v zlom poradí, vymeníme ich. Po každom prechode je najväčší prvok z ešte neusporiadanej časti na konci. Ak počas celého prechodu nenastane výmena, zoznam je už zoradený a môžeme skončiť.</p>
+<div class="code-pair">
+<div class="card"><b>Pseudokód</b>
+<pre>pre i od 0 po n-2:
+    vymenene = nepravda
+    pre j od 0 po n-i-2:
+        ak a[j] &gt; a[j+1]:
+            vymeň a[j] a a[j+1]
+            vymenene = pravda
+    ak vymenene je nepravda:
+        skonči</pre></div>
+<div class="card"><b>Python</b>
+<pre class="python-code">def bubble_sort(a):
+    n = len(a)
+    for i in range(n - 1):
+        vymenene = False
+        for j in range(n - i - 1):
+            if a[j] &gt; a[j + 1]:
+                a[j], a[j + 1] = a[j + 1], a[j]
+                vymenene = True
+        if not vymenene:
+            break
+    return a
+
+cisla = [5, 3, 8, 1, 9, 2]
+print(bubble_sort(cisla))  # [1, 2, 3, 5, 8, 9]</pre></div>
+</div>
+
+<div class="video-card">
+<h4>Video: Bubble Sort (anglicky, 7 min)</h4>
+<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/Dv4qLJcxus8" title="Learn Bubble Sort in 7 minutes – Bro Code" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>Pri sledovaní si všímaj porovnávanie susedov a to, ako najväčší prvok postupuje na koniec.</p>
+<a href="https://youtu.be/Dv4qLJcxus8">Otvoriť video na YouTube</a>
+</div>
+
+<div class="card"><b>Animácia</b> (zelená = na mieste, žltá = porovnávané)
+<div class="bars" id="bars" aria-hidden="true"></div>
+<button class="btn" id="step" type="button">Ďalší krok</button><button class="btn" id="rst" type="button">Nové čísla</button>
+<p id="info" class="crumb" role="status" aria-live="polite"></p></div>
+<div class="t"><b class="l">Tipy a časté chyby</b>
+Žiaci zabúdajú na <code>- i - 1</code>, čo môže viesť k <code>IndexError</code>. Výmenu <code>a[j], a[j+1] = a[j+1], a[j]</code> vysvetli pomocnou premennou alebo kartičkami.<br>
+Rýchlejším žiakom zadaj trasovanie stavu po každom prechode. Zdôrazni, že funkcia mení odovzdaný zoznam priamo.</div>
+
+<h2>2. hodina – selection sort, porovnanie, cvičenia</h2>
+<div class="t"><b class="l">Plán 2. hodiny (45 min)</b>
+0–5 Opakovanie bubble sortu: dva krátke trasovacie príklady.<br>
+5–12 Selection sort: výber minima pomocou kartičiek.<br>
+12–17 Insertion sort: vkladanie kartičky do zoradenej časti.<br>
+17–22 Implementácia a test s prázdnym aj jednoprvkovým zoznamom.<br>
+22–28 Porovnanie algoritmov, <code>sorted()</code>, <code>.sort()</code> a počtu porovnaní.<br>
+28–42 Samostatné úlohy podľa úrovne.<br>
+42–45 Výstupný lístok: jeden rozdiel medzi algoritmami a vhodné použitie <code>sorted()</code>.</div>
+
+<h3>Selection sort (triedenie výberom)</h3>
+<p>V neusporiadanej časti nájdeme najmenší prvok a vymeníme ho s prvým z tejto časti. Neusporiadaná časť sa každým krokom skracuje.</p>
+<div class="code-pair">
+<div class="card"><b>Pseudokód</b>
+<pre>pre i od 0 po n-2:
+    minimum = i
+    pre j od i+1 po n-1:
+        ak a[j] &lt; a[minimum]:
+            minimum = j
+    vymeň a[i] a a[minimum]</pre></div>
+<div class="card"><b>Python</b>
+<pre class="python-code">def selection_sort(a):
+    n = len(a)
+    for i in range(n - 1):
+        min_i = i
+        for j in range(i + 1, n):
+            if a[j] &lt; a[min_i]:
+                min_i = j
+        a[i], a[min_i] = a[min_i], a[i]
+    return a</pre>
+</div>
+</div>
+
+<div class="video-card">
+<h4>Video: Selection Sort (anglicky, 8 min)</h4>
+<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/EwjnF7rFLns" title="Learn Selection Sort in 8 minutes – Bro Code" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>Všímaj si, ako sa v každom kroku vyhľadá minimum v neusporiadanej časti.</p>
+<a href="https://youtu.be/EwjnF7rFLns">Otvoriť video na YouTube</a>
+</div>
+
+<h3>Insertion sort (triedenie vkladaním)</h3>
+<p>Postupne berieme ďalší prvok a vkladáme ho na správne miesto v už zoradenej ľavej časti zoznamu. Podobá sa zoraďovaniu kariet v ruke. Pri takmer zoradenom zozname môže byť praktický, v najhoršom prípade však vykoná približne n·(n−1)/2 porovnaní.</p>
+<pre class="python-code">def insertion_sort(a):
+    for i in range(1, len(a)):
+        prvok = a[i]
+        j = i - 1
+        while j &gt;= 0 and a[j] &gt; prvok:
+            a[j + 1] = a[j]
+            j -= 1
+        a[j + 1] = prvok
+    return a
+
+print(insertion_sort([5, 3, 8, 1, 9, 2]))  # [1, 2, 3, 5, 8, 9]</pre>
+<div class="video-card">
+<h4>Video: Insertion Sort (anglicky, 7 min)</h4>
+<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/8mJ-OhcfpYg" title="Learn Insertion Sort in 7 minutes – Bro Code" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>Sleduj, ako sa prvok zasúva do už zoradenej časti. Porovnaj tento postup s bubble sortom.</p>
+<a href="https://youtu.be/8mJ-OhcfpYg">Otvoriť video na YouTube</a>
+</div>
+
+<h3>Porovnanie a vstavané triedenie</h3>
+<div class="tw"><table>
+<tr><th scope="col">Algoritmus</th><th scope="col">Princíp</th><th scope="col">Počet porovnaní (n prvkov)</th><th scope="col">Výmeny</th></tr>
+<tr><td>Bubble sort</td><td>výmena susedov</td><td>najviac n·(n−1)/2</td><td>môže byť veľa</td></tr>
+<tr><td>Selection sort</td><td>hľadanie minima</td><td>≈ n·(n−1)/2</td><td>najviac n−1</td></tr>
+<tr><td>Insertion sort</td><td>vloženie prvku do zoradenej časti</td><td>najviac n·(n−1)/2</td><td>posuny prvkov</td></tr>
+<tr><td>sorted() / .sort()</td><td>optimalizované vstavané triedenie</td><td>všeobecne efektívnejšie</td><td>–</td></tr>
+</table></div>
+<pre class="python-code">cisla = [5, 3, 8, 1, 9, 2]
+print(sorted(cisla))                 # nový zoradený zoznam
+print(sorted(cisla, reverse=True))   # zostupne
+cisla.sort()                         # zoradí pôvodný zoznam
+slova = ["pec", "ventil", "motor"]
+print(sorted(slova, key=len))        # podľa dĺžky</pre>
+
+<h3>Úlohy</h3>
+<div class="card"><ol>
+<li>Ručne zapíš stav zoznamu <code>[4, 2, 7, 1]</code> po každom prechode bubble sortu.</li>
+<li>Uprav <code>bubble_sort</code> tak, aby triedil zostupne.</li>
+<li>Pridaj do funkcie počítadlo porovnaní a otestuj ho na 10 náhodných číslach (<code>random.randint</code>).</li>
+<li>Zorad zoznam nameraných teplôt a bezpečne vypíš najnižšiu, najvyššiu a medián (uvažuj párny aj nepárny počet meraní).</li>
+<li><strong>★</strong> Zoraď zoznam dvojíc <code>(meno, vek)</code> podľa veku. Čo sa stane pri rovnakom veku?</li>
+</ol></div>
+<div class="t"><b class="l">Riešenia</b>
+1) <code>[2,4,1,7] → [2,1,4,7] → [1,2,4,7]</code><br>
+2) Zmeň porovnanie na <code>a[j] &lt; a[j + 1]</code>.<br>
+3) Pred cyklami nastav <code>pocet = 0</code>; vo vnútornom cykle pred podmienkou zvýš <code>pocet += 1</code>. Každé vykonanie podmienky je jedno porovnanie.<br>
+4) <code>t = sorted(teploty)</code>; ak je <code>t</code> prázdne, medián ani krajné hodnoty nemajú výsledok. Inak nastav <code>n = len(t)</code>; medián je <code>t[n // 2]</code> pri nepárnom počte a <code>(t[n // 2 - 1] + t[n // 2]) / 2</code> pri párnom počte.<br>
+5) <code>sorted(data, key=lambda x: x[1])</code>. Pythonovo triedenie je stabilné, takže dvojice s rovnakým vekom zachovajú pôvodné poradie.</div>
+<div class="t"><b class="l">Diferenciácia a hodnotenie</b>
+Opora: použi zoznam štyroch čísel a kartičky; žiak označí porovnávané susedné dvojice. Rozšírenie: nech žiaci odhadnú počet porovnaní pre <code>n</code> prvkov a porovnajú to s počítadlom v programe. Hodnoť správne trasovanie, vysvetlenie podmienky výmeny a funkčné testy.</div>
+
+<h3>Zhrnutie pre žiakov</h3>
+<div class="card">Triedenie usporiada prvky podľa pravidla. Bubble sort mení susedov, selection sort hľadá minimum. Oba majú dva vnorené cykly, preto sú pomalé pri veľkých zoznamoch. V praxi používame <code>sorted()</code>.</div>
+<p><a href="2.11.1%20Rekurzia%20a%20rekurzivne%20triedenie.html">Pokračovanie: rekurzia a rekurzívne triedenie</a></p>
+
+<h2>Moje poznámky</h2>
+<label for="notes">Poznámky sa ukladajú iba v tomto prehliadači na tomto zariadení.</label>
+<textarea id="notes" placeholder="Sem si píš poznámky z hodiny…"></textarea>
+<p id="notes-status" class="crumb" role="status" aria-live="polite"></p>
+<p><a href="python.html">Prehľad prednášok</a> · <a href="nastavenia.html">Nastavenia vzhľadu</a></p>
+<section class="card" aria-labelledby="sources-heading">
+<h2 id="sources-heading">Použité zdroje</h2>
+<ul>
+<li>Ilustrácia algoritmov triedenia: <code>img/2.11 SortingAlgoritmus.png</code> (súbor dodaný k materiálom).</li>
+<li><a href="https://docs.python.org/3/howto/sorting.html" target="_blank" rel="noopener noreferrer">Oficiálny tutoriál Pythonu: Sorting HOW TO</a>.</li>
+<li>Videá o <a href="https://youtu.be/Dv4qLJcxus8" target="_blank" rel="noopener noreferrer">bubble sort</a>, <a href="https://youtu.be/EwjnF7rFLns" target="_blank" rel="noopener noreferrer">selection sort</a> a <a href="https://youtu.be/8mJ-OhcfpYg" target="_blank" rel="noopener noreferrer">insertion sort</a>.</li>
+<li><a href="https://www.programiz.com/python-programming/online-compiler/" target="_blank" rel="noopener noreferrer">Programiz Python Online Compiler</a> – online spustenie ukážok.</li>
+</ul>
+</section>
+</div>
+<script>
+(function(){
+document.querySelectorAll('pre.python-code').forEach(function(code){
+ var wrapper=document.createElement('div'),actions=document.createElement('div'),button=document.createElement('button'),editor=document.createElement('a'),status=document.createElement('p');
+ wrapper.className='copyable-code';actions.className='copy-actions';
+ button.className='copy-btn';button.type='button';button.textContent='Kopírovať kód';
+ editor.href='https://www.programiz.com/python-programming/online-compiler/';editor.target='_blank';editor.rel='noopener noreferrer';editor.textContent='Vyskúšať v online editore';
+ status.className='copy-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+ code.parentNode.insertBefore(wrapper,code);
+ wrapper.appendChild(actions);actions.appendChild(button);actions.appendChild(editor);wrapper.appendChild(code);wrapper.appendChild(status);
+ button.onclick=function(){
+  if(!navigator.clipboard||!navigator.clipboard.writeText){
+   status.textContent='Kopírovanie nie je dostupné. Označ kód a skopíruj ho pomocou Ctrl+C.';
+   return;
+  }
+  navigator.clipboard.writeText(code.innerText).then(function(){
+   status.textContent='Kód skopírovaný.';
+  }).catch(function(){
+   status.textContent='Kód sa nepodarilo skopírovať. Označ ho a skopíruj pomocou Ctrl+C.';
+  });
+ };
+});
+var b=document.body,bs=document.getElementById('bs'),bt=document.getElementById('bt');
+function setMode(t){
+ b.classList.toggle('teacher',t);
+ bt.classList.toggle('on',t);bt.setAttribute('aria-pressed',String(t));
+ bs.classList.toggle('on',!t);bs.setAttribute('aria-pressed',String(!t));
+}
+bs.onclick=function(){setMode(false)};bt.onclick=function(){setMode(true)};
+var notes=document.getElementById('notes'),notesStatus=document.getElementById('notes-status'),key='tema-2-11-triedenie-poznamky';
+try{notes.value=localStorage.getItem(key)||'';notesStatus.textContent='Poznámky sa ukladajú v tomto prehliadači.'}
+catch(error){notesStatus.textContent='Ukladací priestor nie je dostupný. Poznámky si skopíruj, aby sa nestratili.'}
+notes.oninput=function(){
+ try{localStorage.setItem(key,notes.value);notesStatus.textContent='Poznámky uložené.'}
+ catch(error){notesStatus.textContent='Poznámky sa nepodarilo uložiť. Skopíruj si ich, aby sa nestratili.'}
+};
+var a,i,j,done,passSwapped,bars=document.getElementById('bars'),info=document.getElementById('info');
+function draw(compared,sorted){
+ bars.innerHTML='';
+ a.forEach(function(value,index){
+  var bar=document.createElement('div');
+  bar.style.height=(value*12)+'px';bar.textContent=value;
+  if(sorted&&sorted.indexOf(index)>-1)bar.className='ok';
+  else if(compared&&compared.indexOf(index)>-1)bar.className='cmp';
+  bars.appendChild(bar);
+ });
+}
+function reset(){
+ a=[];for(var k=0;k<8;k++)a.push(1+Math.floor(Math.random()*10));
+ i=0;j=0;done=false;passSwapped=false;
+ info.textContent='Nový zoznam. Stlač „Ďalší krok“ a sleduj porovnávanú dvojicu.';
+ draw();
+}
+function step(){
+ if(done)return;
+ var length=a.length,left=a[j],right=a[j+1],swapped=left>right;
+ if(swapped){a[j]=right;a[j+1]=left;passSwapped=true;}
+ var compared=[j,j+1];
+ j++;
+ var passComplete=j>=length-i-1;
+ if(passComplete){j=0;i++;}
+ var sorted=[];for(var k=length-i;k<length;k++)sorted.push(k);
+ var message='Porovnanie '+left+' a '+right+': '+(swapped?'výmena.':'bez výmeny.');
+ if(passComplete&&!passSwapped){
+  done=true;for(var q=0;q<length;q++)sorted.push(q);
+  draw(null,sorted);info.textContent=message+' V tomto prechode nebola výmena; zoznam je zoradený.';return;
+ }
+ if(passComplete)passSwapped=false;
+ if(i>=length-1){done=true;for(var p=0;p<length;p++)sorted.push(p);draw(null,sorted);info.textContent=message+' Zoznam je zoradený.';return;}
+ draw(compared,sorted);
+ info.textContent=message;
+}
+document.getElementById('step').onclick=step;
+document.getElementById('rst').onclick=reset;
+reset();
+})();
+</script>
+<script src="theme.js"></script>
+</body>
+</html>

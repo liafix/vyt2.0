@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Teoretický úvod do algoritmického rozkladu úloh na podprogramy: dekompozícia, abstrakcia, rozhrania a testovanie.">
+<title>2.9 Algoritmizácia podprogramov | Výučbová téma</title>
+<style>
+:root{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--tbg:#fff4d6;--tline:#e8c25a}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--tbg:#3a3017;--tline:#7a6322}}
+:root[data-theme="light"]{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--tbg:#fff4d6;--tline:#e8c25a}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--tbg:#3a3017;--tline:#7a6322}
+*{box-sizing:border-box}
+html{scroll-padding-top:1rem}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--acc)}
+.w{width:min(100% - 2rem,900px);margin:0 auto;padding:16px}
+header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.crumb{color:var(--mut);font-size:14px}
+h1{margin:12px 0 6px;font-size:clamp(1.8rem,5vw,2.35rem);line-height:1.2}
+h2{margin-top:34px;border-bottom:2px solid var(--line);padding-bottom:5px}
+h3{margin-top:25px}
+.lead{font-size:1.08rem}
+.tag{display:inline-block;margin:0 5px 5px 0;padding:1px 9px;border-radius:6px;background:var(--line);font-size:13px}
+.card,.teacher-note,.diagram{margin:14px 0;padding:14px 17px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.teacher-note{display:none;background:var(--tbg);border-color:var(--tline)}
+body.teacher .teacher-note{display:block}
+.teacher-note b{display:block;margin-bottom:4px;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.mode{display:inline-flex;overflow:hidden;border:1px solid var(--line);border-radius:8px}
+.mode button{padding:7px 12px;border:0;background:var(--card);color:var(--fg);font:inherit;cursor:pointer}
+.mode button.on{background:var(--acc);color:#fff}
+button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.diagram svg{display:block;width:100%;height:auto}
+.diagram figcaption,.muted{color:var(--mut);font-size:.92rem}
+.steps{counter-reset:step;list-style:none;padding:0}
+.steps li{position:relative;margin:12px 0;padding:12px 14px 12px 52px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.steps li::before{counter-increment:step;content:counter(step);position:absolute;left:14px;top:12px;display:grid;width:26px;height:26px;place-items:center;border-radius:50%;background:var(--acc);color:#fff;font-weight:700}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{padding:9px 11px;border:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--card)}
+.checklist li{margin:.45rem 0}
+.sources{margin-top:26px}
+footer{margin-top:30px;padding:14px 0;border-top:1px solid var(--line);color:var(--mut);font-size:14px}
+@media(max-width:600px){.w{width:100%;padding:12px}.diagram{padding:8px}th,td{padding:7px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+  <link rel="stylesheet" href="premium.css">
+</head>
+<body data-layout="reading">
+<div class="w">
+<header>
+<span class="crumb"><a href="python.html">Výučbové materiály</a> › 2. Algoritmus, algoritmizácia › 2.9</span>
+<div><a href="nastavenia.html">Nastavenia vzhľadu</a> · <div class="mode" role="group" aria-label="Zobrazenie stránky"><button id="student-mode" class="on" type="button" aria-pressed="true">Žiak</button><button id="teacher-mode" type="button" aria-pressed="false">Učiteľ</button></div></div>
+</header>
+
+<h1>2.9 Algoritmizácia podprogramov</h1>
+<p class="lead"><span class="tag">2 × 45 min</span><span class="tag">teória algoritmov</span><span class="tag">rozklad úloh</span></p>
+<p>Skôr než začneme písať funkcie v Pythone, naučíme sa navrhovať väčší algoritmus z menších, zrozumiteľných častí. Budeme riešiť najmä <strong>ako úlohu rozdeliť, ako popísať zodpovednosť jej častí a ako overiť, že spolu tvoria správny celok</strong>.</p>
+<figure class="diagram">
+<img src="img/2.9%20Podprogramy.svg" alt="Hlavný algoritmus rozkladá úlohu na menšie podprogramy s jasnými vstupmi a výstupmi" width="1000" height="520" loading="lazy">
+<figcaption>Hlavný algoritmus koordinuje menšie časti. Každý podprogram má svoju zodpovednosť, vstup a výsledok; podrobnosti jeho vnútra možno navrhnúť samostatne.</figcaption>
+</figure>
+
+<div class="teacher-note"><b>Ciele, predpoklady a pomôcky</b>
+Žiak vysvetlí dekompozíciu, abstrakciu a podprogram ako návrhovú jednotku; zostaví hierarchický rozklad úlohy; opíše vstupy, výstupy a zodpovednosť časti; rozlíši súdržnú a príliš previazanú dekompozíciu; navrhne samostatné aj integračné testy. Predpoklady: pojem algoritmus, postupnosť krokov, rozhodovanie a opakovanie. Pomôcky: tabuľa, papier alebo kartičky s úlohami.</div>
+<div class="teacher-note"><b>Nadväznosť na tému 2.10</b>
+Táto hodina sa sústreďuje na návrh algoritmu a rozdelenie zodpovedností. Konkrétny zápis funkcií v Pythone, volanie, parametre, návratové hodnoty, rozsah premenných, predvolené hodnoty a typové anotácie patria do nasledujúcej témy <a href="2.10%20Algoritmiz%C3%A1cia%20funkci%C3%AD.html">2.10 Algoritmizácia funkcií</a>.</div>
+<div class="teacher-note"><b>Časový plán</b>
+1. hodina: 0–5 min motivácia; 5–15 min dekompozícia a abstrakcia; 15–25 min strom úlohy; 25–38 min skupinová aktivita; 38–45 min kontrola a zhrnutie.<br>
+2. hodina: 0–7 min opakovanie; 7–20 min rozhrania a zodpovednosti; 20–30 min súdržnosť, previazanosť a poruchy návrhu; 30–40 min návrh a testovanie v skupinách; 40–45 min prezentácia a výstupný lístok.</div>
+
+<h2>1. hodina – prečo rozdeliť algoritmus?</h2>
+<h3>Od veľkej úlohy k zvládnuteľným častiam</h3>
+<p>Komplexná úloha môže mať priveľa krokov na to, aby sme ju naraz dobre pochopili. <strong>Dekompozícia</strong> je jej rozklad na menšie podúlohy, ktoré sa dajú vysvetliť, navrhnúť a skontrolovať samostatne. Každá časť prispieva k výsledku celku.</p>
+<p>Rozklad nie je len rozdelenie práce medzi ľudí. Je to aj spôsob, ako znížiť zložitosť: v danej chvíli sa sústredíme na jednu zodpovednosť a ostatné časti dočasne vnímame ako hotové celky.</p>
+<div class="card"><strong>Príklad úlohy:</strong> pripraviť školský výlet. Veľká úloha zahŕňa zber prihlášok, kontrolu počtu miest, plán dopravy, výpočet ceny a informovanie účastníkov. Ak sa tieto kroky pomiešajú do jedného dlhého postupu, ťažko zistíme, kde vznikla chyba alebo čo treba zmeniť.</div>
+
+<figure class="diagram">
+<svg viewBox="0 0 800 390" role="img" aria-labelledby="decomp-title decomp-desc" xmlns="http://www.w3.org/2000/svg">
+<title id="decomp-title">Hierarchický rozklad prípravy školského výletu</title>
+<desc id="decomp-desc">Hlavná úloha prípraviť školský výlet sa rozdeľuje na plánovanie, zabezpečenie a informovanie. Plánovanie obsahuje miesto a termín, zabezpečenie dopravu a cenu, informovanie zoznam účastníkov a pokyny.</desc>
+<path d="M400 82v38M140 120h520M140 120v34m260-34v34m260-34v34M140 220v35m-70 0h140m-70 0v30m260-30h140m-70 0v30m260-30h140m-70 0v30" fill="none" stroke="#1f6feb" stroke-width="3"/>
+<g fill="var(--card)" stroke="#1f6feb" stroke-width="2">
+<rect x="255" y="20" width="290" height="62" rx="14"/>
+<rect x="35" y="154" width="210" height="66" rx="12"/><rect x="295" y="154" width="210" height="66" rx="12"/><rect x="555" y="154" width="210" height="66" rx="12"/>
+<rect x="25" y="285" width="90" height="56" rx="10"/><rect x="125" y="285" width="90" height="56" rx="10"/>
+<rect x="285" y="285" width="110" height="56" rx="10"/><rect x="405" y="285" width="110" height="56" rx="10"/>
+<rect x="545" y="285" width="110" height="56" rx="10"/><rect x="665" y="285" width="110" height="56" rx="10"/>
+</g>
+<g fill="var(--fg)" text-anchor="middle" font-family="system-ui,sans-serif">
+<text x="400" y="47" font-size="19" font-weight="700">Pripraviť školský výlet</text>
+<text x="140" y="183" font-size="17" font-weight="700">Plánovanie</text><text x="400" y="183" font-size="17" font-weight="700">Zabezpečenie</text><text x="660" y="183" font-size="17" font-weight="700">Informovanie</text>
+<text x="70" y="310" font-size="14">Miesto</text><text x="170" y="310" font-size="14">Termín</text>
+<text x="340" y="310" font-size="14">Doprava</text><text x="460" y="310" font-size="14">Cena</text>
+<text x="600" y="310" font-size="14">Účastníci</text><text x="720" y="310" font-size="14">Pokyny</text>
+</g>
+<text x="400" y="372" text-anchor="middle" fill="var(--mut)" font-family="system-ui,sans-serif" font-size="15">Každá vetva je zodpovednosťou, ktorú možno ďalej spresniť.</text>
+</svg>
+<figcaption>Vlastná schéma dekompozície. Strom ukazuje, z čoho sa skladá cieľ, nie presné poradie vykonávania krokov.</figcaption>
+</figure>
+
+<h3>Postup zhora nadol</h3>
+<ol class="steps">
+<li><strong>Pomenuj cieľ.</strong> Jednou vetou vyjadri, aký výsledok má algoritmus zabezpečiť.</li>
+<li><strong>Nájdi hlavné zodpovednosti.</strong> Rozdeľ cieľ na niekoľko zmysluplných činností; každá má prispieť k výsledku.</li>
+<li><strong>Spresni časti podľa potreby.</strong> Pokračuj iba tam, kde podúloha ešte nie je dosť jasná na návrh alebo kontrolu.</li>
+<li><strong>Urči závislosti a poradie.</strong> Zisti, ktoré výsledky potrebuje iná časť a čo sa dá pripraviť nezávisle alebo súbežne.</li>
+<li><strong>Skontroluj úplnosť.</strong> Každý potrebný krok patrí do niektorej časti a všetky časti spolu dosiahnu pôvodný cieľ.</li>
+</ol>
+<div class="card"><strong>Pomôcka pri delení:</strong> podúloha má zrozumiteľnú činnosť, jasný výsledok a dá sa vysvetliť bez opakovania celého hlavného zadania. Ak je pomenovanie „urob všetko potrebné“, hranica časti je pravdepodobne príliš neurčitá.</div>
+
+<h3>Abstrakcia a pohľad na „čiernu skrinku“</h3>
+<p><strong>Abstrakcia</strong> znamená, že sa sústredíme na dôležité vlastnosti a nepodstatné detaily na chvíľu odložíme. Keď navrhujeme plán dopravy, zatiaľ nepotrebujeme vedieť, ako sa zostavuje zoznam účastníkov; potrebujeme vedieť, aký počet cestujúcich a aký cieľ cesty dostane plánovanie.</p>
+<p>Podúlohu môžeme dočasne vnímať ako <strong>čiernu skrinku</strong>: poznáme jej účel, potrebné vstupy a očakávaný výstup, ale zatiaľ nemusíme poznať vnútorné kroky. Keď sa ukáže, že vnútro je zložité, otvoríme túto skrinku a navrhneme jej vlastné menšie časti.</p>
+<div class="tw"><table>
+<thead><tr><th>Otázka</th><th>Čo si ujasňujeme</th><th>Príklad pri výlete</th></tr></thead>
+<tbody>
+<tr><td>Načo táto časť slúži?</td><td>Účel a hranicu zodpovednosti</td><td>Plánovanie dopravy zabezpečí cestu pre prihlásených účastníkov.</td></tr>
+<tr><td>Čo potrebuje?</td><td>Vstupy alebo hotové informácie</td><td>Počet účastníkov, cieľ a termín.</td></tr>
+<tr><td>Čo odovzdá ďalej?</td><td>Výsledok, na ktorý sa môžu spoľahnúť iné časti</td><td>Návrh dopravy a jej kapacitu.</td></tr>
+<tr><td>Čo zatiaľ nemusíme riešiť?</td><td>Vnútorné detaily, ktoré neovplyvnia dohodu s okolím</td><td>Konkrétny postup porovnávania dopravcov.</td></tr>
+</tbody></table></div>
+
+<h3>Aktivita: rozložte školský výlet</h3>
+<ol>
+<li>V dvojici napíšte hlavný cieľ na vrch papiera.</li>
+<li>Pod ním vytvorte 3–5 hlavných častí. Každú pomenujte slovesom alebo krátkou činnosťou.</li>
+<li>Vyberte jednu časť a rozložte ju ešte o úroveň nižšie.</li>
+<li>Zakrúžkujte informáciu, ktorá musí prejsť z jednej časti do druhej. Šípkou vyznačte závislosť.</li>
+<li>Skontrolujte strom: nechýba krok? Nie je niektorá časť príliš veľká alebo rozdelená na bezvýznamné drobnosti?</li>
+</ol>
+<div class="teacher-note"><b>Možný rozklad na porovnanie</b>
+Hlavný cieľ: uskutočniť výlet pre prihlásenú skupinu. Časti: zozbierať a overiť prihlášky; zvoliť miesto a termín; zabezpečiť dopravu; vypočítať cenu a pripraviť platby; rozoslať pokyny. Konkrétny rozklad sa môže líšiť, dôležité je zdôvodniť hranice, výsledky a závislosti.</div>
+
+<h2>2. hodina – rozhrania, kvalita návrhu a overovanie</h2>
+<h3>Rozhranie a dohoda medzi časťami</h3>
+<p><strong>Rozhranie</strong> je dohoda o tom, čo časť robí a ako s ňou spolupracuje zvyšok algoritmu. Dobrá dohoda je stručná, jednoznačná a stabilná, aj keď sa neskôr zmení vnútorný postup.</p>
+<p>Pri každej časti si opíšeme jej <strong>zodpovednosť</strong>, potrebné <strong>vstupy</strong>, očakávané <strong>výstupy</strong> a dôležité <strong>predpoklady alebo obmedzenia</strong>. Môžeme tiež určiť, čo má platiť po jej dokončení. Takýto opis pomáha členom tímu pracovať paralelne a uľahčuje testovanie ešte pred spojením celého programu.</p>
+<div class="tw"><table>
+<thead><tr><th>Časť</th><th>Zodpovednosť</th><th>Vstupy</th><th>Výstup a podmienky</th></tr></thead>
+<tbody>
+<tr><td>Overenie prihlášok</td><td>Rozlíšiť platné prihlášky a určiť počet účastníkov.</td><td>Zoznam doručených prihlášok, pravidlá účasti.</td><td>Počet platných účastníkov a zoznam neúplných prihlášok; každá prihláška je započítaná najviac raz.</td></tr>
+<tr><td>Výber dopravy</td><td>Nájsť spôsob dopravy s dostatočnou kapacitou.</td><td>Počet účastníkov, cieľ, termín.</td><td>Možnosť dopravy, kapacita a cena; kapacita pokrýva počet cestujúcich.</td></tr>
+<tr><td>Výpočet ceny</td><td>Určiť cenu na osobu podľa schválených nákladov a pravidiel.</td><td>Celkové náklady, počet platiacich, pravidlá zaokrúhľovania.</td><td>Cena na osobu; pri nulovom počte platiacich sa nesmie vykonať delenie.</td></tr>
+</tbody></table></div>
+<p class="muted">Tabuľka je návrhový opis, nie implementácia v Pythone. Vstup a výstup tu pomenúvame na úrovni algoritmu; spôsob zápisu v jazyku nasleduje v téme 2.10.</p>
+
+<h3>Súdržnosť a previazanosť</h3>
+<p><strong>Súdržnosť</strong> hovorí, či činnosti v jednej časti patria k spoločnému účelu. Vysoká súdržnosť je žiaduca: napríklad „overiť prihlášky“ má jasnú jednotnú zodpovednosť. Ak jedna časť zároveň overuje prihlášky, hľadá autobus, vypočítava cenu a posiela správy, jej súdržnosť je nízka.</p>
+<p><strong>Previazanosť</strong> vyjadruje, nakoľko sú časti závislé od vnútorných detailov ostatných. Nízka previazanosť je zvyčajne lepšia: stačí poznať dohodnutý výstup časti, nie jej vnútorný postup. Potom môžeme jednu časť zmeniť bez toho, aby sme museli prerábať všetko okolo.</p>
+<div class="card"><strong>Rýchla kontrola návrhu:</strong> Vieš každú časť pomenovať jednou činnosťou? Potrebuje iba informácie súvisiace s touto činnosťou? Môžeš zmeniť jej vnútorný postup bez zmeny všetkých ostatných častí? Ak nie, zváž nové rozdelenie alebo jasnejšiu dohodu.</div>
+
+<h3>Časté chyby pri rozklade</h3>
+<ul>
+<li><strong>Jeden obrovský podprogram:</strong> všetky rozhodnutia a činnosti sú zmiešané; chyba sa ťažko hľadá a zmena zasiahne celý postup.</li>
+<li><strong>Príliš veľa drobných častí:</strong> rozdelenie pridáva viac názvov a dohôd než porozumenia. Rozdeľuj podľa potreby, nie mechanicky každú jednu operáciu.</li>
+<li><strong>Nejasná zodpovednosť:</strong> dve časti robia to isté alebo sa predpokladá, že krok vykoná „niekto iný“.</li>
+<li><strong>Skryté závislosti:</strong> časť očakáva údaj, ktorý jej nikto neposkytuje, alebo pracuje s neaktuálnym výsledkom.</li>
+<li><strong>Neurčený okrajový prípad:</strong> návrh funguje pre bežný vstup, ale nedefinuje výsledok pri prázdnom zozname, nedostatku miest alebo nulovom počte platiacich.</li>
+</ul>
+
+<h3>Testovanie od časti po celok</h3>
+<p>Rozklad nám umožňuje overovať algoritmus po vrstvách:</p>
+<ol class="steps">
+<li><strong>Kontrola jednej časti:</strong> vyber vstup, očakávaný výsledok a prípad, ktorý by mohol odhaliť chybu. Napríklad pri overení prihlášok skontroluj aj prázdny zoznam alebo duplicitnú prihlášku.</li>
+<li><strong>Kontrola rozhrania:</strong> over, či výsledok časti má dohodnutý význam, správny tvar a spĺňa podmienky, ktoré potrebuje ďalšia časť.</li>
+<li><strong>Integračná kontrola:</strong> spoj dve alebo viac častí a sleduj, či si správne odovzdajú výsledky a či sa vykonajú v správnom poradí.</li>
+<li><strong>Kontrola celého algoritmu:</strong> prejdi od pôvodnej požiadavky až po výsledok a vyskúšaj bežný aj neobvyklý priebeh.</li>
+</ol>
+<div class="card"><strong>Zapamätaj si:</strong> ak chyba vznikne v jednej jasne oddelenej zodpovednosti, vieme ju hľadať na menšom mieste. Ak nevieme určiť, ktorá časť mala výsledok vytvoriť, problém je často už v návrhu.</div>
+
+<h3>Skupinová úloha: objednávka v školskej jedálni</h3>
+<p>Navrhnite algoritmus, ktorý spracuje objednávku obedov pre triedu a pripraví prehľad pre kuchyňu. Návrh má byť rozkladom zodpovedností, nie hotovým programom.</p>
+<ol>
+<li>Pomenujte cieľ a vytvorte 4–6 hlavných častí.</li>
+<li>Pre tri časti vypíšte zodpovednosť, potrebné vstupy a očakávané výstupy.</li>
+<li>Vyznačte závislosti: ktoré výsledky musia byť pripravené skôr?</li>
+<li>Uveďte aspoň dva okrajové prípady, napríklad prázdnu objednávku, neznámu voľbu alebo zmenu počtu jedál.</li>
+<li>Vysvetlite, ako otestujete jednu časť samostatne a celý postup po spojení.</li>
+<li>Posúďte, či má každá časť jasnú zodpovednosť a či sú medzi časťami len potrebné dohody.</li>
+</ol>
+<div class="teacher-note"><b>Možné body riešenia</b>
+Časti môžu byť: zozbierať objednávky; overiť voľby a počty; zhrnúť množstvá podľa jedla; pripraviť kuchynský prehľad; oznámiť neplatné alebo neúplné objednávky. Okrajové prípady: žiadna objednávka, neznáma voľba, duplicitný záznam, zmena objednávky po uzávierke. Dôležitejšia než jediná „správna“ mapa je zrozumiteľnosť rozhrania a overiteľnosť výsledkov.</div>
+
+<h2>Zhrnutie</h2>
+<div class="card">
+<ul>
+<li><strong>Dekompozícia</strong> rozkladá zložitý problém na zmysluplné menšie zodpovednosti.</li>
+<li><strong>Abstrakcia</strong> dovolí najprv pracovať s účelom, vstupmi a výstupmi časti bez rozoberania jej detailov.</li>
+<li><strong>Rozhranie</strong> je dohoda medzi časťou a zvyškom algoritmu; pomenúva zodpovednosť a potrebné informácie.</li>
+<li>Dobrý návrh má jasne súdržné časti, obmedzené závislosti a určené okrajové prípady.</li>
+<li>Overujeme jednotlivé časti, ich vzájomné rozhrania aj celý spojený algoritmus.</li>
+</ul>
+</div>
+<h3>Výstupný lístok</h3>
+<ol class="checklist">
+<li>Aký je rozdiel medzi dekompozíciou a abstrakciou?</li>
+<li>Čo má obsahovať stručný opis zodpovednosti jednej časti algoritmu?</li>
+<li>Prečo je užitočné, aby jedna časť mala jasný a súdržný účel?</li>
+<li>Uveď jeden okrajový prípad, ktorý by si otestoval v návrhu pre školský výlet alebo objednávku obedov.</li>
+<li>Čo sa v téme 2.10 zmení, keď navrhnuté časti začneme zapisovať v Pythone?</li>
+</ol>
+
+<section class="card sources" aria-labelledby="sources-heading">
+<h2 id="sources-heading">Použité zdroje</h2>
+<ul>
+<li><a href="https://www.bbc.co.uk/bitesize/guides/zp92mp3/revision/1" target="_blank" rel="noopener noreferrer">BBC Bitesize: What is computational thinking?</a> – dekompozícia, abstrakcia a algoritmické myslenie.</li>
+<li><a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions" target="_blank" rel="noopener noreferrer">Oficiálny tutoriál Pythonu: Defining Functions</a> – nadväzujúci zápis funkcií v téme 2.10.</li>
+<li><a href="2.10%20Algoritmiz%C3%A1cia%20funkci%C3%AD.html">Téma 2.10 Algoritmizácia funkcií</a> – pokračovanie od návrhu podprogramov k ich zápisu v Pythone.</li>
+<li>Schéma dekompozície a príklady v tejto stránke sú vytvorené pre výučbový materiál.</li>
+</ul>
+</section>
+<footer><a href="python.html">Späť na prehľad prednášok</a> · <a href="2.10%20Algoritmiz%C3%A1cia%20funkci%C3%AD.html">Pokračovať na tému 2.10</a> · <a href="nastavenia.html">Nastavenia vzhľadu</a></footer>
+</div>
+<script>
+const studentButton=document.getElementById("student-mode");
+const teacherButton=document.getElementById("teacher-mode");
+function setMode(teacher){
+ document.body.classList.toggle("teacher",teacher);
+ studentButton.classList.toggle("on",!teacher);
+ teacherButton.classList.toggle("on",teacher);
+ studentButton.setAttribute("aria-pressed",String(!teacher));
+ teacherButton.setAttribute("aria-pressed",String(teacher));
+}
+studentButton.addEventListener("click",()=>setMode(false));
+teacherButton.addEventListener("click",()=>setMode(true));
+</script>
+<script src="theme.js"></script>
+</body>
+</html>

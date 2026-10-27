@@ -1,0 +1,1 @@
+# 06_Subory_a_systemove_funkcie

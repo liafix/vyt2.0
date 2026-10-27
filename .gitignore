@@ -1,0 +1,38 @@
+# Ignorovať dočasné súbory Pythonu
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+*.egg-info/
+
+# Ignorovať binárne, kompilované a objektové súbory (C / C++)
+*.exe
+*.o
+*.obj
+*.out
+*.app
+*.so
+*.dylib
+*.dll
+*.lib
+
+# Ignorovať zostavovacie zložky
+build/
+dist/
+bin/
+obj/
+
+# Ignorovať nastavenia IDE a editorov
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.user
+
+# Mac / OS dočasné súbory
+.DS_Store
+Thumbs.db

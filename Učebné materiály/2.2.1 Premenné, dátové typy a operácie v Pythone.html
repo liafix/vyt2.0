@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ťahák k premenným, základným dátovým typom a operáciám v Pythone.">
+<title>2.2.1 Premenné, dátové typy a operácie v Pythone</title>
+<style>
+:root{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--note:#fff4d6}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--note:#3a3017}}
+:root[data-theme="light"]{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--note:#fff4d6}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--note:#3a3017}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--acc)}.wrap{width:min(100% - 2rem,900px);margin:auto;padding:16px}header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}.muted{color:var(--mut)}h1{font-size:clamp(1.7rem,5vw,2.3rem);line-height:1.2}.tag{padding:2px 9px;border-radius:6px;background:var(--line);font-size:13px}.card,.note{margin:14px 0;padding:14px 17px;border:1px solid var(--line);border-radius:12px;background:var(--card)}.note{background:var(--note);display:none}body.teacher .note{display:block}.mode{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.mode button{padding:6px 11px;border:0;background:var(--card);color:var(--fg);font:inherit;cursor:pointer}.mode button.on{background:var(--acc);color:#fff}button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:3px}pre{margin:12px 0;background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow-x:auto;font-size:14px;line-height:1.5}.lesson-image{display:block;width:100%;height:auto;margin:18px 0;border:1px solid var(--line);border-radius:12px}.image-caption{margin-top:-10px;color:var(--mut);font-size:14px}.sources,footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line)}footer{color:var(--mut);font-size:14px}
+</style>
+  <link rel="stylesheet" href="../premium.css">
+</head>
+<body data-layout="reading"><div class="wrap">
+<header><span class="muted"><a href="../python.html">Prehľad tém</a> › <a href="../2.2%20Z%C3%A1kladn%C3%A9%20formy%20a%20typy%20algoritmov.html">2.2 Základné formy a typy algoritmov</a> › 2.2.1</span><div><a href="../nastavenia.html">Nastavenia vzhľadu</a> · <div class="mode" role="group" aria-label="Zobrazenie"><button class="on" id="student" type="button" aria-pressed="true">Žiak</button><button id="teacher" type="button" aria-pressed="false">Učiteľ</button></div></div></header>
+<h1>2.2.1 Premenné, dátové typy a operácie v Pythone</h1><p><span class="tag">Ťahák</span> <span class="tag">Základy Pythonu</span></p>
+<figure><img class="lesson-image" src="../img/Premenn%C3%A9D%C3%A1tov%C3%A9TypyaOper%C3%A1cie.png" alt="Ťahák k premenným, dátovým typom a operáciám v Pythone" loading="lazy"><figcaption class="image-caption">Prehľad premenných, dátových typov a operácií v Pythone.</figcaption></figure>
+<h2>Ciele</h2><p>Po preštudovaní materiálu žiak vysvetlí, čo je premenná, rozpozná základné dátové typy, použije aritmetické, porovnávacie a logické operátory a načíta a vypíše jednoduché údaje.</p>
+<h2>1. Premenná a priradenie</h2><p>Premenná je pomenovanie, cez ktoré v programe pracujeme s hodnotou. Operátor <code>=</code> priradí hodnotu do premennej; neznamená matematickú rovnosť. Python určí typ podľa priradenej hodnoty a ten sa môže počas behu programu zmeniť.</p><pre><code>vek = 16
+meno = "Alica"
+teplota = 21.5
+print(meno, vek, teplota)</code></pre><p>Názov premennej začína písmenom alebo podčiarkovníkom, môže obsahovať číslice (nie však na začiatku) a rozlišuje veľké a malé písmená. Používaj výstižné názvy, napríklad <code>pocet_bodov</code>. Kľúčové slová Pythonu, napríklad <code>if</code> a <code>for</code>, nie sú vhodné názvy premenných.</p>
+<h2>2. Základné dátové typy</h2><div class="card"><ul><li><code>int</code> – celé čísla, napríklad <code>-4</code>, <code>0</code>, <code>25</code>.</li><li><code>float</code> – čísla s desatinnou časťou; v kóde sa používa bodka, napríklad <code>3.14</code>.</li><li><code>str</code> – textový reťazec v úvodzovkách, napríklad <code>"Ahoj"</code>.</li><li><code>bool</code> – logická hodnota <code>True</code> alebo <code>False</code>.</li></ul></div><p>Typ hodnoty môžeme preskúmať pomocou <code>type()</code>:</p><pre><code>print(type(25))       # int
+print(type(3.14))     # float
+print(type("Ahoj"))   # str
+print(type(True))     # bool</code></pre>
+<h2>3. Operácie s číslami</h2><p>Základné aritmetické operátory sú sčítanie <code>+</code>, odčítanie <code>-</code>, násobenie <code>*</code>, delenie <code>/</code>, celočíselné delenie <code>//</code>, zvyšok po delení <code>%</code> a umocňovanie <code>**</code>. Zátvorky určujú poradie výpočtu.</p><pre><code>a = 17
+b = 5
+print(a + b)   # 22
+print(a / b)   # 3.4
+print(a // b)  # 3
+print(a % b)   # 2
+print(2 ** 3)  # 8</code></pre><p>Operátor <code>/</code> vracia podiel typu <code>float</code>. Pri kladných číslach <code>//</code> dáva celočíselnú časť podielu a <code>%</code> zvyšok; pri záporných číslach sa výsledok riadi matematickou definíciou delenia nadol.</p>
+<h2>4. Porovnávacie a logické operátory</h2><p>Porovnania <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code> a <code>&gt;=</code> vracajú hodnotu typu <code>bool</code>. Pozor: <code>=</code> priraďuje, zatiaľ čo <code>==</code> porovnáva. Logické operátory <code>and</code>, <code>or</code> a <code>not</code> kombinujú alebo obracajú podmienky.</p><pre><code>vek = 16
+plnoletost = vek >= 18
+ma_vstupenku = True
+moze_vstupit = plnoletost and ma_vstupenku
+print(plnoletost)    # False
+print(moze_vstupit)  # False</code></pre>
+<h2>5. Vstup a výstup</h2><p><code>input()</code> načíta text od používateľa a <code>print()</code> vypíše hodnoty. Keď používateľ zadá číslo, výsledok <code>input()</code> je stále text (<code>str</code>); prevod na číselný typ sa vysvetľuje v <a href="2.2.2%20Pretypovanie%20v%20Pythone.html">podtéme 2.2.2</a>.</p><pre><code>meno = input("Ako sa voláš? ")
+print("Ahoj,", meno)</code></pre>
+<h2>6. Precvičenie</h2><ol><li>Vytvor premenné pre svoje meno, vek a výšku; vypíš ich hodnoty aj typy.</li><li>Načítaj dve čísla a vypíš ich súčet, súčin a zvyšok po delení.</li><li>Vysvetli rozdiel medzi výrazmi <code>pocet = 5</code> a <code>pocet == 5</code>.</li><li>Napíš logický výraz, ktorý je pravdivý, ak číslo leží v rozsahu od 1 do 10 vrátane.</li></ol>
+<h2>Výukové videá</h2><div class="card"><ul><li><a href="https://youtu.be/7IoQ5BGkTJo" target="_blank" rel="noopener noreferrer">Bro Code – premenné, dátové typy a operácie</a>.</li><li><a href="https://youtu.be/U3Px6MDEm5I" target="_blank" rel="noopener noreferrer">Informatika s Mišom – premenné, dátové typy a operácie</a>.</li></ul></div>
+<section class="card"><h2>Poznámky a zdroje</h2><ul><li><a href="https://docs.google.com/document/d/1BRjcCOqMhHqd5nfeyknmN0JJPGus2BIkA0W4_tmrK9Y/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Poznámky z hodiny: Premenné, dátové typy a operácie</a>.</li><li><a href="https://python.input.sk/1/01.html#zakladne-typy-udajov" target="_blank" rel="noopener noreferrer">Základné typy údajov – Python.input.sk</a>.</li><li><a href="https://docs.python.org/3/tutorial/introduction.html" target="_blank" rel="noopener noreferrer">Oficiálny tutoriál Pythonu: čísla, text a zoznamy</a>.</li></ul></section>
+<div class="note"><strong>Poznámka pre učiteľa:</strong> Zadané videozáznamy a poznámky dopĺňajú stručný ťahák. Pri príkladoch so vstupom pripomeň, že <code>input()</code> vracia reťazec; číselné konverzie precvičiť v podtéme 2.2.2.</div>
+<footer><a href="../2.2%20Z%C3%A1kladn%C3%A9%20formy%20a%20typy%20algoritmov.html">Späť na tému 2.2</a> · <a href="2.2.2%20Pretypovanie%20v%20Pythone.html">Pokračovať na 2.2.2</a></footer>
+</div><script>
+const s=document.getElementById("student"),t=document.getElementById("teacher");function mode(isTeacher){document.body.classList.toggle("teacher",isTeacher);s.classList.toggle("on",!isTeacher);t.classList.toggle("on",isTeacher);s.setAttribute("aria-pressed",String(!isTeacher));t.setAttribute("aria-pressed",String(isTeacher))}s.addEventListener("click",()=>mode(false));t.addEventListener("click",()=>mode(true));
+</script><script src="../theme.js"></script></body></html>

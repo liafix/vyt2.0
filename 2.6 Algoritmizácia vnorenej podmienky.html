@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Vnorené podmienky v Pythone: hierarchia rozhodnutí, odsadenie, vývojové diagramy, príklady a precvičenie.">
+<title>2.6 Algoritmizácia vnorenej podmienky</title>
+<style>
+:root{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--note:#fff4d6}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--note:#3a3017}}
+:root[data-theme="light"]{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--note:#fff4d6}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--note:#3a3017}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--acc)}.wrap{width:min(100% - 2rem,860px);margin:auto;padding:16px}header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}.muted{color:var(--mut)}h1{font-size:clamp(1.7rem,5vw,2.3rem);line-height:1.2}.tag{padding:2px 9px;border-radius:6px;background:var(--line);font-size:13px}.card,.note{margin:14px 0;padding:14px 17px;border:1px solid var(--line);border-radius:12px;background:var(--card)}.note{background:var(--note);display:none}body.teacher .note{display:block}.mode{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.mode button{padding:6px 11px;border:0;background:var(--card);color:var(--fg);font:inherit;cursor:pointer}.mode button.on{background:var(--acc);color:#fff}button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:3px}table{width:100%;border-collapse:collapse}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}.scroll{overflow-x:auto}.sources,footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line)}footer{color:var(--mut);font-size:14px}.lesson-image{display:block;width:min(100%,560px);max-height:520px;height:auto;object-fit:contain;margin:18px auto;border:1px solid var(--line);border-radius:12px;background:#fff}.image-caption{margin-top:-10px;color:var(--mut);font-size:14px;text-align:center}.image-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}.image-gallery figure{margin:0;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--card)}.image-gallery img{display:block;width:100%;height:280px;object-fit:contain;background:#fff}.image-gallery figcaption{padding:8px 4px;color:var(--mut);font-size:14px}pre{margin:0;background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow-x:auto;font-size:14px;line-height:1.5}.code-sample{margin:14px 0}.copy-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}.copy-btn{background:var(--acc);color:#fff;border:0;border-radius:6px;padding:5px 10px;font:inherit;font-size:14px;cursor:pointer}.copy-status{min-height:1.5em;margin:2px 0;color:var(--mut);font-size:13px}
+</style>
+  <link rel="stylesheet" href="premium.css">
+</head>
+<body data-layout="reading"><div class="wrap">
+<header><span class="muted"><a href="python.html">Prehľad tém</a> › Algoritmus a algoritmizácia › 2.6</span><div><a href="nastavenia.html">Nastavenia vzhľadu</a> · <div class="mode" role="group" aria-label="Zobrazenie"><button class="on" id="student" type="button" aria-pressed="true">Žiak</button><button id="teacher" type="button" aria-pressed="false">Učiteľ</button></div></div></header>
+<h1>2.6 Algoritmizácia vnorenej podmienky</h1><p><span class="tag">1 × 45 min</span> <span class="tag">Teória a Python</span></p>
+<figure><img class="lesson-image" src="img/VnorenaPodmienka1.png" alt="Vývojový diagram riešenia nefunkčnej lampičky s nadväzujúcimi rozhodnutiami" loading="lazy"><figcaption class="image-caption">Pri diagnostike lampičky má ďalšie rozhodnutie význam až po vyhodnotení predchádzajúceho.</figcaption></figure>
+<h2>Orientačný plán (45 min)</h2><div class="scroll"><table><thead><tr><th>Čas</th><th>Časť hodiny</th><th>Pracovný zámer</th></tr></thead><tbody><tr><td>0–5 min</td><td>Opakovanie</td><td>Rozvetviť známu úlohu s jednou podmienkou.</td></tr><tr><td>5–13 min</td><td>Potreba ďalšieho rozhodnutia</td><td>Vysvetliť, že druhé rozhodnutie závisí od výsledku prvého.</td></tr><tr><td>13–23 min</td><td>Strom možností</td><td>Usporiadať podmienky a koncové výsledky do prehľadnej štruktúry.</td></tr><tr><td>23–37 min</td><td>Riadená aktivita</td><td>Prejsť všetky vetvy a overiť ich na hraničných prípadoch.</td></tr><tr><td>37–45 min</td><td>Samostatná kontrola</td><td>Navrhnúť vlastnú viacúrovňovú voľbu a zdôvodniť poradie.</td></tr></tbody></table></div>
+<h2>Ciele hodiny</h2><p>Žiak vysvetlí, čo je vnorená podmienka a kedy je druhé rozhodnutie závislé od prvého, správne odsádza bloky <code>if</code>/<code>elif</code>/<code>else</code>, trasuje vnorený program a rozhodne, či je vhodnejšie vnorenie alebo spojenie podmienok pomocou <code>and</code>.</p>
+<h2>1. Čo je vnorená podmienka?</h2><p>Vnorená podmienka je podmienka zapísaná vo vnútri bloku inej podmienky. Program najprv vyhodnotí <strong>vonkajšiu podmienku</strong>. K vnorenému rozhodnutiu sa dostane iba vtedy, keď vykoná príslušný vonkajší blok. Vnorenie preto vyjadruje hierarchiu: <em>najprv over A, a len ak A platí, rozhoduj podľa B</em>.</p><p>Napríklad pri kontrole prístupu sa najprv overí, či je používateľ prihlásený. Až prihlásenému používateľovi má zmysel kontrolovať, či má oprávnenie na konkrétnu činnosť. Ak prvá podmienka neplatí, druhý test sa vôbec nevykoná.</p>
+<h2>2. Syntax a odsadenie</h2><p>Každá úroveň vnorenia pridáva ďalšie odsadenie. V Pythone odsadenie nie je len vizuálne formátovanie – určuje, ktoré príkazy patria do ktorého bloku.</p>
+<pre><code>if vonkajsia_podmienka:
+    # Vonkajší blok: 4 medzery
+    if vnorena_podmienka:
+        # Vnorený blok: 8 medzier
+        print("Obe podmienky platia.")
+    else:
+        # Toto else patrí vnorenému if
+        print("Platí iba vonkajšia podmienka.")
+else:
+    # Toto else patrí vonkajšiemu if
+    print("Vonkajšia podmienka neplatí.")</code></pre>
+<ul><li>Vonkajší blok sa odsádza zvyčajne štyrmi medzerami a blok vo vnútri neho ďalšími štyrmi.</li><li><code>else</code> alebo <code>elif</code> musí byť zarovnané s príslušným <code>if</code>.</li><li><code>else</code> patrí k najbližšiemu predchádzajúcemu <code>if</code> na rovnakej úrovni odsadenia, ku ktorému ešte nebolo priradené.</li><li>Editor kódu pomáha odsadením a zvýraznením blokov, ale logiku vetiev musí skontrolovať programátor.</li></ul>
+<h2>3. Príklad: výsledok testu a dochádzka</h2><p>V tomto príklade známky sú v rozsahu 1–5. Najprv sa rozlíši známka. Dochádzka sa kontroluje iba pri známke 1 alebo 2.</p>
+<pre><code># Vstupy príkladu
+znamka = 2
+dochadzka = 85  # percentá
+
+if znamka &lt;= 2:
+    # Sem patrí známka 1 alebo 2
+    if dochadzka &gt;= 80:
+        print("Študent dostane pochvalu.")
+    else:
+        print("Študent má dobrú známku, ale slabú dochádzku.")
+elif znamka == 3:
+    print("Študent prešiel s priemerným výsledkom.")
+else:
+    # Pri predpoklade známok 1 až 5 sem patria 4 a 5
+    print("Študent neprešiel.")</code></pre>
+<p>Pri hodnotách <code>znamka = 2</code> a <code>dochadzka = 85</code> platí vonkajšie porovnanie <code>znamka &lt;= 2</code>. Program potom vyhodnotí vnorené <code>dochadzka &gt;= 80</code>, ktoré je tiež pravdivé, a vypíše pochvalu. Ak by dochádzka bola 70 %, vykonala by sa vnorená vetva <code>else</code>. Pre známku 3 sa vnorený test vôbec nevykonáva.</p>
+<div class="card"><strong>Dôležitý predpoklad:</strong> Záverečné <code>else</code> v tomto príklade znamená známky 4 alebo 5 len preto, že predpokladáme platný rozsah 1–5. Ak používateľ zadáva údaje, treba osobitne overiť, že známka aj percentá dochádzky sú v povolenom rozsahu.</div>
+<h2>4. Ako čítať strom rozhodnutí</h2><p>Vnorené podmienky možno čítať ako strom: každá odpoveď rozvetví postup a ďalší test sa nachádza len v tej vetve, v ktorej je potrebný. Pri návrhu si vypíš možné výsledky, označ, ktoré podmienky sa týkajú každej vetvy, a skontroluj, že všetky prípady majú jasný koniec.</p>
+<div class="image-gallery">
+<figure><img src="img/VnorenaPodmienka2.png" alt="Vývojový diagram hľadania najmenšieho z troch čísel pomocou postupných porovnaní" loading="lazy"><figcaption>Hľadanie minima z troch čísel: ďalšie porovnanie závisí od výsledku predchádzajúceho.</figcaption></figure>
+<figure><img src="img/VnorenaPodmienka3.png" alt="Vývojový diagram riešenia kvadratickej rovnice s kontrolou koeficientu a diskriminantu" loading="lazy"><figcaption>Riešenie kvadratickej rovnice: najprv sa overí koeficient a, potom diskriminant.</figcaption></figure>
+<figure><img src="img/VnorenaPodmienka4.png" alt="Vývojový diagram kalkulačky s výberom operácie a kontrolou delenia nulou" loading="lazy"><figcaption>Kalkulačka: po výbere operácie sa pri delení samostatne kontroluje deliteľ.</figcaption></figure>
+</div>
+<h2>5. Trasovanie programu</h2><p>Trasovanie znamená prejsť kód príkaz po príkaze a zaznamenať, ktoré podmienky sú pravdivé a ktoré riadky sa vykonajú. Pozor: <code>else</code> patrí k vonkajšiemu alebo vnorenému <code>if</code> podľa svojho odsadenia.</p>
+<pre><code>vek = 16
+ma_skusenosti = True
+
+if vek &gt;= 18:
+    print("1")
+    if ma_skusenosti:
+        print("2")
+else:
+    print("3")
+    if ma_skusenosti:
+        print("4")</code></pre>
+<p><strong>Priebeh:</strong> <code>vek &gt;= 18</code> je nepravdivé, preto sa vykoná jeho vonkajšie <code>else</code>. Vypíše sa <code>3</code>. V tomto bloku je <code>ma_skusenosti</code> pravdivé, preto sa vypíše aj <code>4</code>. Správna odpoveď je <strong>c) 3 potom 4</strong>.</p>
+<h2>6. Kedy vnoriť a kedy použiť and?</h2><p>Vnorenie je vhodné, keď druhá podmienka závisí od prvej, keď treba podať odlišnú spätnú väzbu pre jednotlivé dôvody alebo keď sa po prvej kontrole vykonáva väčší samostatný blok. Ak majú obe podmienky viesť k rovnakej činnosti, môžu byť prehľadnejšie spojené operátorom <code>and</code>.</p>
+<pre><code>vek = 18
+ma_skusenosti = True
+
+if vek &gt;= 18 and ma_skusenosti:
+    print("Osoba spĺňa obe kritériá.")
+else:
+    print("Osoba nespĺňa aspoň jedno kritérium.")</code></pre>
+<p>V Pythone je operátor „a zároveň“ zapísaný malými písmenami <code>and</code>. Zápis <code>vek = 18</code> je priradenie, preto ním nemožno testovať podmienku; na porovnanie použijeme napríklad <code>vek &gt;= 18</code> alebo <code>vek == 18</code>. Pri použití <code>and</code> Python vyhodnocuje výrazy zľava doprava a môže skončiť hneď, keď už pozná výsledok celého výrazu (skrátené vyhodnocovanie).</p>
+<div class="card"><strong>Pomôcka pre výber:</strong><ul><li><code>if A:</code> a až v jeho bloku <code>if B:</code> – B testujeme len v prípade, že A platí, prípadne potrebujeme rozdielne kroky.</li><li><code>if A and B:</code> – jediný blok sa vykoná iba vtedy, keď platia obe podmienky.</li><li>Pri vstupnej validácii dbaj na poradie: kratší alebo bezpečný test možno vykonať pred testom, ktorý predpokladá platný vstup.</li></ul></div>
+<h2>7. Časté chyby</h2><ul><li><strong>Nesprávne odsadenie:</strong> riadok sa omylom zaradí do inej vetvy; skontroluj úroveň medzier a poradie blokov.</li><li><strong>Nejasné priradenie else:</strong> <code>else</code> patrí k najbližšiemu nezodpovedanému <code>if</code> s rovnakým odsadením.</li><li><strong>Zbytočne hlboké vnáranie:</strong> príliš veľa úrovní sťažuje čítanie; zváž skoršie ukončenie vetvy, funkcie alebo zjednodušenie logiky.</li><li><strong>Nedefinovaná premenná:</strong> premenná použitá vo vnútornom teste musí dostať hodnotu ešte pred tým, než sa k testu program dostane.</li><li><strong>Neúplné prípady:</strong> over, čo sa stane pri nesplnení prvej podmienky, pri hraničných hodnotách aj pri neplatnom vstupe.</li><li><strong>Neplatný zápis porovnania:</strong> nepíš <code>vek = 18</code> ako podmienku; priraďovanie a porovnávanie sú odlišné operácie.</li></ul>
+<h2>8. Precvičenie</h2><ol><li>Uveď, ku ktorému <code>if</code> patrí každé <code>else</code> v príklade s vekom a vysvetli, prečo sa vypíšu <code>3</code> a <code>4</code>.</li><li>Uprav príklad so známkou tak, aby kontroloval dochádzku iba pri známke 1 alebo 2. Otestuj hodnoty 1, 2, 3 a 4.</li><li>Navrhni vnorené rozhodnutie: najprv over, či je používateľ prihlásený, a až potom, či má oprávnenie. Každú situáciu ukonči vhodnou správou.</li><li>V kalkulačke vysvetli, prečo sa kontrola deliteľa <code>b == 0</code> vykonáva iba vo vetve delenia.</li><li>Prepíš príklad „vek a skúsenosti“ s <code>and</code> na vnorené <code>if</code>. Porovnaj, či výsledné správy poskytujú rovnako podrobnú spätnú väzbu.</li></ol>
+<div class="note"><strong>Poznámka pre učiteľa:</strong> Začnite trasovaním príkladu, kde je vek 16. Nechajte žiakov najprv určiť, ku ktorému <code>if</code> patrí vonkajšie <code>else</code>. Pri príklade so známkou zdôraznite predpoklad povoleného rozsahu 1–5. Neprehĺbte tému za dve až tri úrovne; cieľom je správne vysvetliť závislosť podmienok, odsadenie a väzbu <code>else</code>. Časový plán je návrh na jednu 45-minútovú hodinu.</div>
+<section class="sources"><h2>Použité zdroje</h2><ul><li><a href="https://docs.python.org/3/tutorial/controlflow.html#if-statements" target="_blank" rel="noopener noreferrer">Oficiálny tutoriál Pythonu – príkaz <code>if</code></a>.</li><li><a href="https://docs.python.org/3/reference/compound_stmts.html#the-if-statement" target="_blank" rel="noopener noreferrer">Referenčná príručka Pythonu – príkaz if a bloky</a>.</li><li><a href="2.5%20Algoritmiz%C3%A1cia%20podmienky.html">Téma 2.5 – Algoritmizácia podmienky</a>.</li><li>Obrázky dodané vyučujúcim: <a href="img/VnorenaPodmienka1.png">diagnostika lampičky</a>, <a href="img/VnorenaPodmienka2.png">minimum z troch čísel</a>, <a href="img/VnorenaPodmienka3.png">kvadratická rovnica</a> a <a href="img/VnorenaPodmienka4.png">kalkulačka</a>.</li></ul></section>
+<footer><a href="2.5 Algoritmizácia podmienky.html">Späť na 2.5</a> · <a href="python.html">Prehľad tém</a> · <a href="2.7 Algoritmizácia cyklu.html">Pokračovať na 2.7</a></footer>
+</div><script>
+document.querySelectorAll("pre").forEach(function(code){var wrapper=document.createElement("div"),actions=document.createElement("div"),button=document.createElement("button"),editor=document.createElement("a"),status=document.createElement("p");wrapper.className="code-sample";actions.className="copy-actions";button.className="copy-btn";button.type="button";button.textContent="Kopírovať kód";editor.href="https://www.programiz.com/python-programming/online-compiler/";editor.target="_blank";editor.rel="noopener noreferrer";editor.textContent="Vyskúšať online";status.className="copy-status";status.setAttribute("role","status");status.setAttribute("aria-live","polite");code.parentNode.insertBefore(wrapper,code);wrapper.appendChild(actions);actions.appendChild(button);actions.appendChild(editor);wrapper.appendChild(code);wrapper.appendChild(status);button.addEventListener("click",function(){if(!navigator.clipboard||!navigator.clipboard.writeText){status.textContent="Kopírovanie nie je dostupné. Označ kód a použi Ctrl+C.";return;}navigator.clipboard.writeText(code.innerText).then(function(){status.textContent="Kód skopírovaný.";}).catch(function(){status.textContent="Kód sa nepodarilo skopírovať. Označ ho a použi Ctrl+C.";});});});
+const s=document.getElementById("student"),t=document.getElementById("teacher");function mode(isTeacher){document.body.classList.toggle("teacher",isTeacher);s.classList.toggle("on",!isTeacher);t.classList.toggle("on",isTeacher);s.setAttribute("aria-pressed",String(!isTeacher));t.setAttribute("aria-pressed",String(isTeacher))}s.addEventListener("click",()=>mode(false));t.addEventListener("click",()=>mode(true));
+</script><script src="theme.js"></script></body></html>

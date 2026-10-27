@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Úvod do komentárov a docstringov v Pythone: zápis, rozdiely a dokumentovanie funkcií a tried.">
+<title>1.1.1 Komentáre a docstringy v Pythone</title>
+<style>
+:root{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--note:#fff4d6}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--note:#3a3017}}
+:root[data-theme="light"]{color-scheme:light;--bg:#f7f8fa;--fg:#1c2330;--card:#fff;--mut:#5b6678;--acc:#1f6feb;--line:#d9dee7;--note:#fff4d6}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12161d;--fg:#e6eaf1;--card:#1b212b;--mut:#9aa6b8;--acc:#5aa2ff;--line:#2d3644;--note:#3a3017}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--acc)}.wrap{width:min(100% - 2rem,900px);margin:auto;padding:16px}header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}.muted{color:var(--mut)}h1{font-size:clamp(1.7rem,5vw,2.3rem);line-height:1.2}.tag{padding:2px 9px;border-radius:6px;background:var(--line);font-size:13px}.card,.note{margin:14px 0;padding:14px 17px;border:1px solid var(--line);border-radius:12px;background:var(--card)}.note{background:var(--note);display:none}body.teacher .note{display:block}.mode{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.mode button{padding:6px 11px;border:0;background:var(--card);color:var(--fg);font:inherit;cursor:pointer}.mode button.on{background:var(--acc);color:#fff}button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:3px}pre{margin:0;background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;overflow-x:auto;font-size:14px;line-height:1.5}.code-sample{margin:14px 0}.copy-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}.copy-btn{background:var(--acc);color:#fff;border:0;border-radius:6px;padding:5px 10px;font:inherit;font-size:14px;cursor:pointer}.copy-status{min-height:1.5em;margin:2px 0;color:var(--mut);font-size:13px}footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);color:var(--mut);font-size:14px}@media print{body{background:#fff;color:#000}.mode,header div>a{display:none}a{color:inherit;text-decoration:none}.card,.note{break-inside:avoid}}
+</style>
+  <link rel="stylesheet" href="../premium.css">
+</head>
+<body data-layout="reading"><div class="wrap">
+<header><span class="muted"><a href="../python.html">Prehľad tém</a> › <a href="../1.1%20Bezpe%C4%8Dnos%C5%A5%20pri%20pr%C3%A1ci.html">1.1 Bezpečnosť pri práci</a> › 1.1.1 Komentáre a docstringy</span><div><a href="../nastavenia.html">Nastavenia vzhľadu</a> · <div class="mode" role="group" aria-label="Zobrazenie"><button class="on" id="student" type="button" aria-pressed="true">Žiak</button><button id="teacher" type="button" aria-pressed="false">Učiteľ</button></div></div></header>
+<h1>1.1.1 Komentáre a docstringy v Pythone</h1><p><span class="tag">Úvod do programovania</span> <span class="tag">Pracovný materiál</span></p>
+<h2>Ciele hodiny</h2><ul><li>Vysvetliť, na čo slúžia komentáre v zdrojovom kóde.</li><li>Napísať jednoriadkový aj viacriadkový komentár.</li><li>Rozlíšiť komentár od dokumentačného reťazca (docstringu).</li><li>Vytvoriť a zobraziť dokumentáciu funkcie, triedy alebo modulu.</li></ul>
+<h2>1. Komentáre v Pythone</h2><p>Komentár je poznámka pre človeka, ktorý číta alebo upravuje kód. Python ignoruje text od znaku <code>#</code> po koniec daného riadka. Komentár môže byť samostatný riadok alebo krátka poznámka za príkazom.</p>
+<pre><code># Vypíš pozdrav používateľovi
+print("Ahoj!")  # Komentár za príkazom</code></pre>
+<p>Používaj komentáre na vysvetlenie dôvodu alebo dôležitého rozhodnutia, nie na opakovanie toho, čo už jasne hovorí samotný kód.</p>
+<h3>Viacriadkové komentáre</h3><p>Python nemá osobitnú syntax pre blokový komentár. Viacriadkovú poznámku zapíš pomocou znaku <code>#</code> na každom riadku:</p>
+<pre><code># Tento postup najprv načíta vstupy.
+# Potom vypočíta výsledok.
+# Nakoniec ho zobrazí.</code></pre>
+<div class="note"><strong>Presné rozlíšenie:</strong> Trojité úvodzovky vytvárajú viacriadkový reťazec, nie komentár. Samostatný reťazec, ktorý sa nikam nepriradí, sa po vyhodnotení zahodí, ale na bežné komentovanie sa používa <code>#</code>. Trojité úvodzovky sú vhodné najmä pre docstringy.</div>
+<h2>2. Docstring – dokumentačný reťazec</h2><p>Docstring je reťazec, ktorý sa nachádza ako prvý príkaz v module, funkcii alebo triede. Python ho priradí do atribútu <code>__doc__</code>; dokumentáciu možno zobraziť cez <code>help()</code>. Bežne sa píše v trojitých dvojitých úvodzovkách.</p>
+<h3>Docstring funkcie</h3><pre><code>def greet(name: str, excited: bool = False) -&gt; str:
+    """Vráti pozdrav pre osobu so zadaným menom.
+
+    Args:
+        name: Meno osoby, ktorú pozdravujeme.
+        excited: Ak je True, pridá na koniec výkričník.
+
+    Returns:
+        Pozdrav ako text.
+
+    Examples:
+        &gt;&gt;&gt; greet("Dušan")
+        'Ahoj, Dušan'
+        &gt;&gt;&gt; greet("Dušan", True)
+        'Ahoj, Dušan!'
+    """
+    ending = "!" if excited else ""
+    return f"Ahoj, {name}{ending}"
+
+print(greet("Dušan"))
+help(greet)</code></pre>
+<p>Docstring patrí hneď za hlavičku funkcie, ešte pred jej bežné príkazy. V príklade funkcia vracia text pomocou <code>return</code>; <code>print()</code> ho následne zobrazí. V príkladoch docstringu sú uvedené vstupy, návratová hodnota a ukážkové volania.</p>
+<h3>Docstring triedy</h3><pre><code>class GameObject:
+    """Predstavuje objekt v jednoduchej hre.
+
+    Attributes:
+        name: Názov objektu.
+        health: Počet bodov zdravia.
+        attack: Sila útoku.
+    """
+
+    def __init__(self, name: str, health: int, attack: int):
+        self.name = name
+        self.health = health
+        self.attack = attack
+
+help(GameObject)</code></pre>
+<h3>Docstring vstavaného objektu</h3><p>Aj vstavané funkcie majú dokumentáciu. Vyskúšaj:</p><pre><code>print(print.__doc__)
+help(print)</code></pre>
+<p>Výpis opisuje parametre funkcie <code>print()</code>, napríklad oddeľovač <code>sep</code>, koniec výstupu <code>end</code> a cieľový výstupný prúd <code>file</code>.</p>
+<h2>3. Rýchle porovnanie</h2><div class="card"><ul><li><code># komentár</code> – poznámka v zdrojovom kóde; Python ju ignoruje.</li><li><code>"""reťazec"""</code> – viacriadkový reťazec, nie špeciálny blokový komentár.</li><li><strong>Docstring</strong> – reťazec na prvom mieste v module, triede alebo funkcii; dostupný cez <code>__doc__</code> a <code>help()</code>.</li></ul></div>
+<h2>4. Krátke precvičenie</h2><ol><li>Doplň komentár, ktorý vysvetlí, čo robí tvoj program.</li><li>Vytvor funkciu na výpočet obvodu štvorca a pridaj jej docstring s opisom parametra a návratovej hodnoty.</li><li>Vyskúšaj <code>help(tvoja_funkcia)</code> a <code>print(tvoja_funkcia.__doc__)</code>.</li><li>Rozhodni, či je daná poznámka komentár, obyčajný reťazec alebo docstring.</li></ol>
+<section class="card"><h2>Použité zdroje</h2><ul><li><a href="https://docs.python.org/3/tutorial/introduction.html#comments" target="_blank" rel="noopener noreferrer">Oficiálny tutoriál Pythonu: komentáre</a>.</li><li><a href="https://docs.python.org/3/tutorial/controlflow.html#documentation-strings" target="_blank" rel="noopener noreferrer">Oficiálny tutoriál Pythonu: dokumentačné reťazce</a>.</li><li><a href="https://peps.python.org/pep-0257/" target="_blank" rel="noopener noreferrer">PEP 257: Docstring Conventions</a>.</li></ul></section>
+<div class="note"><strong>Poznámka pre učiteľa:</strong> Pri komentároch odlíšiť syntax jazyka od viacriadkových reťazcov. Docstringy preberajú základný formát; konkrétnu konvenciu podrobne rozvíjať až podľa potrieb triedy.</div>
+<footer><a href="../1.1%20Bezpe%C4%8Dnos%C5%A5%20pri%20pr%C3%A1ci.html">Späť na tému 1.1</a> · <a href="1.1.2%20Pou%C4%8Denie%20BOZP%20a%20prev%C3%A1dzkov%C3%BD%20poriadok%20SVL-16.html">Pokračovať na 1.1.2: Poučenie BOZP</a></footer>
+</div><script>
+document.querySelectorAll("pre").forEach(function(code){var wrapper=document.createElement("div"),actions=document.createElement("div"),button=document.createElement("button"),editor=document.createElement("a"),status=document.createElement("p");wrapper.className="code-sample";actions.className="copy-actions";button.className="copy-btn";button.type="button";button.textContent="Kopírovať kód";editor.href="https://www.programiz.com/python-programming/online-compiler/";editor.target="_blank";editor.rel="noopener noreferrer";editor.textContent="Vyskúšať online";status.className="copy-status";status.setAttribute("role","status");status.setAttribute("aria-live","polite");code.parentNode.insertBefore(wrapper,code);wrapper.appendChild(actions);actions.appendChild(button);actions.appendChild(editor);wrapper.appendChild(code);wrapper.appendChild(status);button.addEventListener("click",function(){if(!navigator.clipboard||!navigator.clipboard.writeText){status.textContent="Kopírovanie nie je dostupné. Označ kód a použi Ctrl+C.";return;}navigator.clipboard.writeText(code.innerText).then(function(){status.textContent="Kód skopírovaný.";}).catch(function(){status.textContent="Kód sa nepodarilo skopírovať. Označ ho a použi Ctrl+C.";});});});
+const s=document.getElementById("student"),t=document.getElementById("teacher");function mode(isTeacher){document.body.classList.toggle("teacher",isTeacher);s.classList.toggle("on",!isTeacher);t.classList.toggle("on",isTeacher);s.setAttribute("aria-pressed",String(!isTeacher));t.setAttribute("aria-pressed",String(isTeacher))}s.addEventListener("click",()=>mode(false));t.addEventListener("click",()=>mode(true));
+</script><script src="../theme.js"></script></body></html>

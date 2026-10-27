@@ -1,0 +1,1 @@
+# 06_Enkapsulacia_a_konstruktory

@@ -1,0 +1,55 @@
+<!doctype html><html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lekcia 01: Základné príkazy Gitu | Programovanie</title><link rel="stylesheet" href="../../../premium.css"><script src="../../../theme.js" defer></script></head><body data-layout="doc-viewer"><div class="doc-shell"><nav class="module-breadcrumb"><a href="../../../index.html">← Všetky kurzy</a><a href="../README.html">Git a verzovanie</a><a href="../../../nastavenia.html">Nastavenia vzhľadu</a></nav><header class="doc-head"><span class="module-eyebrow">Dokumentácia</span><h1>Lekcia 01: Základné príkazy Gitu</h1></header><main class="doc-content"><h1>Lekcia 01: Základné príkazy Gitu</h1>
+<h2>1. Cieľ lekcie</h2>
+<p>Naučiť sa základný pracovný cyklus v Gite: zistenie stavu, prispôsobenie zoznamu zmien (<em>Staging Area</em>) a vytvorenie uloženej snímky kódu (<em>Commit</em>).</p>
+<hr />
+<h2>2. Prerekvizity</h2>
+<ul>
+<li>Nainštalovaný Git v systéme.</li>
+<li>Znalosť otvorenia terminálu / Git Bash.</li>
+</ul>
+<hr />
+<h2>3. Vysvetlenie trojúrovňovej architektúry Gitu</h2>
+<p>Git rozlišuje 3 hlavné priestory, v ktorých sa vaše súbory nachádzajú:</p>
+<pre><code class="language-text">[ Working Directory ]  ---&gt; (git add) ---&gt;  [ Staging Area ]  ---&gt; (git commit) ---&gt;  [ Local Repository ]
+ (Upravené súbory)                           (Pripravené zmeny)                          (Uložené commity)
+</code></pre>
+<ol>
+<li><strong>Working Directory (Pracovný adresár)</strong>: Miesto, kde fyzicky upravujete svoje súbory na disku.</li>
+<li><strong>Staging Area (Index)</strong>: Medzipriestor, kam pridávate presne tie zmeny, ktoré chcete zahrnúť do najbližšieho commitu.</li>
+<li><strong>Local Repository (Lokálny repozitár)</strong>: Databáza v zložke <code>.git</code>, kde sú trvalo uložené všetky snímky (commity) histórie.</li>
+</ol>
+<hr />
+<h2>4. Príklad pracovného cyklu</h2>
+<pre><code class="language-bash"># 1. Zistenie stavu repozitára
+git status
+
+# 2. Pridanie súboru do Staging Area
+git add main.py
+
+# 3. Uloženie commitu s výstižnou správou
+git commit -m &quot;feat: Pridaná funkcia pre načítanie vstupu&quot;
+
+# 4. Zobrazenie histórie commitov
+git log --oneline
+</code></pre>
+<hr />
+<h2>5. Časté chyby a ich oprava</h2>
+<ul>
+<li><strong>Chyba</strong>: Zabudli ste pridať súbor pomocou <code>git add</code> pred commitom.<ul>
+<li><em>Riešenie</em>: Spustite <code>git add názov_súboru</code> a potom vykonajte <code>git commit</code>.</li>
+</ul>
+</li>
+<li><strong>Chyba</strong>: Napísali ste nezmyselnú commit správu ako <code>asdf</code> alebo <code>zmeny</code>.<ul>
+<li><em>Riešenie</em>: Používajte konvenciu Conventional Commits (<code>feat:</code>, <code>fix:</code>, <code>docs:</code>).</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2>6. Samostatné úlohy</h2>
+<ul>
+<li><strong>Úroveň A (Základ)</strong>: Vytvorte nový súbor <code>test.txt</code>, zistite jeho stav pomocou <code>git status</code> a pridajte ho do Staging Area.</li>
+<li><strong>Úroveň B (Precvičenie)</strong>: Vytvorte commit so správou <code>&quot;docs: Pridaný prvý testovací súbor&quot;</code>.</li>
+<li><strong>Úroveň C (Aplikácia)</strong>: Upravte súbor <code>test.txt</code>, pridajte druhý riadok a pozrite si rozdiel pomocou <code>git diff</code>.</li>
+<li><strong>Úroveň D (Výzva)</strong>: Vytvorte súbor <code>.gitignore</code> a nastavte ho tak, aby ignoroval všetky súbory s príponou <code>.log</code>.</li>
+</ul>
+<p class="source-download"><a href="../../../00_Git_a_Verzovanie/01_Zakladne_prikazy/README.md" download>Stiahnuť pôvodný súbor (README.md) ↓</a></p></main><footer class="module-footer"><a href="../../../index.html">Všetky kurzy</a> · <a href="../../../materialy/index.html">Prehľad dokumentácie</a></footer></div></body></html>
